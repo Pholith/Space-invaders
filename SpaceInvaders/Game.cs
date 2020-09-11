@@ -1,9 +1,6 @@
-﻿using System;
+﻿using GameObjects;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace SpaceInvaders
@@ -110,8 +107,18 @@ namespace SpaceInvaders
         public void Draw(Graphics g)
         {
             foreach (GameObject gameObject in gameObjects)
-                gameObject.Draw(this, g);       
+                gameObject.Draw(this, g);
         }
+        
+        /// <summary>
+        /// Init game
+        /// </summary>
+        public void InitGame()
+        {
+            new PlayerShip(new Vecteur2D(gameSize.Width / 2, gameSize.Height - 50));
+
+        }
+
 
         /// <summary>
         /// Update game
@@ -126,10 +133,6 @@ namespace SpaceInvaders
             // if space is pressed
             if (keyPressed.Contains(Keys.Space))
             {
-                // create new BalleQuiTombe
-                GameObject newObject = new BalleQuiTombe(gameSize.Width / 2, 0);
-                // add it to the game
-                AddNewGameObject(newObject);
                 // release key space (no autofire)
                 ReleaseKey(Keys.Space);
             }

@@ -41,6 +41,7 @@ namespace SpaceInvaders
         {
             InitializeComponent();
             game = Game.CreateGame(this.ClientSize);
+            game.InitGame();
             watch.Start();
             WorldClock.Start();
 
