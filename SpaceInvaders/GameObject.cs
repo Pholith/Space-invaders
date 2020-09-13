@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SpaceInvaders.Utils;
+using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 
 namespace SpaceInvaders
 {
@@ -13,7 +15,7 @@ namespace SpaceInvaders
         /// <summary>
         /// Position
         /// </summary>
-        public Vecteur2D Position { get; private set; }
+        public Vecteur2D Position { get; protected set; }
         public Vecteur2D Speed { get; protected set; }
 
         public GameObject(Vecteur2D v1 = null)
@@ -42,7 +44,14 @@ namespace SpaceInvaders
         /// </summary>
         /// <param name="gameInstance">instance of the current game</param>
         /// <param name="graphics">graphic object where to perform rendering</param>
-        public abstract void Draw(Game gameInstance, Graphics graphics);
+        public virtual void Draw(Game gameInstance, Graphics graphics)
+        {
+            if (this is IImage)
+            {
+                IImage go = this as IImage;
+                graphics.DrawImage(go.getImage(), (float)Position.X, (float)Position.Y);
+            }
+        }
 
 
 

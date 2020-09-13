@@ -1,31 +1,51 @@
 ﻿using SpaceInvaders;
+using SpaceInvaders.GameObjects;
+using SpaceInvaders.Properties;
+using SpaceInvaders.Utils;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using System.Resources;
 
 namespace GameObjects
 {
-    class Ship : GameObject
+    class Ship : GameObject, IImage
     {
-
-        private double radius = 10;
-        private static Pen pen = new Pen(Color.Black);
 
         public Ship(Vecteur2D v1) : base(v1)
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            TextReader inputStream = new StreamReader(assembly.GetManifestResourceStream(resourceName));
+        }
+        int speedMax = 300;
+        int size = 45;
+
+        protected void MoveLeft()
+        {
+            Speed = new Vecteur2D(-speedMax, 0);
+        }
+        protected void MoveRight()
+        {
+            Speed = new Vecteur2D(speedMax, 0);
         }
 
-        public override void Draw(Game gameInstance, Graphics graphics)
+        protected void Shoot()
         {
+            new Laser(Position);
+        }
 
-            graphics.DrawImage(Image.FromFile("ship1.png"), 0, 0);
-            /*float xmin = (float)(Position.X - radius);
-            float ymin = (float)(Position.Y - radius);
-            float width = (float)(2 * radius);
-            float height = (float)(2 * radius);
-            graphics.DrawEllipse(pen, xmin, ymin, width, height);*/
+        public Bitmap getImage()
+        {
+            return Resources.ship1;
+        }
+        public override void Update(Game gameInstance, double deltaT)
+        {
+            base.Update(gameInstance, deltaT);
+
+            if (Position.X < 0)
+                Position = new Vecteur2D(0, Position.Y);
+
+            if (Position.X > Game.game.gameSize.Width - size)
+                Position = new Vecteur2D(Game.game.gameSize.Width - size, Position.Y);
         }
     }
 }

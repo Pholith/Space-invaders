@@ -13,6 +13,21 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -46,8 +61,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameObjects\Laser.cs" />
     <Compile Include="GameObjects\PlayerShip.cs" />
     <Compile Include="GameObjects\Ship.cs" />
+    <Compile Include="Utils\IImage.cs" />
+    <Compile Include="Utils\Utils.cs" />
     <Compile Include="Utils\Vecteur2D.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -84,52 +102,59 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\shoot2.png" />
+    <Resource Include="Resources\shoot2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\shoot3.png" />
+    <Resource Include="Resources\shoot3.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\shoot4.png" />
+    <Resource Include="Resources\shoot4.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\bonus.png" />
+    <Resource Include="Resources\bonus.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\bonus2.png" />
+    <Resource Include="Resources\bonus2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\bunker.png" />
+    <Resource Include="Resources\bunker.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ship1.png" />
+    <Resource Include="Resources\ship1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ship2.png" />
+    <Resource Include="Resources\ship2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ship3.png" />
+    <Resource Include="Resources\ship3.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ship4.png" />
+    <Resource Include="Resources\ship4.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ship5.png" />
+    <Resource Include="Resources\ship5.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ship6.png" />
+    <Resource Include="Resources\ship6.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ship7.png" />
+    <Resource Include="Resources\ship7.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ship8.png" />
+    <Resource Include="Resources\ship8.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ship9.png" />
+    <Resource Include="Resources\ship9.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\shoot1.png" />
+    <Resource Include="Resources\shoot1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

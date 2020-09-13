@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SpaceInvaders;
-using System.Diagnostics;
 
 namespace UnitTestProject
 {
@@ -14,7 +13,7 @@ namespace UnitTestProject
             Vecteur2D v2 = new Vecteur2D(2, -1);
             Assert.AreEqual(v1 + v2, new Vecteur2D(5, 3));
         }
-        
+
         [TestMethod]
         public void TestOperatorSub()
         {
