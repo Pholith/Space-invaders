@@ -1,8 +1,6 @@
 ﻿using SpaceInvaders.Utils;
-using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.CompilerServices;
 
 namespace SpaceInvaders
 {
@@ -12,11 +10,21 @@ namespace SpaceInvaders
     abstract class GameObject
     {
 
-        /// <summary>
-        /// Position
-        /// </summary>
         public Vecteur2D Position { get; protected set; }
         public Vecteur2D Speed { get; protected set; }
+
+        public Vecteur2D Size { get; protected set; } = Vecteur2D.zero;
+
+        protected Dictionary<string, TimedAction> actions = new Dictionary<string, TimedAction>();
+        public float GetMiddleX()
+        {
+            return (float)(Position.X - Size.X / 2f);
+        }
+        public float GetMiddleY()
+        {
+            return (float)(Position.Y - Size.Y / 2f);
+        }
+
 
         public GameObject(Vecteur2D v1 = null)
         {
@@ -25,8 +33,14 @@ namespace SpaceInvaders
             Position = v1;
             Speed = Vecteur2D.zero;
             Game.game.AddNewGameObject(this);
-        }
 
+            if (this is IImage)
+            {
+                IImage go = this as IImage;
+                sprite = go.GetImage();//.GetThumbnailImage(45, 45, null, IntPtr.Zero);
+                Size = new Vecteur2D(sprite.Width, sprite.Height);
+            }
+        }
 
 
         /// <summary>
@@ -37,8 +51,16 @@ namespace SpaceInvaders
         public virtual void Update(Game gameInstance, double deltaT)
         {
             Position = Position + Speed * deltaT;
+            // Load deltaT in functions that need to wait
+            foreach (var action in actions.Values)
+            {
+                action.LoadTimer(deltaT);
+            }
         }
-
+        /// <summary>
+        /// Field to store image to not read it at every frame
+        /// </summary>
+        Image sprite;
         /// <summary>
         /// Render the game object
         /// </summary>
@@ -46,10 +68,12 @@ namespace SpaceInvaders
         /// <param name="graphics">graphic object where to perform rendering</param>
         public virtual void Draw(Game gameInstance, Graphics graphics)
         {
-            if (this is IImage)
+            if (sprite != null)
             {
-                IImage go = this as IImage;
-                graphics.DrawImage(go.getImage(), (float)Position.X, (float)Position.Y);
+                graphics.DrawImage(sprite, GetMiddleX(), GetMiddleY(), sprite.Width, sprite.Height);
+                graphics.DrawRectangle(new Pen(Color.Blue, 1), GetMiddleX(), GetMiddleY(), sprite.Width, sprite.Height);
+                graphics.DrawEllipse(new Pen(Color.Red, 3), GetMiddleX(), GetMiddleY(), 1, 1);
+                graphics.DrawEllipse(new Pen(Color.Green, 3), (float)Position.X, (float)Position.Y, 1, 1);
             }
         }
 

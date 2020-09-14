@@ -7,6 +7,6 @@ namespace SpaceInvaders.Utils
     /// </summary>
     interface IImage
     {
-        Bitmap getImage();
+        Bitmap GetImage();
     }
 }

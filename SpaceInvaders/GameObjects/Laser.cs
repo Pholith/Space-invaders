@@ -13,7 +13,7 @@ namespace SpaceInvaders.GameObjects
             Speed = new Vecteur2D(0, -200);
         }
 
-        public Bitmap getImage()
+        public Bitmap GetImage()
         {
             return Resources.shoot1;
         }

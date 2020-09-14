@@ -15,6 +15,9 @@ namespace GameObjects
 
         public Ship(Vecteur2D v1) : base(v1)
         {
+            actions.Add("attack", new TimedAction(0.6, () => {
+                new Laser(Position);
+            }));
         }
         int speedMax = 300;
         int size = 45;
@@ -30,10 +33,10 @@ namespace GameObjects
 
         protected void Shoot()
         {
-            new Laser(Position);
+            actions["attack"].DoIfPossible();
         }
 
-        public Bitmap getImage()
+        public Bitmap GetImage()
         {
             return Resources.ship1;
         }

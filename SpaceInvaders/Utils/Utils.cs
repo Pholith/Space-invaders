@@ -18,5 +18,11 @@ namespace SpaceInvaders.Utils
             b.Append("]");
             return b.ToString();
         }
+
+        public static T GetRandom<T>(this List<T> lst)
+        {
+            Random r = new Random();
+            return lst[r.Next(lst.Count)];
+        }
     }
 }

@@ -1,7 +1,5 @@
 ﻿
 using SpaceInvaders;
-using SpaceInvaders.Utils;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace GameObjects
@@ -15,6 +13,7 @@ namespace GameObjects
 
         public override void Update(Game gm, double deltaT)
         {
+
             if (gm.keyPressed.Contains(Keys.Q))
             {
                 MoveLeft();
@@ -30,16 +29,11 @@ namespace GameObjects
             {
                 Speed = Speed * 0.99; // Slow down when A or D is not pressed
             }
-            if (gm.keyPressed.Contains(Keys.G))
-            {
-                gm.ReleaseKey(Keys.G);
-                MessageBox.Show(gm.keyPressed.ToReadableList());
-            }
 
-            if (gm.keyPressed.Contains(Keys.Escape))
+            if (gm.keyPressed.Contains(Keys.Space))
             {
                 Shoot();
-                gm.ReleaseKey(Keys.Space);
+                //gm.ReleaseKey(Keys.Space);
             }
 
             base.Update(gm, deltaT);

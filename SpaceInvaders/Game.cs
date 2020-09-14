@@ -1,4 +1,6 @@
 ﻿using GameObjects;
+using SpaceInvaders.GameObjects;
+using SpaceInvaders.Utils;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -109,14 +111,19 @@ namespace SpaceInvaders
             foreach (GameObject gameObject in gameObjects)
                 gameObject.Draw(this, g);
         }
-        
+
+        TimedAction generateMob = new TimedAction(0.6, () => new Invader(new Vecteur2D(10, 20)), true);
         /// <summary>
         /// Init game
         /// </summary>
         public void InitGame()
         {
             new PlayerShip(new Vecteur2D(gameSize.Width / 2, gameSize.Height - 50));
-
+            int n = 12;
+            /*for (int i = 0; i < n; i++)
+            {
+                new Invader(new Vecteur2D(gameSize.Width / n * i, 10));
+            }*/
         }
 
 
@@ -125,17 +132,11 @@ namespace SpaceInvaders
         /// </summary>
         public void Update(double deltaT)
         {
+            generateMob.LoadTimer(deltaT);
             // add new game objects
             gameObjects.UnionWith(pendingNewGameObjects);
             pendingNewGameObjects.Clear();
 
-
-            // if space is pressed
-            if (keyPressed.Contains(Keys.Space))
-            {
-                // release key space (no autofire)
-                ReleaseKey(Keys.Space);
-            }
 
             // update each game object
             foreach (GameObject gameObject in gameObjects)

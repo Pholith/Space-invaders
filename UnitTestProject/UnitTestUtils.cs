@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SpaceInvaders.Utils;
 using System.Linq;
+using System.Diagnostics;
 
 namespace UnitTestProject
 {
@@ -17,8 +18,8 @@ namespace UnitTestProject
                 5, 3, 4
             };
             Assert.AreEqual("[5, 3, 4]", l.ToReadableList());
-
-            Assert.AreEqual("[]", new List<int>());
+            Assert.AreEqual("[]", new List<int>().ToReadableList());
         }
+
     }
 }
