@@ -2,6 +2,7 @@
 using SpaceInvaders.GameObjects;
 using SpaceInvaders.Utils;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -112,18 +113,14 @@ namespace SpaceInvaders
                 gameObject.Draw(this, g);
         }
 
-        TimedAction generateMob = new TimedAction(0.6, () => new Invader(new Vecteur2D(10, 20)), true);
+        //TimedAction generateMob = new TimedAction(0.6, () => new Invader(new Vecteur2D(10, 20)), true);
         /// <summary>
         /// Init game
         /// </summary>
         public void InitGame()
         {
             new PlayerShip(new Vecteur2D(gameSize.Width / 2, gameSize.Height - 50));
-            int n = 12;
-            /*for (int i = 0; i < n; i++)
-            {
-                new Invader(new Vecteur2D(gameSize.Width / n * i, 10));
-            }*/
+            
         }
 
 
@@ -132,9 +129,14 @@ namespace SpaceInvaders
         /// </summary>
         public void Update(double deltaT)
         {
-            generateMob.LoadTimer(deltaT);
+            spawnManager.Update(deltaT);
             // add new game objects
+            foreach (var obj in pendingNewGameObjects)
+            {
+                obj.Init(this);
+            }
             gameObjects.UnionWith(pendingNewGameObjects);
+
             pendingNewGameObjects.Clear();
 
 
@@ -147,6 +149,11 @@ namespace SpaceInvaders
             // remove dead objects
             gameObjects.RemoveWhere(gameObject => !gameObject.IsAlive());
         }
+        #endregion
+
+
+        #region Managers
+        private SpawnerManager spawnManager = new SpawnerManager();
         #endregion
     }
 }

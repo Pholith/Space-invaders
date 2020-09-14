@@ -2,36 +2,45 @@
 using SpaceInvaders.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace SpaceInvaders.GameObjects
 {
-    class Invader : GameObject, IImage
+    class Invader : GameObject, IImage, IHitable
     {
 
-        public Invader(Vecteur2D v1) : base(v1)
+        public Invader(Vecteur2D v1, int invaderType = 0, int hp = 1) : base(v1)
         {
-            /*actions.Add("attack", new TimedAction(0.6, () => {
-                new Laser(Position + new Vecteur2D(size / 2, 0));
-            }));*/
+            this.invaderType = invaderType;
             Speed = new Vecteur2D(speedMax, 0);
-
-        }
-        int speedMax = 60;
-
-        public static readonly int size = 40;
-
-        protected void Shoot()
-        {
-            //actions["attack"].DoIfPossible();
+            this.hp = hp;
         }
 
-        public Bitmap GetImage()
+        public override void Init(Game gameInstance)
         {
             Random r = new Random();
 
+            base.Init(gameInstance);
+            AddNewAction(new TimedAction(r.Next(4, 10), () =>
+            {
+                new Laser(Position + new Vecteur2D(0, Size.Y), new Vecteur2D(0, 200));
+            }, true));
+
+        }
+
+        int speedMax = 60;
+        private int invaderType;
+        int hp;
+
+        public virtual Bitmap GetImage()
+        {
+            if (invaderType > 0)
+            {
+                object obj = Resources.ResourceManager.GetObject("ship" + invaderType);
+                return (Bitmap)obj;
+            }
             return new List<Bitmap>() {Resources.ship2,
                 Resources.ship3,
                 //Resources.ship4,
@@ -46,16 +55,29 @@ namespace SpaceInvaders.GameObjects
         {
             base.Update(gameInstance, deltaT);
 
-            if (Position.X < 0 && Speed.X < 0)
+            if (GetAnchorX() < 0 && Speed.X < 0)
             {
-                Position = new Vecteur2D(Position.X, Position.Y + size);
+                Position = new Vecteur2D(Position.X, GetAnchorY() + Size.Y + 20);
                 Speed = new Vecteur2D(speedMax, 0);
             }
-            if (Position.X > Game.game.gameSize.Width - size && Speed.X > 0)
+            if (GetAnchorX() + Size.X > Game.game.gameSize.Width && Speed.X > 0)
             {
-                Position = new Vecteur2D(Game.game.gameSize.Width - size, Position.Y + size);
+                Position = new Vecteur2D(Position.X, GetAnchorY() + Size.Y + 20);
                 Speed = new Vecteur2D(-speedMax, 0);
             }
+        }
+
+        public override bool OnHit(Laser laser)
+        {
+            laser.Kill();
+
+            hp -= laser.Damage;
+            if (hp <= 0)
+            {
+                Kill();
+                return true;
+            }
+            return false;
         }
     }
 }

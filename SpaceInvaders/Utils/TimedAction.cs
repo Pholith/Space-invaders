@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SpaceInvaders.Utils
 {
     /// <summary>
     /// An Action is something a gameobject can do.
-    /// 
     /// </summary>
     public class TimedAction
     {
@@ -16,20 +12,29 @@ namespace SpaceInvaders.Utils
         private readonly bool isAuto;
         private Delegate action;
         private bool ready = false;
-
-        public TimedAction(double couldown, Action action, bool isAuto = false)
+        
+        /// <summary>
+        /// Set a limit of calling this action, -1 is unlimited 
+        /// </summary>
+        private int limitOfCall;
+        
+        public TimedAction(double couldown, Action action, bool isAuto = false, bool readyOnStart = false, int limitOfCall = -1)
         {
+            ready = readyOnStart;
             this.couldown = couldown;
             this.isAuto = isAuto;
             this.action = action;
+            this.limitOfCall = limitOfCall;
         }
 
         public bool DoIfPossible()
         {
-            if (ready)
+            if (ready && limitOfCall != 0)
             {
                 action.DynamicInvoke();
                 ready = false;
+                limitOfCall -= 1;
+                timer = 0;
                 return true;
             }
             return false;
@@ -42,9 +47,14 @@ namespace SpaceInvaders.Utils
             {
                 timer = 0;
                 ready = true;
-                
-                if (isAuto) DoIfPossible();
             }
+            if (isAuto) DoIfPossible();
+
+        }
+
+        public bool Finished()
+        {
+            return limitOfCall == 0;
         }
     }
 }

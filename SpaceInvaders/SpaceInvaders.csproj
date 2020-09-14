@@ -61,6 +61,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameObjects\BigBuggedBoss.cs" />
+    <Compile Include="GameObjects\LaserBall.cs" />
+    <Compile Include="GameObjects\InvaderBigBoss.cs" />
+    <Compile Include="SpawnerManager.cs" />
+    <Compile Include="Utils\IActionsManager.cs" />
+    <Compile Include="Utils\IHitable.cs" />
     <Compile Include="GameObjects\Invader.cs" />
     <Compile Include="GameObjects\Laser.cs" />
     <Compile Include="GameObjects\PlayerShip.cs" />
@@ -157,6 +163,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\shootball.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
