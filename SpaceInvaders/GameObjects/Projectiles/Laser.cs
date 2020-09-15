@@ -7,13 +7,18 @@ namespace SpaceInvaders.GameObjects
 {
     class Laser : GameObject, IImage
     {
+
+
         public int Damage { get; private set; }
-        public Laser(Vecteur2D v1, Vecteur2D speed) : base(v1)
+        public Tag Tag { get; private set; }
+
+        public Laser(Vecteur2D v1, Vecteur2D speed, Tag tag = Tag.Invader) : base(v1)
         {
             Speed = speed;
             Damage = 1;
+            Tag = tag;
         }
-        public Laser(Vecteur2D v1) : this(v1, new Vecteur2D(0, -200))
+        public Laser(Vecteur2D v1, Tag tag = Tag.Invader) : this(v1, new Vecteur2D(0, -200), tag)
         {
 
         }
@@ -21,6 +26,15 @@ namespace SpaceInvaders.GameObjects
         public virtual Bitmap GetImage()
         {
             return Resources.shoot1;
+        }
+
+        public bool CanHit(GameObject go)
+        {
+            // Lasers destroy lasers
+            if (go.GetType() == GetType()) return true;
+
+            return go.GetTag() != Tag;
+
         }
 
         public override void Update(Game gameInstance, double deltaT)

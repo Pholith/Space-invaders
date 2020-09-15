@@ -13,7 +13,7 @@ namespace GameObjects
         {
             attack = AddNewAction(new TimedAction(0.6, () =>
             {
-                new Laser(Position + new Vecteur2D(0, -(Size.Y / 2)));
+                new Laser(Position + new Vecteur2D(0, -(Size.Y / 2)), Tag.Player);
             }));
         }
 
@@ -37,7 +37,7 @@ namespace GameObjects
 
         public Bitmap GetImage()
         {
-            return Resources.ship1;
+            return Resources.playership;
         }
         public override void Update(Game gameInstance, double deltaT)
         {
@@ -49,5 +49,11 @@ namespace GameObjects
             if (GetAnchorX() + Size.X > Game.game.gameSize.Width)
                 Position = new Vecteur2D(Game.game.gameSize.Width - Size.X / 2, Position.Y);
         }
+
+        public override Tag GetTag()
+        {
+            return Tag.Player;
+        }
+
     }
 }

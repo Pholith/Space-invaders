@@ -27,7 +27,7 @@ namespace GameObjects
             }
             else
             {
-                Speed = Speed * 0.99; // Slow down when A or D is not pressed
+                Speed = Speed * 0.98; // Slow down when A or D is not pressed
             }
 
             if (gm.keyPressed.Contains(Keys.Space))

@@ -10,7 +10,7 @@ namespace SpaceInvaders
     /// <summary>
     /// This is the generic abstact base class for any entity in the game
     /// </summary>
-    abstract class GameObject : IHitable
+    abstract class GameObject : IHitable, ITag
     {
 
         public Vecteur2D Position { get; protected set; }
@@ -92,9 +92,9 @@ namespace SpaceInvaders
             if (sprite != null)
             {
                 graphics.DrawImage(sprite, GetAnchorX(), GetAnchorY(), sprite.Width, sprite.Height);
-                graphics.DrawRectangle(new Pen(Color.Blue, 1), GetAnchorX(), GetAnchorY(), sprite.Width, sprite.Height);
+                /*graphics.DrawRectangle(new Pen(Color.Blue, 1), GetAnchorX(), GetAnchorY(), sprite.Width, sprite.Height);
                 graphics.DrawEllipse(new Pen(Color.Red, 3), GetAnchorX(), GetAnchorY(), 1, 1);
-                graphics.DrawEllipse(new Pen(Color.Green, 3), (float)Position.X, (float)Position.Y, 1, 1);
+                graphics.DrawEllipse(new Pen(Color.Green, 3), (float)Position.X, (float)Position.Y, 1, 1);*/
             }
         }
 
@@ -114,11 +114,14 @@ namespace SpaceInvaders
             return alive;
         }
 
-        public virtual bool OnHit(Laser laser)
+        public virtual void OnHit(Laser laser)
         {
-            Kill();
-            laser.Kill();
-            return false;
+            if (laser.CanHit(this))
+            {
+                Kill();
+                laser.Kill();
+            }
+
         }
 
 
@@ -134,5 +137,10 @@ namespace SpaceInvaders
         }
         #endregion
 
+
+        public virtual Tag GetTag()
+        {
+            return Tag.Invader;
+        }
     }
 }

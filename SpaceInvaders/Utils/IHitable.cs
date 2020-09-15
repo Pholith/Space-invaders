@@ -7,7 +7,6 @@
         /// Apply damage on a hittable object
         /// </summary>
         /// <param name="damage"></param>
-        /// <returns> true if the object is destroyed </returns>
-        bool OnHit(Laser laser);
+        void OnHit(Laser laser);
     }
 }

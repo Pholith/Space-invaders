@@ -19,7 +19,6 @@ namespace SpaceInvaders.GameObjects
         {
             Image img = new List<Bitmap>() {Resources.ship2,
                 Resources.ship3,
-                //Resources.ship4,
                 Resources.ship5,
                 Resources.ship6,
                 Resources.ship7,
@@ -32,17 +31,16 @@ namespace SpaceInvaders.GameObjects
         {
             base.Init(gameInstance);
 
-            AddNewAction(new TimedAction(3, () =>
+            AddNewAction(new TimedAction(8, () =>
             {
-                AddNewAction(new TimedAction(0.2, () =>
+                AddNewAction(new TimedAction(0.1, () =>
                 {
-                    new Laser(Position + new Vecteur2D(0, Size.Y), new Vecteur2D(0, 200));
-                    new LaserBall(Position + new Vecteur2D(40, Size.Y / 1.5), new Vecteur2D(50, 200));
-                    new LaserBall(Position + new Vecteur2D(-40, Size.Y / 1.5), new Vecteur2D(-50, 200));
-                    new LaserBall(Position + new Vecteur2D(-50, Size.Y / 1.5), new Vecteur2D(-100, 200));
-                    new LaserBall(Position + new Vecteur2D(50, Size.Y / 1.5), new Vecteur2D(100, 200));
+                    new LaserBall(Position + new Vecteur2D(40, Size.Y / 2), new Vecteur2D(30, 200));
+                    new LaserBall(Position + new Vecteur2D(-40, Size.Y / 2), new Vecteur2D(-30, 200));
+                    new LaserBall(Position + new Vecteur2D(-50, Size.Y / 2), new Vecteur2D(-120, 200));
+                    new LaserBall(Position + new Vecteur2D(50, Size.Y / 2), new Vecteur2D(120, 200));
 
-                }, true, false, 5));
+                }, true, false, 6));
             }, true));
         }
 
@@ -50,6 +48,7 @@ namespace SpaceInvaders.GameObjects
         {
   
             Image sprite = GetImage();
+            Size = new Vecteur2D(sprite.Width, sprite.Height);
             graphics.DrawImage(sprite, GetAnchorX(), GetAnchorY(), sprite.Width, sprite.Height);
         }
 

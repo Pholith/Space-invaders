@@ -2,7 +2,6 @@
 using SpaceInvaders.Utils;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace SpaceInvaders
 {
@@ -12,24 +11,24 @@ namespace SpaceInvaders
         public SpawnerManager()
         {
             Random r = new Random();
-            // Creating a wave every 10 secondes
-            AddNewAction(new TimedAction(15, () =>
+            // Creating a wave every 12 secondes
+            AddNewAction(new TimedAction(12, () =>
             {
-                if (waveCreated == 0)
+                if (waveCreated > 1 && waveCreated % 5 == 0)
                 {
-                    new BigBuggedBoss(new Vecteur2D(50, 50));
+                    AddNewAction(new TimedAction(5, () => new BigBuggedBoss(new Vecteur2D(50, 50)), true, false, 1));
                 }
-                else if (waveCreated % 3 == 0)
+                else if (waveCreated > 1 && waveCreated % 3 == 0)
                 {
-                    new InvaderBigBoss(new Vecteur2D(50, 50));
+                    AddNewAction(new TimedAction(5, () => new InvaderBigBoss(new Vecteur2D(50, 50)), true, false, 1));
                 }
                 else
                 {
                     // Creating 10 mob for this wave
                     int type = r.Next(2, 9);
-                    AddNewAction(new TimedAction(0.8, () => new Invader(new Vecteur2D(10, 20), type), true, true, 20));
+                    AddNewAction(new TimedAction(0.8, () => new Invader(new Vecteur2D(10, 20), type), true, true, 15));
                 }
-                waveCreated ++;
+                waveCreated++;
             }
             , true, true));
 
@@ -46,8 +45,6 @@ namespace SpaceInvaders
             pendingNewActions.Add(action);
             return action;
         }
-        #endregion
-
 
         public void Update(double deltaT)
         {
@@ -59,5 +56,7 @@ namespace SpaceInvaders
             pendingNewActions.Clear();
             actions.RemoveWhere(action => action.Finished());
         }
+        #endregion
+
     }
 }

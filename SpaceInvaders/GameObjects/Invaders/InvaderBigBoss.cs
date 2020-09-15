@@ -27,14 +27,13 @@ namespace SpaceInvaders.GameObjects
             {
                 AddNewAction(new TimedAction(0.3, () =>
                 {
-                    new Laser(Position + new Vecteur2D(0, Size.Y), new Vecteur2D(0, 200));
-                    new LaserBall(Position + new Vecteur2D(40, Size.Y / 1.5), new Vecteur2D(50, 200));
-                    new LaserBall(Position + new Vecteur2D(-40, Size.Y / 1.5), new Vecteur2D(-50, 200));
+                    new Laser(Position + new Vecteur2D(0, Size.Y / 2), new Vecteur2D(0, 200));
+                    new LaserBall(Position + new Vecteur2D(40, Size.Y / 2), new Vecteur2D(50, 200));
+                    new LaserBall(Position + new Vecteur2D(-40, Size.Y / 2), new Vecteur2D(-50, 200));
 
                 }, true, false, 5));
             }, true));
         }
-
 
 
     }

@@ -8,14 +8,13 @@ using System.Drawing;
 
 namespace SpaceInvaders.GameObjects
 {
-    class Invader : GameObject, IImage, IHitable
+    class Invader : LivingEntity, IImage, IHitable
     {
 
-        public Invader(Vecteur2D v1, int invaderType = 0, int hp = 1) : base(v1)
+        public Invader(Vecteur2D v1, int invaderType = 0, int hp = 1) : base(v1, hp)
         {
             this.invaderType = invaderType;
             Speed = new Vecteur2D(speedMax, 0);
-            this.hp = hp;
         }
 
         public override void Init(Game gameInstance)
@@ -23,7 +22,7 @@ namespace SpaceInvaders.GameObjects
             Random r = new Random();
 
             base.Init(gameInstance);
-            AddNewAction(new TimedAction(r.Next(4, 10), () =>
+            AddNewAction(new TimedAction(r.Next(8, 15), () =>
             {
                 new Laser(Position + new Vecteur2D(0, Size.Y), new Vecteur2D(0, 200));
             }, true));
@@ -32,7 +31,6 @@ namespace SpaceInvaders.GameObjects
 
         int speedMax = 60;
         private int invaderType;
-        int hp;
 
         public virtual Bitmap GetImage()
         {
@@ -67,17 +65,5 @@ namespace SpaceInvaders.GameObjects
             }
         }
 
-        public override bool OnHit(Laser laser)
-        {
-            laser.Kill();
-
-            hp -= laser.Damage;
-            if (hp <= 0)
-            {
-                Kill();
-                return true;
-            }
-            return false;
-        }
     }
 }
