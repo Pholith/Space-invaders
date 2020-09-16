@@ -91,6 +91,16 @@ namespace SpaceInvaders.Properties {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] Pixel {
+            get {
+                object obj = ResourceManager.GetObject("Pixel", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap playership {
@@ -237,6 +247,16 @@ namespace SpaceInvaders.Properties {
             get {
                 object obj = ResourceManager.GetObject("shootball", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] vcn_mono {
+            get {
+                object obj = ResourceManager.GetObject("vcn_mono", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

@@ -1,13 +1,11 @@
 ﻿using SpaceInvaders.Properties;
 using SpaceInvaders.Utils;
-using System.Diagnostics;
 using System.Drawing;
 
 namespace SpaceInvaders.GameObjects
 {
     class Laser : GameObject, IImage
     {
-
 
         public int Damage { get; private set; }
         public Tag Tag { get; private set; }
@@ -43,8 +41,11 @@ namespace SpaceInvaders.GameObjects
 
             foreach (var obj in gameInstance.gameObjects)
             {
-                if (GetAnchorX() > obj.GetAnchorX() && GetAnchorY() > obj.GetAnchorY() && GetAnchorY() < obj.GetAnchorY() + obj.Size.Y && GetAnchorX() < obj.GetAnchorX() + obj.Size.X)
-                    //|| Position.X + Size.X < obj.Position.X && Position.Y < obj.Position.Y + obj.Size.Y && Posi)
+                if (obj == this) continue;
+                if (!(obj.GetAnchorX() > GetAnchorX() + Size.X ||
+                    obj.GetAnchorY() > GetAnchorY() + Size.Y ||
+                    GetAnchorX() > obj.GetAnchorX() + obj.Size.X ||
+                    GetAnchorY() > obj.GetAnchorY() + obj.Size.Y))
                 {
                     obj.OnHit(this);
                 }

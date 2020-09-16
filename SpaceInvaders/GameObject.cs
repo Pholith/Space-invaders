@@ -1,9 +1,7 @@
 ﻿using SpaceInvaders.GameObjects;
 using SpaceInvaders.Utils;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Windows.Forms;
 
 namespace SpaceInvaders
 {
@@ -24,11 +22,11 @@ namespace SpaceInvaders
         /// <returns></returns>
         public float GetAnchorX()
         {
-            return (float) (Position.X - Size.X / 2f);
+            return (float)(Position.X - Size.X / 2f);
         }
         public float GetAnchorY()
         {
-            return (float) (Position.Y - Size.Y / 2f);
+            return (float)(Position.Y - Size.Y / 2f);
         }
 
 
@@ -75,7 +73,7 @@ namespace SpaceInvaders
         /// <summary>
         /// Field to store image to not read it at every frame
         /// </summary>
-        Image sprite;
+        Bitmap sprite;
         /// <summary>
         /// Render the game object
         /// </summary>
@@ -114,6 +112,11 @@ namespace SpaceInvaders
             return alive;
         }
 
+        public bool IsPointOnPixel()
+        {
+            sprite.GetPixel(1, 1);
+            return false;
+        }
         public virtual void OnHit(Laser laser)
         {
             if (laser.CanHit(this))

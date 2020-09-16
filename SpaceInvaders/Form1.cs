@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
+using SpaceInvaders.GameModes;
 
 namespace SpaceInvaders
 {
@@ -40,7 +41,7 @@ namespace SpaceInvaders
         public GameForm()
         {
             InitializeComponent();
-            game = Game.CreateGame(this.ClientSize);
+            game = Game.CreateGame(ClientSize, new NormalMode());
             game.InitGame();
             watch.Start();
             WorldClock.Start();

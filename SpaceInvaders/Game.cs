@@ -1,4 +1,5 @@
 ﻿using GameObjects;
+using SpaceInvaders.GameModes;
 using SpaceInvaders.GameObjects;
 using SpaceInvaders.Utils;
 using System.Collections.Generic;
@@ -40,6 +41,11 @@ namespace SpaceInvaders
         public Size gameSize;
 
         /// <summary>
+        /// GameMode choiced in the menu
+        /// </summary>
+        private GameMode mode;
+
+        /// <summary>
         /// State of the keyboard
         /// </summary>
         public HashSet<Keys> keyPressed = new HashSet<Keys>();
@@ -54,9 +60,10 @@ namespace SpaceInvaders
         public static Game game { get; private set; }
 
         /// <summary>
-        /// A shared black brush
+        /// Some pens
         /// </summary>
-        private static Brush blackBrush = new SolidBrush(Color.Black);
+        private static Pen blackPen = new Pen(Color.Black, 4);
+        private static Pen whitePen = new Pen(Color.White, 3);
 
         /// <summary>
         /// A shared simple font
@@ -66,26 +73,23 @@ namespace SpaceInvaders
 
 
         #region constructors
+
         /// <summary>
         /// Singleton constructor
         /// </summary>
         /// <param name="gameSize">Size of the game area</param>
         /// 
         /// <returns></returns>
-        public static Game CreateGame(Size gameSize)
+        public static Game CreateGame(Size gameSize, GameMode mode)
         {
-            if (game == null)
-                game = new Game(gameSize);
+            game = new Game(gameSize, mode);
             return game;
         }
 
-        /// <summary>
-        /// Private constructor
-        /// </summary>
-        /// <param name="gameSize">Size of the game area</param>
-        private Game(Size gameSize)
+        private Game(Size gameSize, GameMode mode)
         {
             this.gameSize = gameSize;
+            this.mode = mode;
         }
 
         #endregion
@@ -109,26 +113,69 @@ namespace SpaceInvaders
         /// <param name="g">Graphics to draw in</param>
         public void Draw(Graphics g)
         {
+            
             foreach (GameObject gameObject in gameObjects)
                 gameObject.Draw(this, g);
+
+            if (paused) DrawTextSquare(g, "paused", 20, 10);
+            if (mode.IsEnd()) DrawTextSquare(g, mode.IsWin() ? "win" : "lose", 38, 15);
+
         }
 
-        //TimedAction generateMob = new TimedAction(0.6, () => new Invader(new Vecteur2D(10, 20)), true);
+        private void DrawTextSquare(Graphics g, string text, int fontSize, int padding)
+        {
+            Font f = new Font(FontFamily.GenericSansSerif, fontSize, FontStyle.Regular);
+            SizeF textSize = g.MeasureString(text, f);
+            Vecteur2D pausePosition = new Vecteur2D(gameSize.Width / 2 - textSize.Width / 2, gameSize.Height / 2 - textSize.Height / 2);
+            Rectangle rect = new Rectangle((int)pausePosition.X - padding, (int)pausePosition.Y - padding, (int)textSize.Width + padding * 2, (int)textSize.Height + padding * 2);
+
+            g.FillRectangle(whitePen.Brush, rect);
+            g.DrawRectangle(blackPen, rect);
+            g.DrawString(text, f, blackPen.Brush, (float)pausePosition.X, (float)pausePosition.Y);
+        }
+
+        /// <summary>
+        /// Start a new game of the same mode
+        /// </summary>
+        private void ResetGame()
+        {
+            gameObjects.Clear();
+            pendingNewGameObjects.Clear();
+            InitGame();
+            spawnManager = new SpawnerManager();
+        }
+
         /// <summary>
         /// Init game
         /// </summary>
         public void InitGame()
         {
-            new PlayerShip(new Vecteur2D(gameSize.Width / 2, gameSize.Height - 50));
-            
+            mode.Init();
         }
 
+        private bool paused = false;
 
         /// <summary>
         /// Update game
         /// </summary>
         public void Update(double deltaT)
         {
+            // Check for pause
+            if (keyPressed.Contains(Keys.P))
+            {
+                paused = !paused;
+                ReleaseKey(Keys.P);
+            }
+            if (paused) return;
+
+            if (mode.IsEnd() || mode.CheckEnd())
+            {
+                if (keyPressed.Contains(Keys.Space))
+                {
+                    ResetGame();
+                }
+                return;
+            }
             spawnManager.Update(deltaT);
             // add new game objects
             foreach (var obj in pendingNewGameObjects)
@@ -153,7 +200,9 @@ namespace SpaceInvaders
 
 
         #region Managers
+
         private SpawnerManager spawnManager = new SpawnerManager();
+
         #endregion
     }
 }
