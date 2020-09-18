@@ -6,10 +6,10 @@ using System.Drawing;
 
 namespace GameObjects
 {
-    class Ship : GameObject, IImage
+    class Ship : LivingEntity, IImage
     {
 
-        public Ship(Vecteur2D v1) : base(v1)
+        public Ship(Vecteur2D v1) : base(v1, 3)
         {
             attack = AddNewAction(new TimedAction(0.6, () =>
             {

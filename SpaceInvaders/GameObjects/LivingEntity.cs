@@ -1,26 +1,32 @@
 ﻿namespace SpaceInvaders.GameObjects
 {
-
+    /// <summary>
+    /// A living Entity is a gameobject with HPs.
+    /// </summary>
+    /// <seealso cref="GameObject" />
     class LivingEntity : GameObject
     {
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LivingEntity"/> class.
+        /// </summary>
+        /// <param name="v1"> Position of the bunker </param>
+        /// <param name="hP"> Amount of HP (-1 for infinite) .</param>
         public LivingEntity(Vecteur2D v1, int hP) : base(v1)
         {
             HP = hP;
         }
 
+
         public int HP { get; private set; }
 
         public override void OnHit(Laser laser)
         {
-            if (laser.CanHit(this))
+            if (HP == -1) return;
+            HP -= laser.Damage;
+            if (HP <= 0)
             {
-                laser.Kill();
-                HP -= laser.Damage;
-                if (HP <= 0)
-                {
-                    Kill();
-                }
-
+                Kill();
             }
         }
     }

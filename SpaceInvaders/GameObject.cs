@@ -112,19 +112,56 @@ namespace SpaceInvaders
             return alive;
         }
 
-        public bool IsPointOnPixel()
+        /// <summary>
+        /// Determines if point is superposing the square of this gameobject.
+        /// </summary>
+        /// <param name="position">The position of the point to test</param>
+        /// <returns>
+        ///   <c>true</c> if the point is superposing the square; otherwise, <c>false</c>.
+        /// </returns>
+        public bool IsPointSuperposingSquare(Vecteur2D position)
         {
-            sprite.GetPixel(1, 1);
-            return false;
+            return !(position.X - GetAnchorX() >= Size.X ||
+                position.X - GetAnchorX() < 0 ||
+                position.Y - GetAnchorY() >= Size.Y ||
+                position.Y - GetAnchorY() < 0);
         }
+
+        /// <summary>
+        /// Test if a pixel position is superposing a black pixel of this gameobject
+        /// </summary>
+        /// <param name="position">coords of the pixel to test (screen refenciel)</param>
+        /// <returns>
+        /// True if there is a superposition
+        /// </returns>
+        public virtual bool IsPointOnPixel(Vecteur2D position)
+        {
+            if (!IsPointSuperposingSquare(position)) return false;
+            return sprite.GetPixel((int)(position.X - GetAnchorX()), (int)(position.Y - GetAnchorY())).A == 255;
+        }
+
+        /// <summary>
+        /// Destroys the pixel at the given postion and pixels arround.
+        /// </summary>
+        /// <param name="position">The position of the pixel </param>
+        public virtual void DestroyPixel(Vecteur2D position)
+        {
+            int size = 6;
+            for (int i = -size; i < size; i++)
+            {
+                for (int j = -size; j < size; j++)
+                {
+                    Vecteur2D pixel = new Vecteur2D(position.X + i, position.Y + j);
+                    if (IsPointSuperposingSquare(pixel) &&
+                        Vecteur2D.Distance(position, pixel) < size)
+                        sprite.SetPixel((int)(position.X - GetAnchorX()) + i, (int)(position.Y - GetAnchorY()) + j, Color.Transparent);
+                }
+            }
+        }
+
         public virtual void OnHit(Laser laser)
         {
-            if (laser.CanHit(this))
-            {
-                Kill();
-                laser.Kill();
-            }
-
+            Kill();
         }
 
 

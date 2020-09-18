@@ -1,4 +1,5 @@
 ﻿using GameObjects;
+using SpaceInvaders.GameObjects;
 using System;
 
 namespace SpaceInvaders.GameModes
@@ -16,6 +17,10 @@ namespace SpaceInvaders.GameModes
         public virtual void Init()
         {
             player = new PlayerShip(new Vecteur2D(Game.game.gameSize.Width / 2, Game.game.gameSize.Height - 50));
+            
+            new Bunker(new Vecteur2D(Game.game.gameSize.Width / 3, Game.game.gameSize.Height - 100));
+            new Bunker(new Vecteur2D(Game.game.gameSize.Width / 1.5, Game.game.gameSize.Height - 100));
+
             win = false;
             ended = false;
         }

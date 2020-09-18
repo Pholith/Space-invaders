@@ -14,12 +14,23 @@ namespace SpaceInvaders
         public double X { get; private set; }
         public double Y { get; private set; }
 
-        public Vecteur2D(double x, double y)
+        public Vecteur2D(float x, float y)
         {
-            this.X = x;
-            this.Y = y;
+            X = x;
+            Y = y;
         }
 
+        public Vecteur2D(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public Vecteur2D(double x, double y)
+        {
+            X = x;
+            Y = y;
+        }
 
         public Vecteur2D() : this(0, 0)
         {
@@ -62,6 +73,10 @@ namespace SpaceInvaders
             return !(a == b);
         }
 
+        public static double Distance(Vecteur2D a, Vecteur2D b)
+        {
+            return Math.Sqrt(Math.Pow(b.X - a.X, 2) + Math.Pow(b.Y - a.Y, 2));
+        }
         public override bool Equals(object obj)
         {
 

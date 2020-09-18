@@ -29,7 +29,7 @@ namespace SpaceInvaders.GameObjects
 
         }
 
-        int speedMax = 60;
+        int speedMax = 50;
         private int invaderType;
 
         public virtual Bitmap GetImage()
@@ -56,12 +56,12 @@ namespace SpaceInvaders.GameObjects
             if (GetAnchorX() < 0 && Speed.X < 0)
             {
                 Position = new Vecteur2D(Position.X, GetAnchorY() + Size.Y + 20);
-                Speed = new Vecteur2D(speedMax, 0);
+                Speed = new Vecteur2D(speedMax + Position.Y, 0);
             }
             if (GetAnchorX() + Size.X > Game.game.gameSize.Width && Speed.X > 0)
             {
                 Position = new Vecteur2D(Position.X, GetAnchorY() + Size.Y + 20);
-                Speed = new Vecteur2D(-speedMax, 0);
+                Speed = new Vecteur2D(-speedMax - Position.Y, 0);
             }
         }
 

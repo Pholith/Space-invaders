@@ -2,6 +2,7 @@
 using SpaceInvaders.Utils;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -51,6 +52,18 @@ namespace SpaceInvaders.GameObjects
             Size = new Vecteur2D(sprite.Width, sprite.Height);
             graphics.DrawImage(sprite, GetAnchorX(), GetAnchorY(), sprite.Width, sprite.Height);
         }
+        public override bool IsPointOnPixel(Vecteur2D position)
+        {
+            return IsPointSuperposingSquare(position);
+        }
 
+        public override void DestroyPixel(Vecteur2D position)
+        {
+            return;
+        }
+        public override void Update(Game gameInstance, double deltaT)
+        {
+            base.Update(gameInstance, deltaT);
+        }
     }
 }

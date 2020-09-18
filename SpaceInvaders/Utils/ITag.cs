@@ -8,7 +8,8 @@ namespace SpaceInvaders
     public enum Tag
     {
         Invader,
-        Player
+        Player,
+        Neutral
     }
 
     interface ITag

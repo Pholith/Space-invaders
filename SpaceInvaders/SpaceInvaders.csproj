@@ -65,7 +65,6 @@
     <Compile Include="GameModes\EndlessGame.cs" />
     <Compile Include="GameModes\GameMode.cs" />
     <Compile Include="GameModes\NormalMode.cs" />
-    <Compile Include="GameObjects\BunkerCell.cs" />
     <Compile Include="GameObjects\Invaders\BigBuggedBoss.cs" />
     <Compile Include="GameObjects\Bunker.cs" />
     <Compile Include="GameObjects\Projectiles\LaserBall.cs" />
@@ -187,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\playership.png" />
+    <Resource Include="Resources\shipTest.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

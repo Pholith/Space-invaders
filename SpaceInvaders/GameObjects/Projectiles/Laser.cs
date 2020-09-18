@@ -20,6 +20,10 @@ namespace SpaceInvaders.GameObjects
         {
 
         }
+        public override Tag GetTag()
+        {
+            return Tag;
+        }
 
         public virtual Bitmap GetImage()
         {
@@ -28,11 +32,7 @@ namespace SpaceInvaders.GameObjects
 
         public bool CanHit(GameObject go)
         {
-            // Lasers destroy lasers
-            if (go.GetType() == GetType()) return true;
-
             return go.GetTag() != Tag;
-
         }
 
         public override void Update(Game gameInstance, double deltaT)
@@ -42,12 +42,32 @@ namespace SpaceInvaders.GameObjects
             foreach (var obj in gameInstance.gameObjects)
             {
                 if (obj == this) continue;
+                if (!CanHit(obj)) continue;
+
+                // If the squares intersect
                 if (!(obj.GetAnchorX() > GetAnchorX() + Size.X ||
                     obj.GetAnchorY() > GetAnchorY() + Size.Y ||
                     GetAnchorX() > obj.GetAnchorX() + obj.Size.X ||
                     GetAnchorY() > obj.GetAnchorY() + obj.Size.Y))
                 {
-                    obj.OnHit(this);
+
+                    bool hited = false;
+
+                    // Check if a pixel of the laser is on a pixel of the gameobject
+                    for (int i = (int)GetAnchorX(); i < GetAnchorX() + Size.X; i++)
+                        for (int j = (int)GetAnchorY(); j < GetAnchorY() + Size.Y; j++)
+                            // Destroy the pixel, apply hit and destroy the laser
+                            if (obj.IsPointOnPixel(new Vecteur2D(i, j)))
+                            {
+                                obj.DestroyPixel(new Vecteur2D(i, j));
+                                if (!hited)
+                                {
+                                    Kill();
+                                    obj.OnHit(this);
+                                    hited = true;
+                                }
+                            }
+
                 }
             }
         }
