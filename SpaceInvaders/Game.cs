@@ -2,6 +2,7 @@
 using SpaceInvaders.GameModes;
 using SpaceInvaders.GameObjects;
 using SpaceInvaders.Utils;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -43,7 +44,7 @@ namespace SpaceInvaders
         /// <summary>
         /// GameMode choiced in the menu
         /// </summary>
-        private GameMode mode;
+        public GameMode Mode { get; private set; }
 
         /// <summary>
         /// State of the keyboard
@@ -59,6 +60,7 @@ namespace SpaceInvaders
         /// </summary>
         public static Game game { get; private set; }
 
+        public Random random { get; private set; }
         /// <summary>
         /// Some pens
         /// </summary>
@@ -89,7 +91,8 @@ namespace SpaceInvaders
         private Game(Size gameSize, GameMode mode)
         {
             this.gameSize = gameSize;
-            this.mode = mode;
+            Mode = mode;
+            random = new Random();
         }
 
         #endregion
@@ -118,7 +121,7 @@ namespace SpaceInvaders
                 gameObject.Draw(this, g);
 
             if (paused) DrawTextSquare(g, "paused", 20, 10);
-            if (mode.IsEnd()) DrawTextSquare(g, mode.IsWin() ? "win" : "lose", 38, 15);
+            if (Mode.Ended) DrawTextSquare(g, Mode.Win ? "win" : "lose", 38, 15);
 
         }
 
@@ -134,23 +137,16 @@ namespace SpaceInvaders
             g.DrawString(text, f, blackPen.Brush, (float)pausePosition.X, (float)pausePosition.Y);
         }
 
-        /// <summary>
-        /// Start a new game of the same mode
-        /// </summary>
-        private void ResetGame()
-        {
-            gameObjects.Clear();
-            pendingNewGameObjects.Clear();
-            InitGame();
-            spawnManager = new SpawnerManager();
-        }
 
         /// <summary>
         /// Init game
         /// </summary>
         public void InitGame()
         {
-            mode.Init();
+            gameObjects.Clear();
+            pendingNewGameObjects.Clear();
+            Mode.Init();
+            spawnManager = new SpawnerManager();
         }
 
         private bool paused = false;
@@ -168,24 +164,16 @@ namespace SpaceInvaders
             }
             if (paused) return;
 
-            if (mode.IsEnd() || mode.CheckEnd())
-            {
-                if (keyPressed.Contains(Keys.Space))
-                {
-                    ResetGame();
-                }
-                return;
-            }
             spawnManager.Update(deltaT);
+
+
             // add new game objects
             foreach (var obj in pendingNewGameObjects)
             {
                 obj.Init(this);
             }
             gameObjects.UnionWith(pendingNewGameObjects);
-
             pendingNewGameObjects.Clear();
-
 
             // update each game object
             foreach (GameObject gameObject in gameObjects)
@@ -195,13 +183,24 @@ namespace SpaceInvaders
 
             // remove dead objects
             gameObjects.RemoveWhere(gameObject => !gameObject.IsAlive());
+
+
+            if (Mode.Ended || Mode.CheckEnd())
+            {
+                if (keyPressed.Contains(Keys.Space))
+                {
+                    InitGame();
+                }
+                return;
+            }
+
         }
         #endregion
 
 
         #region Managers
 
-        private SpawnerManager spawnManager = new SpawnerManager();
+        private SpawnerManager spawnManager;
 
         #endregion
     }

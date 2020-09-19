@@ -1,11 +1,9 @@
-﻿using SpaceInvaders.Properties;
+﻿using SpaceInvaders.GameObjects.Invaders;
+using SpaceInvaders.Properties;
 using SpaceInvaders.Utils;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace SpaceInvaders.GameObjects
 {
@@ -47,7 +45,7 @@ namespace SpaceInvaders.GameObjects
 
         public override void Draw(Game gameInstance, Graphics graphics)
         {
-  
+
             Image sprite = GetImage();
             Size = new Vecteur2D(sprite.Width, sprite.Height);
             graphics.DrawImage(sprite, GetAnchorX(), GetAnchorY(), sprite.Width, sprite.Height);

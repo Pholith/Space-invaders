@@ -1,4 +1,5 @@
-﻿using SpaceInvaders.Properties;
+﻿using SpaceInvaders.GameModes;
+using SpaceInvaders.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,9 +34,9 @@ namespace SpaceInvaders
             endlessButton.Click += endlessButtonClick;
         }
 
-        private void OpenGame()
+        private void OpenGame(GameMode mode)
         {
-            var frm = new GameForm();
+            var frm = new GameForm(mode);
             frm.StartPosition = FormStartPosition.CenterScreen;
             frm.FormClosing += delegate { this.Show(); };
             frm.Show();
@@ -44,11 +45,11 @@ namespace SpaceInvaders
 
         private void simpleButtonClick(object sender, EventArgs e)
         {
-            OpenGame();
+            OpenGame(new NormalMode());
         }
         private void endlessButtonClick(object sender, EventArgs e)
         {
-            OpenGame();
+            OpenGame(new EndlessMode());
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -67,6 +67,8 @@
     <Compile Include="GameModes\NormalMode.cs" />
     <Compile Include="GameObjects\Invaders\BigBuggedBoss.cs" />
     <Compile Include="GameObjects\Bunker.cs" />
+    <Compile Include="GameObjects\Invaders\InvaderBlock.cs" />
+    <Compile Include="GameObjects\Invaders\Invader.cs" />
     <Compile Include="GameObjects\Projectiles\LaserBall.cs" />
     <Compile Include="GameObjects\Invaders\InvaderBigBoss.cs" />
     <Compile Include="GameObjects\LivingEntity.cs" />
@@ -80,7 +82,7 @@
     <Compile Include="SpawnerManager.cs" />
     <Compile Include="Utils\IActionsManager.cs" />
     <Compile Include="Utils\IHitable.cs" />
-    <Compile Include="GameObjects\Invaders\Invader.cs" />
+    <Compile Include="GameObjects\Invaders\AutoInvader.cs" />
     <Compile Include="GameObjects\Projectiles\Laser.cs" />
     <Compile Include="GameObjects\PlayerShip.cs" />
     <Compile Include="GameObjects\Ship.cs" />

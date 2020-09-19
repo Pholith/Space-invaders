@@ -66,8 +66,9 @@ namespace SpaceInvaders
 
             Position = Position + Speed * deltaT;
 
-            // Automaticly kill gameobject if out of screen
-            if (Position.X < -10 || Position.X > gameInstance.gameSize.Width + 10 || Position.Y < 0 || Position.Y > gameInstance.gameSize.Height + 10) Kill();
+            // Automaticly kill gameobject if it is far out of screen
+            int marge = 50;
+            if (Position.X < -marge || Position.X > gameInstance.gameSize.Width + marge || Position.Y < -marge || Position.Y > gameInstance.gameSize.Height + marge) Kill();
         }
 
         /// <summary>

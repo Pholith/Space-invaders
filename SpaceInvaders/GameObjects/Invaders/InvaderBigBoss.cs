@@ -1,7 +1,7 @@
-﻿using SpaceInvaders.Properties;
+﻿using SpaceInvaders.GameObjects.Invaders;
+using SpaceInvaders.Properties;
 using SpaceInvaders.Utils;
 using System;
-using System.Diagnostics;
 using System.Drawing;
 
 namespace SpaceInvaders.GameObjects

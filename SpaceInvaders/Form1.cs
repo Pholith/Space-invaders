@@ -38,10 +38,10 @@ namespace SpaceInvaders
         /// <summary>
         /// Create form, create game
         /// </summary>
-        public GameForm()
+        public GameForm(GameMode mode)
         {
             InitializeComponent();
-            game = Game.CreateGame(ClientSize, new NormalMode());
+            game = Game.CreateGame(ClientSize, mode);
             game.InitGame();
             watch.Start();
             WorldClock.Start();

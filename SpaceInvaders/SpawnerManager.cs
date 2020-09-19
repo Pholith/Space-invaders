@@ -1,4 +1,5 @@
-﻿using SpaceInvaders.GameObjects;
+﻿using SpaceInvaders.GameModes;
+using SpaceInvaders.GameObjects;
 using SpaceInvaders.Utils;
 using System;
 using System.Collections.Generic;
@@ -10,30 +11,31 @@ namespace SpaceInvaders
 
         public SpawnerManager()
         {
-            Random r = new Random();
             // Creating a wave every 12 secondes
-            AddNewAction(new TimedAction(12, () =>
-            {
-                if (waveCreated > 1 && waveCreated % 5 == 0)
+            if (Game.game.Mode is EndlessMode)
+                AddNewAction(new TimedAction(12, () =>
                 {
-                    AddNewAction(new TimedAction(5, () => new BigBuggedBoss(new Vecteur2D(50, 50)), true, false, 1));
+                    if (waveCreated > 1 && waveCreated % 5 == 0)
+                    {
+                        AddNewAction(new TimedAction(5, () => new BigBuggedBoss(new Vecteur2D(50, 50)), true, false, 1));
+                    }
+                    else if (waveCreated > 1 && waveCreated % 3 == 0)
+                    {
+                        AddNewAction(new TimedAction(5, () => new InvaderBigBoss(new Vecteur2D(50, 50)), true, false, 1));
+                    }
+                    else
+                    {
+                        // Creating 10 mob for this wave
+                        int type = Game.game.random.Next(2, 9);
+                        AddNewAction(new TimedAction(0.8, () => new AutoInvader(new Vecteur2D(10, 20), type), true, true, 15));
+                    }
+                    waveCreated++;
                 }
-                else if (waveCreated > 1 && waveCreated % 3 == 0)
-                {
-                    AddNewAction(new TimedAction(5, () => new InvaderBigBoss(new Vecteur2D(50, 50)), true, false, 1));
-                }
-                else
-                {
-                    // Creating 10 mob for this wave
-                    int type = r.Next(2, 9);
-                    AddNewAction(new TimedAction(0.8, () => new Invader(new Vecteur2D(10, 20), type), true, true, 15));
-                }
-                waveCreated++;
-            }
-            , true, true));
+                , true, true));
 
         }
         int waveCreated = 0;
+
 
         #region Actions managment
 
