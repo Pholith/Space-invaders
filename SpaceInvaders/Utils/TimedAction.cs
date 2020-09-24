@@ -7,10 +7,13 @@ namespace SpaceInvaders.Utils
     /// </summary>
     public class TimedAction
     {
+
+        public double Couldown { get; set; }
+        public Action Action { get; set; }
+
         private double timer = 0;
-        private double couldown;
         private readonly bool isAuto;
-        private Delegate action;
+        
         private bool ready = false;
         
         /// <summary>
@@ -21,9 +24,9 @@ namespace SpaceInvaders.Utils
         public TimedAction(double couldown, Action action, bool isAuto = false, bool readyOnStart = false, int limitOfCall = -1)
         {
             ready = readyOnStart;
-            this.couldown = couldown;
+            Couldown = couldown;
+            Action = action;
             this.isAuto = isAuto;
-            this.action = action;
             this.limitOfCall = limitOfCall;
         }
 
@@ -31,7 +34,7 @@ namespace SpaceInvaders.Utils
         {
             if (ready && limitOfCall != 0)
             {
-                action.DynamicInvoke();
+                Action.Invoke();
                 ready = false;
                 limitOfCall -= 1;
                 timer = 0;
@@ -43,7 +46,7 @@ namespace SpaceInvaders.Utils
         public void LoadTimer(double deltaT)
         {
             timer += deltaT;
-            if (timer >= couldown)
+            if (timer >= Couldown)
             {
                 timer = 0;
                 ready = true;

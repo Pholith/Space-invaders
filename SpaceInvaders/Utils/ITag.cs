@@ -9,7 +9,8 @@ namespace SpaceInvaders
     {
         Invader,
         Player,
-        Neutral
+        Neutral,
+        Invincible
     }
 
     interface ITag

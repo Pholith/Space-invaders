@@ -25,14 +25,17 @@ namespace SpaceInvaders.GameObjects
             return Tag;
         }
 
+
         public virtual Bitmap GetImage()
         {
-            return Resources.shoot1;
+            Bitmap img = Resources.shoot1;
+            if (Tag == Tag.Player) img = Utils.Utils.RecolorImage(img, Color.DarkBlue);
+            return img;
         }
 
         public bool CanHit(GameObject go)
         {
-            return go.GetTag() != Tag;
+            return go.GetTag() != Tag && go.GetTag() != Tag.Invincible;
         }
 
         public override void Update(Game gameInstance, double deltaT)

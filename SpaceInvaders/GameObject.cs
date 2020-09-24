@@ -13,7 +13,7 @@ namespace SpaceInvaders
 
         public Vecteur2D Position { get; protected set; }
         public Vecteur2D Speed { get; protected set; }
-
+        public Vecteur2D Acceleration { get; protected set; } = Vecteur2D.zero;
         public Vecteur2D Size { get; protected set; } = Vecteur2D.zero;
 
         /// <summary>
@@ -60,17 +60,23 @@ namespace SpaceInvaders
             {
                 action.LoadTimer(deltaT);
             }
+            ApplyMovement(deltaT);
+
             actions.UnionWith(pendingNewActions);
             pendingNewActions.Clear();
             actions.RemoveWhere(action => action.Finished());
-
-            Position = Position + Speed * deltaT;
 
             // Automaticly kill gameobject if it is far out of screen
             int marge = 50;
             if (Position.X < -marge || Position.X > gameInstance.gameSize.Width + marge || Position.Y < -marge || Position.Y > gameInstance.gameSize.Height + marge) Kill();
         }
 
+
+        protected virtual void ApplyMovement(double deltaT)
+        {
+            Speed += Acceleration * deltaT;
+            Position += Speed * deltaT;
+        }
         /// <summary>
         /// Field to store image to not read it at every frame
         /// </summary>
@@ -99,9 +105,14 @@ namespace SpaceInvaders
 
 
         private bool alive = true;
-        public void Kill()
+        public virtual void Kill()
         {
             alive = false;
+            if (!(this is DeathParticle))
+            for (int i = 0; i < 3; i++)
+            {
+                new DeathParticle(Position);
+            }
         }
 
         /// <summary>
@@ -127,6 +138,15 @@ namespace SpaceInvaders
                 position.Y - GetAnchorY() >= Size.Y ||
                 position.Y - GetAnchorY() < 0);
         }
+
+        public bool AreSquareSuperposing(GameObject go)
+        {
+            return !(go.GetAnchorX() > GetAnchorX() + Size.X ||
+                    go.GetAnchorY() > GetAnchorY() + Size.Y ||
+                    GetAnchorX() > go.GetAnchorX() + go.Size.X ||
+                    GetAnchorY() > go.GetAnchorY() + go.Size.Y);
+        }
+
 
         /// <summary>
         /// Test if a pixel position is superposing a black pixel of this gameobject

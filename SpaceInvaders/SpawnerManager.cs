@@ -15,7 +15,7 @@ namespace SpaceInvaders
             if (Game.game.Mode is EndlessMode)
                 AddNewAction(new TimedAction(12, () =>
                 {
-                    if (waveCreated > 1 && waveCreated % 5 == 0)
+                    if ( waveCreated > 1 && waveCreated % 5 == 0)
                     {
                         AddNewAction(new TimedAction(5, () => new BigBuggedBoss(new Vecteur2D(50, 50)), true, false, 1));
                     }
@@ -27,7 +27,7 @@ namespace SpaceInvaders
                     {
                         // Creating 10 mob for this wave
                         int type = Game.game.random.Next(2, 9);
-                        AddNewAction(new TimedAction(0.8, () => new AutoInvader(new Vecteur2D(10, 20), type), true, true, 15));
+                        AddNewAction(new TimedAction(0.9, () => new AutoInvader(new Vecteur2D(10, 20), type), true, true, 15));
                     }
                     waveCreated++;
                 }

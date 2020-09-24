@@ -46,7 +46,7 @@ namespace SpaceInvaders
             this.simpleButton.Name = "simpleButton";
             this.simpleButton.Size = new System.Drawing.Size(198, 47);
             this.simpleButton.TabIndex = 0;
-            this.simpleButton.Text = "simple game";
+            this.simpleButton.Text = "normal mode";
             this.simpleButton.UseCompatibleTextRendering = true;
             this.simpleButton.UseVisualStyleBackColor = false;
             this.simpleButton.Click += new System.EventHandler(this.button1_Click);
@@ -63,7 +63,7 @@ namespace SpaceInvaders
             this.endlessButton.Name = "endlessButton";
             this.endlessButton.Size = new System.Drawing.Size(198, 47);
             this.endlessButton.TabIndex = 1;
-            this.endlessButton.Text = "endless game";
+            this.endlessButton.Text = "manic shooter";
             this.endlessButton.UseCompatibleTextRendering = true;
             this.endlessButton.UseVisualStyleBackColor = false;
             // 

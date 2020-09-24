@@ -7,9 +7,9 @@ using System.Drawing;
 
 namespace SpaceInvaders.GameObjects
 {
-    class BigBuggedBoss : Invader
+    class BigBuggedBoss : AutoInvader
     {
-        public BigBuggedBoss(Vecteur2D v1) : base(v1, 0, 15)
+        public BigBuggedBoss(Vecteur2D v1) : base(v1, 0, 30)
         {
 
         }
@@ -23,21 +23,33 @@ namespace SpaceInvaders.GameObjects
                 Resources.ship7,
                 Resources.ship8,
                 Resources.ship9 }.GetRandom();
-            return (Bitmap)img.GetThumbnailImage(img.Width * 2, img.Height * 2, null, IntPtr.Zero);
+            return (Bitmap)img.GetThumbnailImage((int) Size.X, (int) Size.Y, null, IntPtr.Zero);
         }
 
         public override void Init(Game gameInstance)
         {
-            base.Init(gameInstance);
-
-            AddNewAction(new TimedAction(8, () =>
+            Size = new Vecteur2D(80, 80);
+            AddNewAction(new TimedAction(6, () =>
             {
                 AddNewAction(new TimedAction(0.1, () =>
                 {
-                    new LaserBall(Position + new Vecteur2D(40, Size.Y / 2), new Vecteur2D(30, 200));
-                    new LaserBall(Position + new Vecteur2D(-40, Size.Y / 2), new Vecteur2D(-30, 200));
-                    new LaserBall(Position + new Vecteur2D(-50, Size.Y / 2), new Vecteur2D(-120, 200));
-                    new LaserBall(Position + new Vecteur2D(50, Size.Y / 2), new Vecteur2D(120, 200));
+
+
+                    new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), new Vecteur2D(30, 200));
+                    new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(-30, 200));
+
+                    new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(20, 100),
+                        null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(-Math.Cos(inc % Math.PI), 0));
+
+                    new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), new Vecteur2D(-20, 100),
+                        null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(Math.Cos(inc % Math.PI), 0));
+
+
+                    new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(-120, 200), 
+                        null, (obj, deltaT, inc) => new Vecteur2D(Math.Cos(inc), 0) + obj.Position);
+
+                    new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), new Vecteur2D(120, 200),
+                        null, (obj, deltaT, inc) => new Vecteur2D(Math.Cos(inc), 0) + obj.Position);
 
                 }, true, false, 6));
             }, true));
@@ -50,6 +62,7 @@ namespace SpaceInvaders.GameObjects
             Size = new Vecteur2D(sprite.Width, sprite.Height);
             graphics.DrawImage(sprite, GetAnchorX(), GetAnchorY(), sprite.Width, sprite.Height);
         }
+
         public override bool IsPointOnPixel(Vecteur2D position)
         {
             return IsPointSuperposingSquare(position);
@@ -59,6 +72,7 @@ namespace SpaceInvaders.GameObjects
         {
             return;
         }
+
         public override void Update(Game gameInstance, double deltaT)
         {
             base.Update(gameInstance, deltaT);

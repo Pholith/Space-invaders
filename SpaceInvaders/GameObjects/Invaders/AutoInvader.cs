@@ -4,7 +4,7 @@ namespace SpaceInvaders.GameObjects
 {
     class AutoInvader : Invader
     {
-        public AutoInvader(Vecteur2D position, int invaderType = 0) : base(position, invaderType)
+        public AutoInvader(Vecteur2D position, int invaderType = 0, int hp = 1) : base(position, invaderType, hp)
         {
 
         }

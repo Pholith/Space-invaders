@@ -6,9 +6,9 @@ using System.Drawing;
 
 namespace SpaceInvaders.GameObjects
 {
-    class InvaderBigBoss : Invader
+    class InvaderBigBoss : AutoInvader
     {
-        public InvaderBigBoss(Vecteur2D v1) : base(v1, 0, 15)
+        public InvaderBigBoss(Vecteur2D v1) : base(v1, 0, 20)
         {
 
         }
@@ -27,9 +27,19 @@ namespace SpaceInvaders.GameObjects
             {
                 AddNewAction(new TimedAction(0.3, () =>
                 {
+                    new Laser(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), new Vecteur2D(0, 200));
+                    new Laser(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(0, 200));
+
                     new Laser(Position + new Vecteur2D(0, Size.Y / 2), new Vecteur2D(0, 200));
-                    new LaserBall(Position + new Vecteur2D(40, Size.Y / 2), new Vecteur2D(50, 200));
-                    new LaserBall(Position + new Vecteur2D(-40, Size.Y / 2), new Vecteur2D(-50, 200));
+                    new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), new Vecteur2D(50, 200));
+                    new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(-50, 200));
+
+                    new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), new Vecteur2D(20, 100),
+                        null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(Math.Cos(inc % Math.PI), 0));
+
+                    new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(-20, 100),
+                        null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(-Math.Cos(inc % Math.PI), 0));
+
 
                 }, true, false, 5));
             }, true));

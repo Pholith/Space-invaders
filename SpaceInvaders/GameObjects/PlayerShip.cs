@@ -24,10 +24,20 @@ namespace GameObjects
             {
                 MoveRight();
                 gm.ReleaseKey(Keys.D);
+            } 
+            else if (gm.keyPressed.Contains(Keys.Z))
+            {
+                MoveUp();
+                gm.ReleaseKey(Keys.Z);
+            }
+            else if (gm.keyPressed.Contains(Keys.S))
+            {
+                MoveDown();
+                gm.ReleaseKey(Keys.S);
             }
             else
             {
-                Speed = Speed * 0.98; // Slow down when A or D is not pressed
+                Speed = Speed * 0.98; // Slow down when no key is pressed
             }
 
             if (gm.keyPressed.Contains(Keys.Space))

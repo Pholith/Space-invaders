@@ -65,6 +65,10 @@
     <Compile Include="GameModes\EndlessGame.cs" />
     <Compile Include="GameModes\GameMode.cs" />
     <Compile Include="GameModes\NormalMode.cs" />
+    <Compile Include="GameObjects\Bonus\AttackSpeedBonus.cs" />
+    <Compile Include="GameObjects\Bonus\Bonus.cs" />
+    <Compile Include="GameObjects\Bonus\BulletsBonus.cs" />
+    <Compile Include="GameObjects\DeathParticle.cs" />
     <Compile Include="GameObjects\Invaders\BigBuggedBoss.cs" />
     <Compile Include="GameObjects\Bunker.cs" />
     <Compile Include="GameObjects\Invaders\InvaderBlock.cs" />

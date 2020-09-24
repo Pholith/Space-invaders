@@ -14,10 +14,10 @@ namespace SpaceInvaders.GameObjects.Invaders
         {
             int size = 45;
             int unitType = 0;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 5; i++)
             {
                 unitType = Game.game.random.Next(2, 9);
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < 9; j++)
                 {
                     units.Add(new Invader(new Vecteur2D(j * size, i * size), unitType));
                 }
