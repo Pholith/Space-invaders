@@ -54,6 +54,13 @@ namespace SpaceInvaders.GameObjects
                     GetAnchorY() > obj.GetAnchorY() + obj.Size.Y))
                 {
 
+                    if (obj is Laser)
+                    {
+                        obj.OnHit(this);
+                        Kill();
+                        return;
+                    }
+
                     bool hited = false;
 
                     // Check if a pixel of the laser is on a pixel of the gameobject

@@ -1,10 +1,6 @@
 ﻿using SpaceInvaders.Properties;
 using SpaceInvaders.Utils;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace SpaceInvaders.GameObjects
 {
@@ -14,7 +10,7 @@ namespace SpaceInvaders.GameObjects
         {
 
         }
-        
+
         public override Tag GetTag()
         {
             return Tag.Neutral;
@@ -25,6 +21,6 @@ namespace SpaceInvaders.GameObjects
             return Resources.bunker;
         }
 
-        
+
     }
 }

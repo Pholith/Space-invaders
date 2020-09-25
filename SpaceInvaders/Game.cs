@@ -184,8 +184,8 @@ namespace SpaceInvaders
             // remove dead objects
             gameObjects.RemoveWhere(gameObject => !gameObject.IsAlive());
 
-
-            if (Mode.Ended || Mode.CheckEnd())
+            Mode.Update(deltaT);
+            if (Mode.Ended)
             {
                 if (keyPressed.Contains(Keys.Space))
                 {

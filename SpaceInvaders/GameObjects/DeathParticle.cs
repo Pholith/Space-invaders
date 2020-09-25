@@ -19,14 +19,15 @@ namespace SpaceInvaders.GameObjects
 
         }
 
-        Brush color;
+        private readonly Brush color;
+
         public override void Draw(Game gameInstance, Graphics graphics)
         {
             base.Draw(gameInstance, graphics);
             graphics.FillRectangle(color, GetAnchorX(), GetAnchorY(), (float) Size.X, (float) Size.Y);
         }
 
-        private double liveTime = 2;
+        private double liveTime = 1.5;
         public override void Update(Game gameInstance, double deltaT)
         {
             base.Update(gameInstance, deltaT);

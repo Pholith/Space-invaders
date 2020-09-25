@@ -1,5 +1,6 @@
 ﻿using GameObjects;
 using SpaceInvaders.GameObjects;
+using System.Diagnostics;
 
 namespace SpaceInvaders.GameModes
 {
@@ -9,6 +10,8 @@ namespace SpaceInvaders.GameModes
         private Ship player;
         public bool Win { get; protected set; }
         public bool Ended { get; protected set; }
+
+        protected double SecFromStart { get; private set; } = 0;
 
         protected GameMode()
         {
@@ -25,20 +28,17 @@ namespace SpaceInvaders.GameModes
             Ended = false;
         }
 
-        /// <summary>
-        /// Check if the game is end.
-        /// </summary>
-        /// <returns> Return true if the game is end </returns>
-        public virtual bool CheckEnd()
+        public virtual void Update(double deltaT)
         {
+            SecFromStart += deltaT;
             if (!player.IsAlive())
             {
                 Ended = true;
                 Win = false;
-                return true;
             }
-            return false;
+
         }
+
 
         public void Lose()
         {

@@ -30,7 +30,7 @@ namespace SpaceInvaders.GameObjects.Invaders
 
         }
 
-        private static int baseSpeed = 30;
+        public static int baseSpeed = 30;
         private int invaderType;
         private Laser shoot = null;
 
@@ -61,6 +61,11 @@ namespace SpaceInvaders.GameObjects.Invaders
 
         }
 
+        public override int GetNumberOfParticles()
+        {
+            return 4;
+        }
+
 
         /// <summary>
         /// Switches the speed direction of invader and go down
@@ -68,10 +73,10 @@ namespace SpaceInvaders.GameObjects.Invaders
         public void SwitchDirection()
         {
             Position = new Vecteur2D(Position.X, GetAnchorY() + Size.Y + 20);
-            Speed = new Vecteur2D(-Speed.X, 0);
+            Speed = new Vecteur2D(-Speed.X, Speed.Y);
             // Increase the speed 
             int amount = 10;
-            Speed = new Vecteur2D(Speed.X + ((Speed.X > 0) ? amount : -amount), 0);
+            Speed = new Vecteur2D(Speed.X + ((Speed.X > 0) ? amount : -amount), Speed.Y);
 
         }
 
@@ -86,13 +91,17 @@ namespace SpaceInvaders.GameObjects.Invaders
             return GetAnchorX() < 0 && Speed.X < 0 || GetAnchorX() + Size.X > Game.game.gameSize.Width && Speed.X > 0;
         }
 
+        /// <summary>
+        /// Kills this instance and drop a bonus.
+        /// </summary>
         public override void Kill()
         {
             base.Kill();
             double rand = Game.game.random.NextDouble();
             if (rand < 0.05) new AttackSpeedBonus(Position);
             else if (rand < 0.1) new BulletsBonus(Position);
-
+            else if (rand < 0.2) new MegaShoot(Position);
+            else if (rand < 0.25) new HealBonus(Position);
         }
 
     }

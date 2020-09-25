@@ -9,7 +9,7 @@ namespace SpaceInvaders.GameObjects
 {
     class BigBuggedBoss : AutoInvader
     {
-        public BigBuggedBoss(Vecteur2D v1) : base(v1, 0, 30)
+        public BigBuggedBoss(Vecteur2D v1) : base(v1, 0, 120)
         {
 
         }
@@ -23,20 +23,16 @@ namespace SpaceInvaders.GameObjects
                 Resources.ship7,
                 Resources.ship8,
                 Resources.ship9 }.GetRandom();
-            return (Bitmap)img.GetThumbnailImage((int) Size.X, (int) Size.Y, null, IntPtr.Zero);
+            return Utils.Utils.ResizeImage(img, (int) Size.X, (int) Size.Y);
         }
 
         public override void Init(Game gameInstance)
         {
             Size = new Vecteur2D(80, 80);
-            AddNewAction(new TimedAction(6, () =>
+            AddNewAction(new TimedAction(9, () =>
             {
-                AddNewAction(new TimedAction(0.1, () =>
+                AddNewAction(new TimedAction(0.2, () =>
                 {
-
-
-                    new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), new Vecteur2D(30, 200));
-                    new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(-30, 200));
 
                     new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(20, 100),
                         null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(-Math.Cos(inc % Math.PI), 0));

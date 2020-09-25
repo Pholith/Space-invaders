@@ -15,14 +15,15 @@ namespace SpaceInvaders.GameModes
 
         }
 
-        public override bool CheckEnd()
-        {           
+        public override void Update(double deltaT)
+        {
+            base.Update(deltaT);
             if (Game.game.gameObjects.All((GameObject obj) => !(obj is Invader)))
             {
                 Win = true;
                 Ended = true;
             }
-            return base.CheckEnd();
+
         }
     }
 }

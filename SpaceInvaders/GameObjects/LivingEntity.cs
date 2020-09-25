@@ -18,7 +18,7 @@
         }
 
 
-        public int HP { get; private set; }
+        public int HP { get; protected set; }
 
         public override void OnHit(Laser laser)
         {

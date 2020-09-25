@@ -20,6 +20,32 @@ namespace GameObjects
         }
 
         int speedMax = 300;
+
+        public void MegaShoot()
+        {
+            AddNewAction(new TimedAction(0.5, () =>
+            {
+                new Laser(Position + new Vecteur2D(-2, -(Size.Y / 2)), Tag.Player);
+                new Laser(Position + new Vecteur2D(0, -(Size.Y / 2)), Tag.Player);
+                new Laser(Position + new Vecteur2D(2, -(Size.Y / 2)), Tag.Player);
+
+                new LaserBall(Position + new Vecteur2D(0, Size.Y / 2), new Vecteur2D(60, -200), tag: Tag.Player);
+                new LaserBall(Position + new Vecteur2D(0, Size.Y / 2), new Vecteur2D(40, -200), tag: Tag.Player);
+                new LaserBall(Position + new Vecteur2D(0, Size.Y / 2), new Vecteur2D(10, -200), tag: Tag.Player);
+
+                new LaserBall(Position + new Vecteur2D(0, Size.Y / 2), new Vecteur2D(-60, -200), tag: Tag.Player);
+                new LaserBall(Position + new Vecteur2D(0, Size.Y / 2), new Vecteur2D(-40, -200), tag: Tag.Player);
+                new LaserBall(Position + new Vecteur2D(0, Size.Y / 2), new Vecteur2D(-20, -200), tag: Tag.Player);
+            }, true, true, 2));
+        }
+
+        public void ApplyHealBonus()
+        {
+            HP = 3;
+            LoadSprite();
+        }
+
+
         int bullet = 1;
         public TimedAction Attack { get; set; }
 
@@ -64,6 +90,8 @@ namespace GameObjects
         {
             return Resources.playership;
         }
+
+
         public override void Update(Game gameInstance, double deltaT)
         {
             base.Update(gameInstance, deltaT);

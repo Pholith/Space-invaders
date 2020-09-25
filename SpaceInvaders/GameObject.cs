@@ -67,16 +67,32 @@ namespace SpaceInvaders
             actions.RemoveWhere(action => action.Finished());
 
             // Automaticly kill gameobject if it is far out of screen
-            int marge = 50;
-            if (Position.X < -marge || Position.X > gameInstance.gameSize.Width + marge || Position.Y < -marge || Position.Y > gameInstance.gameSize.Height + marge) Kill();
+            int marge = 20;
+            if (Position.X < -marge || Position.X > gameInstance.gameSize.Width + marge || Position.Y < -marge || Position.Y > gameInstance.gameSize.Height) Kill();
         }
 
-
+        /// <summary>
+        /// Compute the new position depending of the movement setuped ans of the Speed.
+        /// </summary>
+        /// <param name="deltaT">The delta t.</param>
         protected virtual void ApplyMovement(double deltaT)
         {
             Speed += Acceleration * deltaT;
             Position += Speed * deltaT;
         }
+
+
+        /// <summary>
+        /// Loads the object sprite.
+        /// </summary>
+        public void LoadSprite()
+        {
+            IImage go = this as IImage;
+            sprite = go.GetImage();
+            Size = new Vecteur2D(sprite.Width, sprite.Height);
+        }
+
+
         /// <summary>
         /// Field to store image to not read it at every frame
         /// </summary>
@@ -90,9 +106,7 @@ namespace SpaceInvaders
         {
             if (sprite == null && this is IImage)
             {
-                IImage go = this as IImage;
-                sprite = go.GetImage();//.GetThumbnailImage(45, 45, null, IntPtr.Zero);
-                Size = new Vecteur2D(sprite.Width, sprite.Height);
+                LoadSprite();
             }
             if (sprite != null)
             {
@@ -105,15 +119,28 @@ namespace SpaceInvaders
 
 
         private bool alive = true;
+        /// <summary>
+        /// Kills this instance.
+        /// </summary>
         public virtual void Kill()
         {
             alive = false;
             if (!(this is DeathParticle))
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < GetNumberOfParticles(); i++)
             {
                 new DeathParticle(Position);
             }
         }
+
+        /// <summary>
+        /// Gets the number of particles to spawn at death.
+        /// </summary>
+        /// <returns></returns>
+        public virtual int GetNumberOfParticles()
+        {
+            return 1;
+        }
+
 
         /// <summary>
         /// Determines if object is alive. If false, the object will be removed automatically.
@@ -139,6 +166,11 @@ namespace SpaceInvaders
                 position.Y - GetAnchorY() < 0);
         }
 
+        /// <summary>
+        /// Ares the square hitbox of the gameobjects superposing.
+        /// </summary>
+        /// <param name="go">The gameobject to test the collision </param>
+        /// <returns> True if gameobjects collide </returns>
         public bool AreSquareSuperposing(GameObject go)
         {
             return !(go.GetAnchorX() > GetAnchorX() + Size.X ||
@@ -180,6 +212,10 @@ namespace SpaceInvaders
             }
         }
 
+        /// <summary>
+        /// Apply hit consequences.
+        /// </summary>
+        /// <param name="laser"></param>
         public virtual void OnHit(Laser laser)
         {
             Kill();
@@ -191,6 +227,11 @@ namespace SpaceInvaders
         private HashSet<TimedAction> actions = new HashSet<TimedAction>();
         private HashSet<TimedAction> pendingNewActions = new HashSet<TimedAction>();
 
+        /// <summary>
+        /// Adds the new action in the action managment system of this object.
+        /// </summary>
+        /// <param name="action">The action to add.</param>
+        /// <returns></returns>
         public TimedAction AddNewAction(TimedAction action)
         {
             pendingNewActions.Add(action);
@@ -198,7 +239,9 @@ namespace SpaceInvaders
         }
         #endregion
 
-
+        /// <summary>
+        /// Gets the tag of this instance.
+        /// </summary>
         public virtual Tag GetTag()
         {
             return Tag.Invader;

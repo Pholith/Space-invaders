@@ -49,7 +49,7 @@ namespace SpaceInvaders
         }
         private void endlessButtonClick(object sender, EventArgs e)
         {
-            OpenGame(new EndlessMode());
+            OpenGame(new ManicShooter());
         }
 
         private void button1_Click(object sender, EventArgs e)
