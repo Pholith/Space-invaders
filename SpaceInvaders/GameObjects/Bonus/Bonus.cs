@@ -22,13 +22,20 @@ namespace SpaceInvaders.GameObjects.Bonus
                 if (item is Ship && item.AreSquareSuperposing(this))
                 {
                     Ship ship = item as Ship;
-                    ApplyBonus(ship);
+                    if (!ApplyBonus(ship)) Game.game.AddScore(50);
                     Kill();
                     break;
                 }
             }
         }
-        protected abstract void ApplyBonus(Ship ship);
+
+
+        /// <summary>
+        /// Applies the bonus on the ship
+        /// </summary>
+        /// <param name="ship">The ship.</param>
+        /// <returns> True if the bonus changed something on the ship </returns>
+        protected abstract bool ApplyBonus(Ship ship);
 
         public override Tag GetTag()
         {
@@ -36,5 +43,6 @@ namespace SpaceInvaders.GameObjects.Bonus
         }
 
         public abstract Bitmap GetImage();
+
     }
 }

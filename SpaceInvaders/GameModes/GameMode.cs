@@ -1,6 +1,6 @@
 ﻿using GameObjects;
 using SpaceInvaders.GameObjects;
-using System.Diagnostics;
+using System.Drawing;
 
 namespace SpaceInvaders.GameModes
 {
@@ -44,6 +44,20 @@ namespace SpaceInvaders.GameModes
         {
             Ended = true;
             Win = false;
+        }
+
+        public virtual void Draw(Graphics g)
+        {
+            string strHP = "HP: " + player.HP;
+            string score = "Score: " + Game.game.Score;
+            
+            SizeF sizeHP = g.MeasureString(strHP, Game.defaultFont);
+            g.DrawString(strHP, Game.defaultFont, new SolidBrush(Game.foregroundColor), 0, Game.game.gameSize.Height - sizeHP.Height);
+
+            SizeF sizeScore = g.MeasureString(score, Game.defaultFont);
+            g.DrawString(score, Game.defaultFont, new SolidBrush(Game.foregroundColor), 0, Game.game.gameSize.Height - sizeHP.Height - sizeScore.Height);
+
+
         }
     }
 }

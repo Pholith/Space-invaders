@@ -88,7 +88,7 @@ namespace SpaceInvaders
         public void LoadSprite()
         {
             IImage go = this as IImage;
-            sprite = go.GetImage();
+            sprite = go.GetImage().InvertColor();
             Size = new Vecteur2D(sprite.Width, sprite.Height);
         }
 
@@ -130,6 +130,7 @@ namespace SpaceInvaders
             {
                 new DeathParticle(Position);
             }
+            Game.game.AddScore(GetScore());
         }
 
         /// <summary>
@@ -245,6 +246,15 @@ namespace SpaceInvaders
         public virtual Tag GetTag()
         {
             return Tag.Invader;
+        }
+
+        /// <summary>
+        /// Score to add when this object is destroyed.
+        /// </summary>
+        /// <returns></returns>
+        public virtual int GetScore()
+        {
+            return 0;
         }
     }
 }

@@ -50,6 +50,11 @@ namespace SpaceInvaders
         /// State of the keyboard
         /// </summary>
         public HashSet<Keys> keyPressed = new HashSet<Keys>();
+        
+        
+        public int Score { get; private set; }
+        public void AddScore(int score) => Score += score;
+
 
         #endregion
 
@@ -67,10 +72,13 @@ namespace SpaceInvaders
         private static Pen blackPen = new Pen(Color.Black, 4);
         private static Pen whitePen = new Pen(Color.White, 3);
 
+        public static readonly Color backgroundColor = Color.Black;
+        public static readonly Color foregroundColor = Color.White;
+
         /// <summary>
         /// A shared simple font
         /// </summary>
-        private static Font defaultFont = new Font("Times New Roman", 24, FontStyle.Bold, GraphicsUnit.Pixel);
+        public static Font defaultFont = new Font(FontFamily.GenericSansSerif, 24, FontStyle.Regular);
         #endregion
 
 
@@ -122,7 +130,7 @@ namespace SpaceInvaders
 
             if (paused) DrawTextSquare(g, "paused", 20, 10);
             if (Mode.Ended) DrawTextSquare(g, Mode.Win ? "win" : "lose", 38, 15);
-
+            Mode.Draw(g);
         }
 
         private void DrawTextSquare(Graphics g, string text, int fontSize, int padding)

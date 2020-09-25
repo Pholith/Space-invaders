@@ -15,9 +15,10 @@ namespace SpaceInvaders.GameObjects.Bonus
             return Resources.bonusMegaShoot;
         }
 
-        protected override void ApplyBonus(Ship ship)
+        protected override bool ApplyBonus(Ship ship)
         {
             ship.MegaShoot();
+            return true;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace SpaceInvaders.GameObjects
             Size = new Vecteur2D(Game.game.random.Next(3, 5), Game.game.random.Next(3, 5));
 
             double rand = Game.game.random.NextDouble();
-            if (rand < 0.3) color = new SolidBrush(Color.Black);
+            if (rand < 0.3) color = new SolidBrush(Game.foregroundColor);
             else if (rand < 0.6) color = new SolidBrush(Color.OrangeRed);
             else if (rand < 0.9) color = new SolidBrush(Color.Red);
             else color = new SolidBrush(Color.DarkOrange);

@@ -1,7 +1,6 @@
 ﻿using SpaceInvaders.GameObjects.Bonus;
 using SpaceInvaders.Properties;
 using SpaceInvaders.Utils;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -18,6 +17,7 @@ namespace SpaceInvaders.GameObjects.Invaders
         {
             this.invaderType = invaderType;
             Speed = new Vecteur2D(baseSpeed, 0);
+
         }
 
         public override void Init(Game gameInstance)
@@ -91,6 +91,7 @@ namespace SpaceInvaders.GameObjects.Invaders
             return GetAnchorX() < 0 && Speed.X < 0 || GetAnchorX() + Size.X > Game.game.gameSize.Width && Speed.X > 0;
         }
 
+
         /// <summary>
         /// Kills this instance and drop a bonus.
         /// </summary>
@@ -98,11 +99,16 @@ namespace SpaceInvaders.GameObjects.Invaders
         {
             base.Kill();
             double rand = Game.game.random.NextDouble();
+
             if (rand < 0.05) new AttackSpeedBonus(Position);
             else if (rand < 0.1) new BulletsBonus(Position);
             else if (rand < 0.2) new MegaShoot(Position);
             else if (rand < 0.25) new HealBonus(Position);
         }
 
+        public override int GetScore()
+        {
+            return BaseHP;
+        }
     }
 }

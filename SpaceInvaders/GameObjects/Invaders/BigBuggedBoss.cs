@@ -22,7 +22,7 @@ namespace SpaceInvaders.GameObjects
                 Resources.ship6,
                 Resources.ship7,
                 Resources.ship8,
-                Resources.ship9 }.GetRandom();
+                Resources.ship9 }.GetRandom().InvertColor();
             return Utils.Utils.ResizeImage(img, (int) Size.X, (int) Size.Y);
         }
 
@@ -73,5 +73,6 @@ namespace SpaceInvaders.GameObjects
         {
             base.Update(gameInstance, deltaT);
         }
+
     }
 }

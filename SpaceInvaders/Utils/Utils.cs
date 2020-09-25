@@ -43,6 +43,30 @@ namespace SpaceInvaders.Utils
             return img;
         }
 
+        /// <summary>
+        /// Inverts the color between the game foreground and the game background.
+        /// It makes the gameobjects white from black images.
+        /// </summary>
+        /// <param name="img">The color inverted img.</param>
+        /// <returns></returns>
+        public static Bitmap InvertColor(this Bitmap img)
+        {
+            Color color = Game.foregroundColor;
+            for (int i = 0; i < img.Width; i++)
+            {
+                for (int j = 0; j < img.Height; j++)
+                {
+                    Color pixelColor = img.GetPixel(i, j);
+                    if (pixelColor.A == 255 && 
+                        pixelColor.R == Game.backgroundColor.R &&
+                        pixelColor.G == Game.backgroundColor.G &&
+                        pixelColor.B == Game.backgroundColor.B) img.SetPixel(i, j, color);
+                }
+            }
+            return img;
+
+        }
+
         /// <summary> 
         /// Resize the image to the specified width and height. 
         /// </summary> 

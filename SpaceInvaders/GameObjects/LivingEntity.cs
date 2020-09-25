@@ -15,10 +15,12 @@
         public LivingEntity(Vecteur2D v1, int hP) : base(v1)
         {
             HP = hP;
+            BaseHP = hP;
         }
 
 
         public int HP { get; protected set; }
+        protected int BaseHP { get; private set; }
 
         public override void OnHit(Laser laser)
         {

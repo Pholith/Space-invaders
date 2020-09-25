@@ -15,9 +15,9 @@ namespace SpaceInvaders.GameObjects.Bonus
             return Resources.bonusHealth;
         }
 
-        protected override void ApplyBonus(Ship ship)
+        protected override bool ApplyBonus(Ship ship)
         {
-            ship.ApplyHealBonus();
+            return ship.ApplyHealBonus();
         }
 
     }

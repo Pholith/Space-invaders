@@ -16,11 +16,10 @@ namespace SpaceInvaders.GameObjects.Bonus
             return Resources.bonus;
         }
 
-        protected override void ApplyBonus(Ship ship)
+        protected override bool ApplyBonus(Ship ship)
         {
-            ship.AddBullet();
+            return ship.AddBullet();
         }
-        
         
     }
 }

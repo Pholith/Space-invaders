@@ -17,28 +17,25 @@ namespace GameObjects
             if (gm.keyPressed.Contains(Keys.Q))
             {
                 MoveLeft();
-                gm.ReleaseKey(Keys.Q);
+                //gm.ReleaseKey(Keys.Q);
             }
 
-            else if (gm.keyPressed.Contains(Keys.D))
+            if (gm.keyPressed.Contains(Keys.D))
             {
                 MoveRight();
-                gm.ReleaseKey(Keys.D);
+                //gm.ReleaseKey(Keys.D);
             } 
-            else if (gm.keyPressed.Contains(Keys.Z))
+            if (gm.keyPressed.Contains(Keys.Z))
             {
                 MoveUp();
-                gm.ReleaseKey(Keys.Z);
+                //gm.ReleaseKey(Keys.Z);
             }
-            else if (gm.keyPressed.Contains(Keys.S))
+            if (gm.keyPressed.Contains(Keys.S))
             {
                 MoveDown();
-                gm.ReleaseKey(Keys.S);
+                //gm.ReleaseKey(Keys.S);
             }
-            else
-            {
-                Speed = Speed * 0.98; // Slow down when no key is pressed
-            }
+            Speed = Speed * 0.97; // Slow down every tic
 
             if (gm.keyPressed.Contains(Keys.Space))
             {
