@@ -1,10 +1,12 @@
-﻿using GameObjects;
-using SpaceInvaders.GameObjects;
+﻿using SpaceInvaders.GameObjects;
 using System.Drawing;
 
 namespace SpaceInvaders.GameModes
 {
 
+    /// <summary>
+    /// A Gamemode represent the style of game that was choiced.
+    /// </summary>
     public abstract class GameMode
     {
         private Ship player;
@@ -50,7 +52,7 @@ namespace SpaceInvaders.GameModes
         {
             string strHP = "HP: " + player.HP;
             string score = "Score: " + Game.game.Score;
-            
+
             SizeF sizeHP = g.MeasureString(strHP, Game.defaultFont);
             g.DrawString(strHP, Game.defaultFont, new SolidBrush(Game.foregroundColor), 0, Game.game.gameSize.Height - sizeHP.Height);
 

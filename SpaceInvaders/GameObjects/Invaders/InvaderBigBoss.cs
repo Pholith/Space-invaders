@@ -8,7 +8,7 @@ namespace SpaceInvaders.GameObjects
 {
     class InvaderBigBoss : AutoInvader
     {
-        public InvaderBigBoss(Vecteur2D v1, Vecteur2D speed = null) : base(v1, 0, 30, speed)
+        public InvaderBigBoss(Vecteur2D v1, Vecteur2D speed = null) : base(v1, 0, 20, speed)
         {
 
         }
@@ -23,7 +23,7 @@ namespace SpaceInvaders.GameObjects
         {
             base.Init(gameInstance);
 
-            AddNewAction(new TimedAction(3, () => new AutoInvader(Position, 4, 2, new Vecteur2D(baseSpeed * 5, 10)), true, false));
+            AddNewAction(new TimedAction(4, () => new AutoInvader(Position, 4, 2, new Vecteur2D(baseSpeed * 5, 10)), true, false));
 
             AddNewAction(new TimedAction(9, () =>
             {

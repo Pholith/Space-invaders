@@ -26,7 +26,7 @@ namespace SpaceInvaders.GameObjects
         public override Bitmap GetImage()
         {
             Bitmap img = Resources.shootball;
-            if (Tag == Tag.Player) img = Utils.Utils.RecolorImage(img, Color.DarkBlue);
+            if (Tag == Tag.Player) img = Utils.Utils.RecolorImage(img, Color.DeepSkyBlue);
             return img;
         }
 

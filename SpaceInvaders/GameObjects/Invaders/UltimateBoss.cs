@@ -5,9 +5,13 @@ using System.Drawing;
 
 namespace SpaceInvaders.GameObjects.Invaders
 {
+    /// <summary>
+    /// The Ultimate boss is a big invader in the manic shooter
+    /// </summary>
+    /// <seealso cref="AutoInvader" />
     class UltimateBoss : AutoInvader
     {
-        public UltimateBoss(Vecteur2D v1) : base(v1, 50, 400, new Vecteur2D(baseSpeed / 2, 0))
+        public UltimateBoss(Vecteur2D v1) : base(v1, 50, 350, new Vecteur2D(baseSpeed / 2, 0))
         {
 
         }

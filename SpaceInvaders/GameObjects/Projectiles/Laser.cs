@@ -4,10 +4,16 @@ using System.Drawing;
 
 namespace SpaceInvaders.GameObjects
 {
+    /// <summary>
+    /// A laser is a simple projectile shooted by the ship and the invaders.
+    /// </summary>
+    /// <seealso cref="Ship" />
+    /// <seealso cref="AutoInvader" />
     class Laser : GameObject, IImage
     {
 
         public int Damage { get; private set; }
+
         public Tag Tag { get; private set; }
 
         public Laser(Vecteur2D v1, Vecteur2D speed, Tag tag = Tag.Invader) : base(v1)
@@ -29,7 +35,7 @@ namespace SpaceInvaders.GameObjects
         public virtual Bitmap GetImage()
         {
             Bitmap img = Resources.shoot1;
-            if (Tag == Tag.Player) img = Utils.Utils.RecolorImage(img, Color.DarkBlue);
+            if (Tag == Tag.Player) img = Utils.Utils.RecolorImage(img, Color.DeepSkyBlue);
             return img;
         }
 

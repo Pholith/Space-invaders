@@ -9,7 +9,7 @@ namespace SpaceInvaders.GameObjects
 {
     class BigBuggedBoss : AutoInvader
     {
-        public BigBuggedBoss(Vecteur2D v1) : base(v1, 0, 120)
+        public BigBuggedBoss(Vecteur2D v1) : base(v1, 0, 100)
         {
 
         }

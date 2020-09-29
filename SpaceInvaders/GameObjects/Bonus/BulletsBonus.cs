@@ -1,5 +1,4 @@
-﻿using GameObjects;
-using SpaceInvaders.Properties;
+﻿using SpaceInvaders.Properties;
 using System.Drawing;
 
 namespace SpaceInvaders.GameObjects.Bonus
@@ -20,6 +19,6 @@ namespace SpaceInvaders.GameObjects.Bonus
         {
             return ship.AddBullet();
         }
-        
+
     }
 }

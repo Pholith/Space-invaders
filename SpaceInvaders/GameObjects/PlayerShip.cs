@@ -2,8 +2,12 @@
 using SpaceInvaders;
 using System.Windows.Forms;
 
-namespace GameObjects
+namespace SpaceInvaders.GameObjects
 {
+    /// <summary>
+    /// A ship that can be controlled using inputs
+    /// </summary>
+    /// <seealso cref="Ship" />
     class PlayerShip : Ship
     {
         public PlayerShip(Vecteur2D v) : base(v)

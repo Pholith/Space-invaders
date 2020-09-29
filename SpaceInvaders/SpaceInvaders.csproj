@@ -86,7 +86,6 @@
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ITag.cs" />
-    <Compile Include="SpawnerManager.cs" />
     <Compile Include="Utils\IActionsManager.cs" />
     <Compile Include="Utils\IHitable.cs" />
     <Compile Include="GameObjects\Invaders\AutoInvader.cs" />

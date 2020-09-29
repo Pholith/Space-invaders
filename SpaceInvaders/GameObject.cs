@@ -19,7 +19,7 @@ namespace SpaceInvaders
         /// <summary>
         /// Allow to center images and hitbox test on the positionX
         /// </summary>
-        /// <returns></returns>
+        /// <returns> The left top point of the image (Not the position) </returns>
         public float GetAnchorX()
         {
             return (float)(Position.X - Size.X / 2f);

@@ -1,13 +1,15 @@
-﻿using SpaceInvaders;
-using SpaceInvaders.GameModes;
-using SpaceInvaders.GameObjects;
+﻿using SpaceInvaders.GameModes;
 using SpaceInvaders.Properties;
 using SpaceInvaders.Utils;
 using System;
 using System.Drawing;
 
-namespace GameObjects
+namespace SpaceInvaders.GameObjects
 {
+    /// <summary>
+    /// A ship is the game ship. 
+    /// </summary>
+    /// <seealso cref="PlayerShip" />
     class Ship : LivingEntity, IImage
     {
 
@@ -61,12 +63,13 @@ namespace GameObjects
             int bulletFixed = bullet;
             if (bullet > 4) return false;
 
-            else if (bullet > 3) Attack.Action += () => {
+            else if (bullet > 3) Attack.Action += () =>
+            {
                 new LaserBall(Position, new Vecteur2D(0, -80), tag: Tag.Player, del: (ball, deltaT, inc)
                     => new Vecteur2D(Math.Cos(inc), 0) + ball.Position
-                );;
+                ); ;
             };
-            else Attack.Action += () => { new LaserBall(Position, new Vecteur2D(-40 + bulletFixed * 20, -100), tag:Tag.Player); };
+            else Attack.Action += () => { new LaserBall(Position, new Vecteur2D(-40 + bulletFixed * 20, -100), tag: Tag.Player); };
             bullet++;
             return true;
         }
@@ -108,9 +111,9 @@ namespace GameObjects
 
             if (GetAnchorX() + Size.X > Game.game.gameSize.Width)
                 Position = new Vecteur2D(Game.game.gameSize.Width - Size.X / 2, Position.Y);
-            
+
             if (GetAnchorY() + Size.Y > Game.game.gameSize.Height)
-                Position = new Vecteur2D(Position.X, Game.game.gameSize.Height - Size.Y/2);
+                Position = new Vecteur2D(Position.X, Game.game.gameSize.Height - Size.Y / 2);
 
         }
 

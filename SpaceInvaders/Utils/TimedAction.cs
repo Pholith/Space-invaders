@@ -5,7 +5,7 @@ namespace SpaceInvaders.Utils
     /// <summary>
     /// An Action is something a gameobject can do.
     /// </summary>
-    public class TimedAction
+    public class TimedAction : ICloneable
     {
 
         public double Couldown { get; set; }
@@ -58,6 +58,11 @@ namespace SpaceInvaders.Utils
         public bool Finished()
         {
             return limitOfCall == 0;
+        }
+
+        public object Clone()
+        {
+            return new TimedAction(Couldown, Action, isAuto, ready, limitOfCall);
         }
     }
 }

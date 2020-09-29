@@ -1,10 +1,6 @@
-﻿using GameObjects;
-using SpaceInvaders.GameModes;
-using SpaceInvaders.GameObjects;
-using SpaceInvaders.Utils;
+﻿using SpaceInvaders.GameModes;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -50,8 +46,8 @@ namespace SpaceInvaders
         /// State of the keyboard
         /// </summary>
         public HashSet<Keys> keyPressed = new HashSet<Keys>();
-        
-        
+
+
         public int Score { get; private set; }
         public void AddScore(int score) => Score += score;
 
@@ -124,7 +120,7 @@ namespace SpaceInvaders
         /// <param name="g">Graphics to draw in</param>
         public void Draw(Graphics g)
         {
-            
+
             foreach (GameObject gameObject in gameObjects)
                 gameObject.Draw(this, g);
 
@@ -154,7 +150,6 @@ namespace SpaceInvaders
             gameObjects.Clear();
             pendingNewGameObjects.Clear();
             Mode.Init();
-            spawnManager = new SpawnerManager();
         }
 
         private bool paused = false;
@@ -171,9 +166,6 @@ namespace SpaceInvaders
                 ReleaseKey(Keys.P);
             }
             if (paused) return;
-
-            spawnManager.Update(deltaT);
-
 
             // add new game objects
             foreach (var obj in pendingNewGameObjects)
@@ -208,7 +200,6 @@ namespace SpaceInvaders
 
         #region Managers
 
-        private SpawnerManager spawnManager;
 
         #endregion
     }

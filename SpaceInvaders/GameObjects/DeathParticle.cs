@@ -3,13 +3,17 @@ using System.Drawing;
 
 namespace SpaceInvaders.GameObjects
 {
+    /// <summary>
+    /// A deathParticle is a particle instanciated at the death of an object. 
+    /// </summary>
+    /// <seealso cref="GameObject" />
     class DeathParticle : GameObject
     {
 
         public DeathParticle(Vecteur2D position) : base(position)
         {
-            Speed = new Vecteur2D(Game.game.random.NextDouble(-1, 1) * 50, Game.game.random.NextDouble(-1, 1) * 50);
-            Size = new Vecteur2D(Game.game.random.Next(3, 5), Game.game.random.Next(3, 5));
+            Speed = new Vecteur2D(Game.game.random.NextDouble(-1, 1) * 70, Game.game.random.NextDouble(-1, 1) * 70);
+            Size = new Vecteur2D(Game.game.random.Next(4, 6), Game.game.random.Next(4, 6));
 
             double rand = Game.game.random.NextDouble();
             if (rand < 0.3) color = new SolidBrush(Game.foregroundColor);
@@ -27,7 +31,7 @@ namespace SpaceInvaders.GameObjects
             graphics.FillRectangle(color, GetAnchorX(), GetAnchorY(), (float) Size.X, (float) Size.Y);
         }
 
-        private double liveTime = 1.5;
+        private double liveTime = 1;
         public override void Update(Game gameInstance, double deltaT)
         {
             base.Update(gameInstance, deltaT);

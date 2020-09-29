@@ -1,9 +1,12 @@
-﻿using GameObjects;
-using SpaceInvaders.Utils;
+﻿using SpaceInvaders.Utils;
 using System.Drawing;
 
 namespace SpaceInvaders.GameObjects.Bonus
 {
+    /// <summary>
+    /// A bonus is a object that can be get by tyhe player to offer a bonus
+    /// </summary>
+    /// <seealso cref="GameObject" />
     abstract class Bonus : GameObject, IImage
     {
         public Bonus(Vecteur2D position, Vecteur2D speed = null) : base(position)
