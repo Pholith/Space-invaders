@@ -54,11 +54,11 @@ namespace SpaceInvaders.GameModes
                 new AutoInvader(new Vecteur2D(0, 20), 0, speed: new Vecteur2D(Invader.baseSpeed * 2, 20));
                 new AutoInvader(new Vecteur2D(Invader.baseSize, 20), 0, speed: new Vecteur2D(Invader.baseSpeed * 2, 20));
 
-                AddNewAction(new TimedAction(3, () => new BigBuggedBoss(new Vecteur2D(0, 50)), true, false, 2));
+                AddNewAction(new TimedAction(3, () => new BigBuggedBoss(new Vecteur2D(0, 50)), true, false, 1));
             }, true, true, 1));
 
 
-            map.Add(4, new TimedAction(4, () => new InvaderBigBoss(new Vecteur2D(0, 50)), true, false, 3));
+            map.Add(4, new TimedAction(7, () => new InvaderBigBoss(new Vecteur2D(0, 50)), true, false, 3));
 
             map.Add(5, new TimedAction(3, () => new UltimateBoss(new Vecteur2D(0, Invader.baseSize)), true, false, 1));
 
@@ -72,7 +72,7 @@ namespace SpaceInvaders.GameModes
                 else if (waveCreated < 8) rand = Game.game.random.Next(1, 4);
                 else rand = Game.game.random.Next(4, 6);
 
-                rand = 3;
+                //rand = 3;
 
                 AddNewAction((TimedAction)map[rand].Clone());
                 waveCreated++;

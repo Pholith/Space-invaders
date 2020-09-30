@@ -9,7 +9,7 @@ namespace SpaceInvaders.GameObjects
 {
     class BigBuggedBoss : AutoInvader
     {
-        public BigBuggedBoss(Vecteur2D v1) : base(v1, 0, 130)
+        public BigBuggedBoss(Vecteur2D v1) : base(v1, 0, 300, new Vecteur2D(baseSpeed / 2, 0))
         {
 
         }
@@ -29,11 +29,11 @@ namespace SpaceInvaders.GameObjects
         public override void Init(Game gameInstance)
         {
             Size = new Vecteur2D(80, 80);
-            AddNewAction(new TimedAction(9, () =>
+            AddNewAction(new TimedAction(7, () =>
             {
                 AddNewAction(new TimedAction(0.2, () =>
                 {
-                    /*
+                    
                     new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(20, 100),
                         null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(-Math.Cos(inc % Math.PI), 0));
 
@@ -46,12 +46,14 @@ namespace SpaceInvaders.GameObjects
 
                     new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), new Vecteur2D(120, baseBulletSpeed),
                         null, (obj, deltaT, inc) => new Vecteur2D(Math.Cos(inc), 0) + obj.Position);
-                    */
+                    
                     // Target the player
-                    
-                    
-                    new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), 
-                        (Game.game.Mode.Player.Position - (Position + new Vecteur2D(Size.X / 2, Size.Y / 2))).SetYWithRatio(baseBulletSpeed));
+                    new LaserBall(new Vecteur2D(GetAnchorX() + Size.X, Size.Y / 2), 
+                        (Game.game.Mode.Player.Position - (new Vecteur2D(GetAnchorX() + Size.X, Size.Y / 2))).SetNewMagnitude(baseBulletSpeed));
+
+                    new LaserBall(new Vecteur2D(GetAnchorX(), Size.Y / 2),
+                        (Game.game.Mode.Player.Position - (new Vecteur2D(GetAnchorX(), Size.Y / 2))).SetNewMagnitude(baseBulletSpeed));
+
 
                 }, true, false, 6));
             }, true));

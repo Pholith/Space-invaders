@@ -49,14 +49,12 @@ namespace SpaceInvaders
             return new Vecteur2D(x, y);
         }
 
-        public Vecteur2D SetYWithRatio(double newY)
+        public Vecteur2D SetNewMagnitude(double newNorme)
         {
-            // magnitude of the old vector
-            double a = Norme();
-            // compute x to not change the magnitude
-            double x = Math.Acos(newY);
+            double x = X / Norme() * newNorme;
+            double y = Y / Norme() * newNorme;
 
-            return new Vecteur2D(x, newY);
+            return new Vecteur2D(x, y);
         }
 
         public static Vecteur2D operator +(Vecteur2D a, Vecteur2D b)

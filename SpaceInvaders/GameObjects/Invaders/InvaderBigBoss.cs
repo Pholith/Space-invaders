@@ -25,17 +25,17 @@ namespace SpaceInvaders.GameObjects
 
             AddNewAction(new TimedAction(10, () => new AutoInvader(Position, 4, 2, new Vecteur2D(baseSpeed * 5, 10)), true, false));
 
-            AddNewAction(new TimedAction(9, () =>
+            AddNewAction(new TimedAction(4, () =>
             {
-                AddNewAction(new TimedAction(0.5, () =>
+                AddNewAction(new TimedAction(0.3, () =>
                 {
-                    new Laser(new Vecteur2D(GetAnchorX(), Size.Y / 2), new Vecteur2D(0, baseBulletSpeed));
-                    new Laser(new Vecteur2D(GetAnchorX() + Size.X, Size.Y / 2), new Vecteur2D(0, baseBulletSpeed));
+                    new Laser(new Vecteur2D(GetAnchorX(), Size.Y), new Vecteur2D(0, baseBulletSpeed));
+                    new Laser(new Vecteur2D(GetAnchorX() + Size.X, Size.Y), new Vecteur2D(0, baseBulletSpeed));
 
-                    new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), new Vecteur2D(20, 100),
+                    new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y), new Vecteur2D(20, 100),
                         null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(Math.Cos(inc % Math.PI), 0));
 
-                    new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(-20, 100),
+                    new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y), new Vecteur2D(-20, 100),
                         null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(-Math.Cos(inc % Math.PI), 0));
 
 
