@@ -9,7 +9,7 @@ namespace SpaceInvaders.GameObjects
 {
     class BigBuggedBoss : AutoInvader
     {
-        public BigBuggedBoss(Vecteur2D v1) : base(v1, 0, 100)
+        public BigBuggedBoss(Vecteur2D v1) : base(v1, 0, 130)
         {
 
         }
@@ -33,7 +33,7 @@ namespace SpaceInvaders.GameObjects
             {
                 AddNewAction(new TimedAction(0.2, () =>
                 {
-
+                    /*
                     new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(20, 100),
                         null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(-Math.Cos(inc % Math.PI), 0));
 
@@ -41,11 +41,17 @@ namespace SpaceInvaders.GameObjects
                         null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(Math.Cos(inc % Math.PI), 0));
 
 
-                    new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(-120, 200), 
+                    new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(-120, baseBulletSpeed), 
                         null, (obj, deltaT, inc) => new Vecteur2D(Math.Cos(inc), 0) + obj.Position);
 
-                    new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), new Vecteur2D(120, 200),
+                    new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), new Vecteur2D(120, baseBulletSpeed),
                         null, (obj, deltaT, inc) => new Vecteur2D(Math.Cos(inc), 0) + obj.Position);
+                    */
+                    // Target the player
+                    
+                    
+                    new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), 
+                        (Game.game.Mode.Player.Position - (Position + new Vecteur2D(Size.X / 2, Size.Y / 2))).SetYWithRatio(baseBulletSpeed));
 
                 }, true, false, 6));
             }, true));

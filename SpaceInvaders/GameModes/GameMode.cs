@@ -9,7 +9,8 @@ namespace SpaceInvaders.GameModes
     /// </summary>
     public abstract class GameMode
     {
-        private Ship player;
+
+        internal Ship Player { get; private set; }
         public bool Win { get; protected set; }
         public bool Ended { get; protected set; }
 
@@ -21,7 +22,7 @@ namespace SpaceInvaders.GameModes
 
         public virtual void Init()
         {
-            player = new PlayerShip(new Vecteur2D(Game.game.gameSize.Width / 2, Game.game.gameSize.Height - 50));
+            Player = new PlayerShip(new Vecteur2D(Game.game.gameSize.Width / 2, Game.game.gameSize.Height - 50));
 
             new Bunker(new Vecteur2D(Game.game.gameSize.Width / 3, Game.game.gameSize.Height - 100));
             new Bunker(new Vecteur2D(Game.game.gameSize.Width / 1.5, Game.game.gameSize.Height - 100));
@@ -33,7 +34,7 @@ namespace SpaceInvaders.GameModes
         public virtual void Update(double deltaT)
         {
             SecFromStart += deltaT;
-            if (!player.IsAlive())
+            if (!Player.IsAlive())
             {
                 Ended = true;
                 Win = false;
@@ -50,7 +51,7 @@ namespace SpaceInvaders.GameModes
 
         public virtual void Draw(Graphics g)
         {
-            string strHP = "HP: " + player.HP;
+            string strHP = "HP: " + Player.HP;
             string score = "Score: " + Game.game.Score;
 
             SizeF sizeHP = g.MeasureString(strHP, Game.defaultFont);

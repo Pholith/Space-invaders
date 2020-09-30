@@ -1,4 +1,5 @@
-﻿using SpaceInvaders.Properties;
+﻿using SpaceInvaders.GameModes;
+using SpaceInvaders.Properties;
 using SpaceInvaders.Utils;
 using System.Drawing;
 
@@ -52,6 +53,7 @@ namespace SpaceInvaders.GameObjects
             {
                 if (obj == this) continue;
                 if (!CanHit(obj)) continue;
+                if (Game.game.Mode is ManicShooter && obj is Laser) continue;
 
                 // If the squares intersect
                 if (!(obj.GetAnchorX() > GetAnchorX() + Size.X ||

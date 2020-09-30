@@ -26,6 +26,10 @@ namespace SpaceInvaders.Utils
             return lst[r.Next(lst.Count)];
         }
 
+        public static bool NextBool(this Random r)
+        {
+            return r.NextDouble() < 0.5;
+        }
         public static double NextDouble(this Random r, double min, double max)
         {
             return r.NextDouble() * (max - min) + min;
@@ -37,7 +41,7 @@ namespace SpaceInvaders.Utils
             {
                 for (int j = 0; j < img.Height; j++)
                 {
-                    img.SetPixel(i, j, color);
+                    if (img.GetPixel(i, j).A == 255) img.SetPixel(i, j, color);
                 }
             }
             return img;

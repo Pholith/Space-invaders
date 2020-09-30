@@ -39,7 +39,7 @@ namespace SpaceInvaders.GameObjects
                 MoveDown();
                 //gm.ReleaseKey(Keys.S);
             }
-            Speed = Speed * 0.97; // Slow down every tic
+            Speed = Speed * 0.95; // Slow down every tic
 
             if (gm.keyPressed.Contains(Keys.Space))
             {

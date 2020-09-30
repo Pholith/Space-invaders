@@ -147,6 +147,7 @@ namespace SpaceInvaders
         /// </summary>
         public void InitGame()
         {
+            Score = 0;
             gameObjects.Clear();
             pendingNewGameObjects.Clear();
             Mode.Init();

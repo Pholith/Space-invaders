@@ -25,12 +25,13 @@ namespace SpaceInvaders.GameObjects.Invaders
             base.Init(gameInstance);
             AddNewAction(new TimedAction(8 + gameInstance.random.NextDouble() * 12, () =>
             {
-                if (shoot == null || !shoot.IsAlive()) shoot = new Laser(Position + new Vecteur2D(0, Size.Y), new Vecteur2D(0, 200));
+                if (shoot == null || !shoot.IsAlive()) shoot = new Laser(Position + new Vecteur2D(0, Size.Y), new Vecteur2D(0, baseBulletSpeed));
             }, true));
 
         }
-
-        public static int baseSpeed = 30;
+        public static readonly int baseBulletSpeed = 120;
+        public static readonly int baseSize = 45;
+        public static readonly int baseSpeed = 30;
         private int invaderType;
         private Laser shoot = null;
 

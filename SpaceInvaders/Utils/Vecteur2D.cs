@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SpaceInvaders
 {
-    public class Vecteur2D
+    public sealed class Vecteur2D
     {
 
         public static Vecteur2D zero = new Vecteur2D(0, 0);
@@ -36,7 +36,28 @@ namespace SpaceInvaders
         {
         }
 
-        public double Norme { get; private set; }
+        public double Norme()
+        {
+            return Math.Sqrt((X * X) + (Y * Y));
+        }
+
+        public Vecteur2D Normalize()
+        {
+            double a = Norme();
+            double x = a * X / Math.Abs(a);
+            double y = a * Y / Math.Abs(a);
+            return new Vecteur2D(x, y);
+        }
+
+        public Vecteur2D SetYWithRatio(double newY)
+        {
+            // magnitude of the old vector
+            double a = Norme();
+            // compute x to not change the magnitude
+            double x = Math.Acos(newY);
+
+            return new Vecteur2D(x, newY);
+        }
 
         public static Vecteur2D operator +(Vecteur2D a, Vecteur2D b)
         {
@@ -72,6 +93,7 @@ namespace SpaceInvaders
         {
             return !(a == b);
         }
+
 
         public static double Distance(Vecteur2D a, Vecteur2D b)
         {
