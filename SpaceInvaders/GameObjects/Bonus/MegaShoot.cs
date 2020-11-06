@@ -5,7 +5,7 @@ namespace SpaceInvaders.GameObjects.Bonus
 {
     class MegaShoot : Bonus
     {
-        public MegaShoot(Vecteur2D position) : base(position, new Vecteur2D(0, 40))
+        public MegaShoot(Vecteur2D position) : base(position, new Vecteur2D(0, 80))
         {
         }
 
@@ -16,7 +16,7 @@ namespace SpaceInvaders.GameObjects.Bonus
 
         protected override bool ApplyBonus(Ship ship)
         {
-            ship.MegaShoot();
+            ship.AddPower();
             return true;
         }
     }

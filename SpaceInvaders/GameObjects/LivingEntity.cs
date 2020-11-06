@@ -20,6 +20,7 @@
 
 
         public int HP { get; protected set; }
+        public int Power { get; protected set; }
         protected int BaseHP { get; private set; }
 
         public override void OnHit(Laser laser)

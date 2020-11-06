@@ -9,7 +9,7 @@ namespace SpaceInvaders.GameObjects
 {
     class BigBuggedBoss : AutoInvader
     {
-        public BigBuggedBoss(Vecteur2D v1) : base(v1, 0, 300, new Vecteur2D(baseSpeed / 2, 0))
+        public BigBuggedBoss(Vecteur2D v1) : base(v1, 0, 200, new Vecteur2D(baseSpeed / 2, 5))
         {
 
         }
@@ -29,7 +29,7 @@ namespace SpaceInvaders.GameObjects
         public override void Init(Game gameInstance)
         {
             Size = new Vecteur2D(80, 80);
-            AddNewAction(new TimedAction(7, () =>
+            AddNewAction(new TimedAction(6, () =>
             {
                 AddNewAction(new TimedAction(0.2, () =>
                 {
@@ -46,16 +46,21 @@ namespace SpaceInvaders.GameObjects
 
                     new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), new Vecteur2D(120, baseBulletSpeed),
                         null, (obj, deltaT, inc) => new Vecteur2D(Math.Cos(inc), 0) + obj.Position);
-                    
-                    // Target the player
-                    new LaserBall(new Vecteur2D(GetAnchorX() + Size.X, Size.Y / 2), 
-                        (Game.game.Mode.Player.Position - (new Vecteur2D(GetAnchorX() + Size.X, Size.Y / 2))).SetNewMagnitude(baseBulletSpeed));
 
-                    new LaserBall(new Vecteur2D(GetAnchorX(), Size.Y / 2),
-                        (Game.game.Mode.Player.Position - (new Vecteur2D(GetAnchorX(), Size.Y / 2))).SetNewMagnitude(baseBulletSpeed));
+                // Target the player
+                Vecteur2D newBulletPosition = Position + new Vecteur2D(- Size.X /2, Size.Y / 2);
+                Vecteur2D newBulletSpeed = (Game.game.Mode.Player.Position - newBulletPosition).SetNewMagnitude(baseBulletSpeed);
+                new LaserBall(newBulletPosition, newBulletSpeed);
+
+                Vecteur2D newBulletPosition2 = Position + new Vecteur2D(Size.X / 2, Size.Y / 2);
+                Vecteur2D newBulletSpeed2 = (Game.game.Mode.Player.Position - newBulletPosition2).SetNewMagnitude(baseBulletSpeed);
+                new LaserBall(newBulletPosition2, newBulletSpeed2);
+
+                //new LaserBall( + Size.X, Size.Y / 2), (Game.game.Mode.Player.Position - new Vecteur2D(GetAnchorX() + Size.X, Size.Y / 2)).SetNewMagnitude(baseBulletSpeed));
+                  //  new LaserBall(         , Size.Y / 2), (Game.game.Mode.Player.Position - new Vecteur2D(GetAnchorX()         , Size.Y / 2)).SetNewMagnitude(baseBulletSpeed));
 
 
-                }, true, false, 6));
+                }, true, false, 13));
             }, true));
         }
 

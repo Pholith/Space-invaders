@@ -108,6 +108,16 @@ namespace SpaceInvaders
             return X == v1.X && Y == v1.Y;
         }
 
+        
+        public static Vecteur2D FromAngle(int degreeAngle, int magnitude = 1)
+        {
+            return FromAngle(Utils.Utils.DegToRad(degreeAngle), magnitude);
+        }
+        public static Vecteur2D FromAngle(double radianAngle, int magnitude = 1)
+        {
+            return new Vecteur2D(Math.Cos(radianAngle), Math.Sin(radianAngle)) * magnitude;
+        }
+
         public override int GetHashCode()
         {
             return (int)(X + Y);

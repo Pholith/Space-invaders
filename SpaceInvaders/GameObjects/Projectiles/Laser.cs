@@ -17,13 +17,15 @@ namespace SpaceInvaders.GameObjects
 
         public Tag Tag { get; private set; }
 
+
+        public static readonly int baseSpeed = 250;
         public Laser(Vecteur2D v1, Vecteur2D speed, Tag tag = Tag.Invader) : base(v1)
         {
             Speed = speed;
             Damage = 1;
             Tag = tag;
         }
-        public Laser(Vecteur2D v1, Tag tag = Tag.Invader) : this(v1, new Vecteur2D(0, -200), tag)
+        public Laser(Vecteur2D v1, Tag tag = Tag.Invader) : this(v1, new Vecteur2D(0, -baseSpeed), tag)
         {
 
         }
@@ -31,7 +33,6 @@ namespace SpaceInvaders.GameObjects
         {
             return Tag;
         }
-
 
         public virtual Bitmap GetImage()
         {

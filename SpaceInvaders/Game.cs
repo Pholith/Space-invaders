@@ -18,7 +18,7 @@ namespace SpaceInvaders
         /// <summary>
         /// Set of new game objects scheduled for addition to the game
         /// </summary>
-        private HashSet<GameObject> pendingNewGameObjects = new HashSet<GameObject>();
+        public HashSet<GameObject> pendingNewGameObjects = new HashSet<GameObject>();
 
         /// <summary>
         /// Schedule a new object for addition in the game.
@@ -74,7 +74,7 @@ namespace SpaceInvaders
         /// <summary>
         /// A shared simple font
         /// </summary>
-        public static Font defaultFont = new Font(FontFamily.GenericSansSerif, 24, FontStyle.Regular);
+        public static Font defaultFont = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Regular);
         #endregion
 
 

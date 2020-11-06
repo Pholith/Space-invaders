@@ -30,6 +30,10 @@ namespace SpaceInvaders.Utils
             this.limitOfCall = limitOfCall;
         }
 
+        /// <summary>
+        /// Do the action
+        /// </summary>
+        /// <returns></returns>
         public bool DoIfPossible()
         {
             if (ready && limitOfCall != 0)
@@ -41,6 +45,15 @@ namespace SpaceInvaders.Utils
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Do the actions even if it is not ready. Should be use only if you know what you're doing <see cref="DoIfPossible"/>
+        /// </summary>
+        public void ForceAction()
+        {
+            ready = true;
+            DoIfPossible();
         }
 
         public void LoadTimer(double deltaT)

@@ -11,7 +11,7 @@ namespace SpaceInvaders.GameObjects.Invaders
     /// <seealso cref="AutoInvader" />
     class UltimateBoss : AutoInvader
     {
-        public UltimateBoss(Vecteur2D v1) : base(v1, 50, 350, new Vecteur2D(baseSpeed / 2, 0))
+        public UltimateBoss(Vecteur2D v1) : base(v1, 0, 350, new Vecteur2D(baseSpeed / 2, 0))
         {
 
         }
@@ -24,11 +24,7 @@ namespace SpaceInvaders.GameObjects.Invaders
 
         public override void Init(Game gameInstance)
         {
-            base.Init(gameInstance);
-           
-            AddNewAction(new TimedAction(16, () => new InvaderBigBoss(Position, new Vecteur2D(0, 10)), true, false));
-
-
+            
             AddNewAction(new TimedAction(8, () =>
             {
                 AddNewAction(new TimedAction(0.8, () =>
@@ -48,10 +44,10 @@ namespace SpaceInvaders.GameObjects.Invaders
                     new LaserBall(Position + new Vecteur2D(0, 0), new Vecteur2D(-40, baseBulletSpeed));
 
 
-                    new LaserBall(Position + new Vecteur2D(0, 0), new Vecteur2D(50, baseBulletSpeed), new Vecteur2D(-30, -50));
-                    new LaserBall(Position + new Vecteur2D(0, 0), new Vecteur2D(-50, baseBulletSpeed), new Vecteur2D(-30, -50));
-                    new LaserBall(Position + new Vecteur2D(0, 0), new Vecteur2D(50, baseBulletSpeed), new Vecteur2D(30, -50));
-                    new LaserBall(Position + new Vecteur2D(0, 0), new Vecteur2D(-50, baseBulletSpeed), new Vecteur2D(30, -50));
+                    new LaserBall(Position + new Vecteur2D(0, 0), new Vecteur2D(50, baseBulletSpeed), new Vecteur2D(-20, -30));
+                    new LaserBall(Position + new Vecteur2D(0, 0), new Vecteur2D(-50, baseBulletSpeed), new Vecteur2D(-20, -30));
+                    new LaserBall(Position + new Vecteur2D(0, 0), new Vecteur2D(50, baseBulletSpeed), new Vecteur2D(20, -30));
+                    new LaserBall(Position + new Vecteur2D(0, 0), new Vecteur2D(-50, baseBulletSpeed), new Vecteur2D(20, -30));
 
                     new LaserBall(Position + new Vecteur2D(0, 0), new Vecteur2D(50, baseBulletSpeed),
                         del: (obj, deltaT, inc) => obj.Position + new Vecteur2D(Math.Cos(inc % Math.PI) * 2, 0));

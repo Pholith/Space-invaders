@@ -10,6 +10,7 @@ namespace SpaceInvaders.GameObjects.Invaders
     /// An invader is the common ennemy of the game
     /// </summary>
     /// <seealso cref="LivingEntity" />
+    /// <seealso cref="AutoInvader" />
     class Invader : LivingEntity, IImage, IHitable
     {
 
@@ -23,7 +24,7 @@ namespace SpaceInvaders.GameObjects.Invaders
         public override void Init(Game gameInstance)
         {
             base.Init(gameInstance);
-            AddNewAction(new TimedAction(8 + gameInstance.random.NextDouble() * 12, () =>
+            AddNewAction(new TimedAction(6 + gameInstance.random.NextDouble() * 10, () =>
             {
                 if (shoot == null || !shoot.IsAlive()) shoot = new Laser(Position + new Vecteur2D(0, Size.Y), new Vecteur2D(0, baseBulletSpeed));
             }, true));
@@ -55,7 +56,7 @@ namespace SpaceInvaders.GameObjects.Invaders
         public override void Update(Game gameInstance, double deltaT)
         {
             base.Update(gameInstance, deltaT);
-            if (GetAnchorY() > Game.game.gameSize.Height - 100)
+            if (GetAnchorY() > Game.game.gameSize.Height - 40)
             {
                 Game.game.Mode.Lose();
             }

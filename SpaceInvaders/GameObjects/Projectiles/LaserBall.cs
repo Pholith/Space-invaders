@@ -5,7 +5,7 @@ namespace SpaceInvaders.GameObjects
 {
     class LaserBall : Laser
     {
-        public LaserBall(Vecteur2D v1, Vecteur2D speed, Vecteur2D acceleration = null, DelegateMovement del = null, Tag tag = Tag.Invader) : base(v1, speed, tag)
+        public LaserBall(Vecteur2D position, Vecteur2D speed, Vecteur2D acceleration = null, DelegateMovement del = null, Tag tag = Tag.Invader) : base(position, speed, tag)
         {
             if (acceleration is null) acceleration = Vecteur2D.zero;
             Acceleration = acceleration;

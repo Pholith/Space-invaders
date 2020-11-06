@@ -75,6 +75,7 @@
     <Compile Include="GameObjects\DeathParticle.cs" />
     <Compile Include="GameObjects\Invaders\BigBuggedBoss.cs" />
     <Compile Include="GameObjects\Bunker.cs" />
+    <Compile Include="GameObjects\Invaders\BulletSpammerBoss.cs" />
     <Compile Include="GameObjects\Invaders\InvaderBlock.cs" />
     <Compile Include="GameObjects\Invaders\Invader.cs" />
     <Compile Include="GameObjects\Invaders\UltimateBoss.cs" />
@@ -197,6 +198,7 @@
   <ItemGroup>
     <Resource Include="Resources\bonusMegaShoot.png" />
     <Resource Include="Resources\bonusHealth.png" />
+    <Resource Include="Resources\bulletSpammer.png" />
     <Content Include="Resources\playership.png" />
     <Resource Include="Resources\shipTest.png" />
   </ItemGroup>

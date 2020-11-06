@@ -1,6 +1,7 @@
 ﻿using SpaceInvaders.GameObjects;
 using SpaceInvaders.Utils;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 
 namespace SpaceInvaders
@@ -37,6 +38,7 @@ namespace SpaceInvaders
             Position = v1;
             Speed = Vecteur2D.zero;
             Game.game.AddNewGameObject(this);
+
         }
 
         /// <summary>
@@ -89,7 +91,18 @@ namespace SpaceInvaders
         {
             IImage go = this as IImage;
             sprite = go.GetImage().InvertColor();
+            if (customColor != Color.Empty) sprite = Utils.Utils.RecolorImage(sprite, customColor);
             Size = new Vecteur2D(sprite.Width, sprite.Height);
+        }
+
+        private Color customColor;
+        /// <summary>
+        /// Change the color of the object after it creation
+        /// </summary>
+        /// <param name="color">The color.</param>
+        public void SetCustomColor(Color color)
+        {
+            customColor = color;
         }
 
 
@@ -200,7 +213,7 @@ namespace SpaceInvaders
         /// <param name="position">The position of the pixel </param>
         public virtual void DestroyPixel(Vecteur2D position)
         {
-            int size = 6;
+            int size = DestroyPixelSize();
             for (int i = -size; i < size; i++)
             {
                 for (int j = -size; j < size; j++)
@@ -211,6 +224,14 @@ namespace SpaceInvaders
                         sprite.SetPixel((int)(position.X - GetAnchorX()) + i, (int)(position.Y - GetAnchorY()) + j, Color.Transparent);
                 }
             }
+        }
+        /// <summary>
+        /// Set the radius of the pixel that should be destroyed when hit
+        /// </summary>
+        /// <returns></returns>
+        protected virtual int DestroyPixelSize()
+        {
+            return 6;
         }
 
         /// <summary>

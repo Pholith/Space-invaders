@@ -15,7 +15,10 @@ namespace SpaceInvaders.GameObjects.Bonus
             else Speed = speed;
         }
 
-
+        public override int GetNumberOfParticles()
+        {
+            return 0;
+        }
         public override void Update(Game gameInstance, double deltaT)
         {
             base.Update(gameInstance, deltaT);

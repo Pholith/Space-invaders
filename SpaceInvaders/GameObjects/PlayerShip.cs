@@ -43,7 +43,7 @@ namespace SpaceInvaders.GameObjects
 
             if (gm.keyPressed.Contains(Keys.Space))
             {
-                Shoot();
+                UseMegaShoot();
                 //gm.ReleaseKey(Keys.Space);
             }
 

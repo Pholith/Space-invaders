@@ -2,6 +2,7 @@
 using SpaceInvaders.Properties;
 using SpaceInvaders.Utils;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 
 namespace SpaceInvaders.GameObjects
@@ -19,26 +20,38 @@ namespace SpaceInvaders.GameObjects
             {
                 new Laser(Position + new Vecteur2D(0, -(Size.Y / 2)), Tag.Player);
             }, true));
+
+            megaShoot = AddNewAction(new TimedAction(1.5, () =>
+            {
+                new Laser(Position + new Vecteur2D(-10, 2), Tag.Player);
+                new Laser(Position + new Vecteur2D(-10, 2), Tag.Player);
+                new Laser(Position + new Vecteur2D(0, 0), Tag.Player);
+                new Laser(Position + new Vecteur2D(10, 2), Tag.Player);
+                new Laser(Position + new Vecteur2D(10, 2), Tag.Player);
+                
+                int angleMegaShoot = 40;
+                for (int i = -angleMegaShoot; i <= angleMegaShoot; i += 3)
+                {
+                    new LaserBall(Position, Vecteur2D.FromAngle(-90 + i, Laser.baseSpeed), tag: Tag.Player);
+                }
+            }, false, true));
         }
 
-        int speedMax = 200;
+        int speedMax = 150;
 
-        public void MegaShoot()
+        private TimedAction megaShoot { get; set; }
+
+        public void AddPower()
         {
-            AddNewAction(new TimedAction(0.5, () =>
-            {
-                new Laser(Position + new Vecteur2D(-2, -(Size.Y / 2)), Tag.Player);
-                new Laser(Position + new Vecteur2D(0, -(Size.Y / 2)), Tag.Player);
-                new Laser(Position + new Vecteur2D(2, -(Size.Y / 2)), Tag.Player);
-
-                new LaserBall(Position + new Vecteur2D(0, Size.Y / 2), new Vecteur2D(60, -200), tag: Tag.Player);
-                new LaserBall(Position + new Vecteur2D(0, Size.Y / 2), new Vecteur2D(40, -200), tag: Tag.Player);
-                new LaserBall(Position + new Vecteur2D(0, Size.Y / 2), new Vecteur2D(10, -200), tag: Tag.Player);
-
-                new LaserBall(Position + new Vecteur2D(0, Size.Y / 2), new Vecteur2D(-60, -200), tag: Tag.Player);
-                new LaserBall(Position + new Vecteur2D(0, Size.Y / 2), new Vecteur2D(-40, -200), tag: Tag.Player);
-                new LaserBall(Position + new Vecteur2D(0, Size.Y / 2), new Vecteur2D(-20, -200), tag: Tag.Player);
-            }, true, true, 2));
+            Power += 1;
+        }
+        public void UseMegaShoot()
+        {
+#if DEBUG
+            megaShoot.DoIfPossible();
+#endif
+            if (Power < 1) return;
+            if (megaShoot.DoIfPossible()) Power--;
         }
 
         public bool ApplyHealBonus()
@@ -65,11 +78,11 @@ namespace SpaceInvaders.GameObjects
 
             else if (bullet > 3) Attack.Action += () =>
             {
-                new LaserBall(Position, new Vecteur2D(0, -80), tag: Tag.Player, del: (ball, deltaT, inc)
+                new LaserBall(Position, new Vecteur2D(0, - Laser.baseSpeed / 2), tag: Tag.Player, del: (ball, deltaT, inc)
                     => new Vecteur2D(Math.Cos(inc), 0) + ball.Position
                 ); ;
             };
-            else Attack.Action += () => { new LaserBall(Position, new Vecteur2D(-40 + bulletFixed * 20, -100), tag: Tag.Player); };
+            else Attack.Action += () => { new LaserBall(Position, new Vecteur2D(-40 + bulletFixed * 20, - Laser.baseSpeed * 0.8), tag: Tag.Player); };
             bullet++;
             return true;
         }
@@ -111,6 +124,9 @@ namespace SpaceInvaders.GameObjects
 
             if (GetAnchorX() + Size.X > Game.game.gameSize.Width)
                 Position = new Vecteur2D(Game.game.gameSize.Width - Size.X / 2, Position.Y);
+
+            if (GetAnchorY() < 0)
+                Position = new Vecteur2D(Position.X, Size.Y / 2);
 
             if (GetAnchorY() + Size.Y > Game.game.gameSize.Height)
                 Position = new Vecteur2D(Position.X, Game.game.gameSize.Height - Size.Y / 2);

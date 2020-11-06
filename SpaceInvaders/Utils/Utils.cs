@@ -35,6 +35,12 @@ namespace SpaceInvaders.Utils
             return r.NextDouble() * (max - min) + min;
         }
 
+        public static double DegToRad(int degree)
+        {
+            return degree * (Math.PI / 180);
+        }
+
+
         public static Bitmap RecolorImage(Bitmap img, Color color)
         {
             for (int i = 0; i < img.Width; i++)
