@@ -23,6 +23,15 @@ namespace SpaceInvaders.GameObjects.Invaders
             return 1;
         }
 
+        double counter = 0;
+        public override void Update(Game gameInstance, double deltaT)
+        {
+            base.Update(gameInstance, deltaT);
+            counter += deltaT;
+            Position += new Vecteur2D(Math.Cos(counter), 0) / 15;
+
+        }
+
         public override void Init(Game gameInstance)
         {
             Speed = Vecteur2D.zero; // This boss don't move
@@ -30,7 +39,7 @@ namespace SpaceInvaders.GameObjects.Invaders
 
             AddNewAction(new TimedAction(13, () =>
             {
-                int rand = Game.game.random.Next(1, 4);
+                int rand = Game.game.random.Next(1, 5);
                 switch (rand)
                 {
                     case 1:
@@ -49,7 +58,7 @@ namespace SpaceInvaders.GameObjects.Invaders
                         break;
 
                     case 2:
-                        // Fire target bullet from the canon
+                        // Fire cibled bullet from the canon
                         AddNewAction(new TimedAction(0.15, () =>
                         {
                             Random r = Game.game.random;
@@ -58,16 +67,21 @@ namespace SpaceInvaders.GameObjects.Invaders
                             Vecteur2D newBulletSpeed = (Game.game.Mode.Player.Position + new Vecteur2D(r.Next(-randRange, randRange), r.Next(-randRange, randRange)) - newBulletPosition).SetNewMagnitude(baseBulletSpeed);
                             new LaserBall(newBulletPosition, newBulletSpeed);
 
-                        }, true, false, 50));
+                        }, true, false, 30));
+                        for (int i = 0; i < (Game.game.gameSize.Width - baseSize) / baseSize; i++)
+                        {
+                            new AutoInvader(new Vecteur2D(baseSize + i * baseSize, 0), 0, hp: 1, speed: new Vecteur2D(0, baseSpeed));
+                        }
+
                         break;
 
                     case 3:
-                        AddNewAction(new TimedAction(2, () => // Repeat the pattern some times
+                        AddNewAction(new TimedAction(1, () => // Repeat the pattern some times
                         {
                             int middleAngle = 90;
                             int randAngle = Game.game.random.Next(middleAngle - 50, middleAngle + 50);
 
-                            LaserBall l = new LaserBall(Position + new Vecteur2D(0, Size.Y /2), Vecteur2D.FromAngle(randAngle, baseBulletSpeed));
+                            LaserBall l = new LaserBall(Position + new Vecteur2D(0, Size.Y / 2), Vecteur2D.FromAngle(randAngle, baseBulletSpeed));
                             l.SetCustomColor(Color.Red);
 
                             AddNewAction(new TimedAction(1.5, () => // Wait some seconds after the warning shoot
@@ -81,9 +95,29 @@ namespace SpaceInvaders.GameObjects.Invaders
 
                                 }, true, false, 5));
                             }, true, false, 1));
-                        }, true, true, 6));
+                        }, true, false, 8));
                         break;
 
+                    case 4:
+                        AddNewAction(new TimedAction(0.2, () =>
+                        {
+                            double roundSizeCoeff = 2.2;
+                            // tourbillon of balls
+                            new LaserBall(Position + new Vecteur2D(0, Size.Y / 2), Vecteur2D.FromAngle(90, baseBulletSpeed * 2),
+                                del: (LaserBall ball, double deltaT, double increment) =>
+                                {
+                                    return ball.Position + new Vecteur2D(0, 30) * deltaT + ball.Speed.Rotate(increment / roundSizeCoeff) * deltaT;
+                                }, overrideMovement: true);
+
+                            new LaserBall(Position + new Vecteur2D(0, Size.Y / 2), Vecteur2D.FromAngle(90, baseBulletSpeed * 2),
+                                del: (LaserBall ball, double deltaT, double increment) =>
+                                {
+                                    return ball.Position + new Vecteur2D(0, 30) * deltaT + ball.Speed.Rotate(-(increment / roundSizeCoeff)) * deltaT;
+                                }, overrideMovement: true);
+
+
+                        }, true, false, 30));
+                        break;
 
 
                     default:

@@ -112,7 +112,6 @@ namespace SpaceInvaders.GameModes
                 else if (waveCreated < 3) rand = Game.game.random.Next(2, 5);
                 else rand = Game.game.random.Next(3, 7);
 
-                //rand = 5; if (waveCreated > 0) rand = -1;
                 Debug.Print("New wave - Rand=" + rand.ToString() + " waveCreated=" + waveCreated);
 
                 if (rand != -1) AddNewAction((TimedAction)map[rand].Clone());

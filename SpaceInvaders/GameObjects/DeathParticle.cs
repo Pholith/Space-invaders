@@ -13,7 +13,7 @@ namespace SpaceInvaders.GameObjects
         public DeathParticle(Vecteur2D position) : base(position)
         {
             Speed = new Vecteur2D(Game.game.random.NextDouble(-1, 1) * 70, Game.game.random.NextDouble(-1, 1) * 70);
-            Size = new Vecteur2D(Game.game.random.Next(4, 6), Game.game.random.Next(4, 6));
+            Size = new Vecteur2D(Game.game.random.Next(3, 5), Game.game.random.Next(3, 5));
 
             double rand = Game.game.random.NextDouble();
             if (rand < 0.3) color = new SolidBrush(Game.foregroundColor);

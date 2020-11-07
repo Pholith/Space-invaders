@@ -19,11 +19,12 @@ namespace SpaceInvaders.GameObjects
 
 
         public static readonly int baseSpeed = 250;
-        public Laser(Vecteur2D v1, Vecteur2D speed, Tag tag = Tag.Invader) : base(v1)
+        public Laser(Vecteur2D v1, Vecteur2D speed, Tag tag = Tag.Invader, double ttl = 20) : base(v1)
         {
             Speed = speed;
             Damage = 1;
             Tag = tag;
+            this.ttl = ttl;
         }
         public Laser(Vecteur2D v1, Tag tag = Tag.Invader) : this(v1, new Vecteur2D(0, -baseSpeed), tag)
         {
@@ -46,9 +47,14 @@ namespace SpaceInvaders.GameObjects
             return go.GetTag() != Tag && go.GetTag() != Tag.Invincible;
         }
 
+        private double ttl; // tiem to live
+        private double ttlCount = 0;
         public override void Update(Game gameInstance, double deltaT)
         {
             base.Update(gameInstance, deltaT);
+
+            ttlCount += deltaT;
+            if (ttlCount >= ttl) Kill();
 
             foreach (var obj in gameInstance.gameObjects)
             {

@@ -56,9 +56,6 @@ namespace SpaceInvaders.GameObjects
                 Vecteur2D newBulletSpeed2 = (Game.game.Mode.Player.Position - newBulletPosition2).SetNewMagnitude(baseBulletSpeed);
                 new LaserBall(newBulletPosition2, newBulletSpeed2);
 
-                //new LaserBall( + Size.X, Size.Y / 2), (Game.game.Mode.Player.Position - new Vecteur2D(GetAnchorX() + Size.X, Size.Y / 2)).SetNewMagnitude(baseBulletSpeed));
-                  //  new LaserBall(         , Size.Y / 2), (Game.game.Mode.Player.Position - new Vecteur2D(GetAnchorX()         , Size.Y / 2)).SetNewMagnitude(baseBulletSpeed));
-
 
                 }, true, false, 13));
             }, true));

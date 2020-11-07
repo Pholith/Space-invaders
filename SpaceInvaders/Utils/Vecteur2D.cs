@@ -117,7 +117,23 @@ namespace SpaceInvaders
         {
             return new Vecteur2D(Math.Cos(radianAngle), Math.Sin(radianAngle)) * magnitude;
         }
+        
+        public Vecteur2D Rotate(int degrees)
+        {
+            return Rotate(Utils.Utils.DegToRad(degrees));
+        }
 
+        public Vecteur2D Rotate(double radians)
+        {
+            double ca = Math.Cos(radians);
+            double sa = Math.Sin(radians);
+            return new Vecteur2D(ca * X - sa * Y, sa * X + ca * Y);
+        }
+
+        public Vecteur2D Round()
+        {
+            return new Vecteur2D(Math.Round(X), Math.Round(Y));
+        }
         public override int GetHashCode()
         {
             return (int)(X + Y);

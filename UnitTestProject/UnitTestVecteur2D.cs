@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SpaceInvaders;
+using System;
 
 namespace UnitTestProject
 {
@@ -39,6 +40,18 @@ namespace UnitTestProject
             Assert.IsFalse(v1 == v2 * 2);
         }
 
+        [TestMethod]
+        public void TestRotation()
+        {
+            Vecteur2D v1 = new Vecteur2D(1, 0);
+            Assert.AreEqual(v1.Rotate(0), v1);
+            Assert.AreEqual(v1.Rotate(Math.PI).Round(), new Vecteur2D(-1, 0));
+            Assert.AreEqual(v1.Rotate(Math.PI/2).Round(), new Vecteur2D(0, 1));
+
+            Vecteur2D v2 = new Vecteur2D(5, 2);
+            Assert.AreEqual(v2.Rotate(Math.PI).Round(), new Vecteur2D(-5, -2));
+            Assert.AreEqual(v2.Rotate(90).Round(), new Vecteur2D(-2, 5));
+        }
 
     }
 }
