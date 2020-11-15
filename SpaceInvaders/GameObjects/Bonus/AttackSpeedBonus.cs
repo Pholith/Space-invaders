@@ -18,9 +18,7 @@ namespace SpaceInvaders.GameObjects.Bonus
 
         protected override bool ApplyBonus(Ship ship)
         {
-            if (ship.Attack.Couldown / 2 == 0.1) return false;
-            ship.Attack.Couldown = Math.Max(0.1, ship.Attack.Couldown / 2);
-            return true;
+            return ship.ApplyAttackSpeedBonus();
         }
 
     }

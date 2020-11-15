@@ -9,7 +9,7 @@ namespace SpaceInvaders
     /// <summary>
     /// This is the generic abstact base class for any entity in the game
     /// </summary>
-    abstract class GameObject : IHitable, ITag
+    public abstract class GameObject : IHitable, ITag
     {
 
         public Vecteur2D Position { get; protected set; }
@@ -69,8 +69,7 @@ namespace SpaceInvaders
             actions.RemoveWhere(action => action.Finished());
 
             // Automaticly kill gameobject if it is far out of screen
-            int marge = 20;
-            if (Position.X < -marge || Position.X > gameInstance.gameSize.Width + marge || Position.Y < -marge || Position.Y > gameInstance.gameSize.Height) Kill();
+            if (OutOfScreen(15)) Kill();
         }
 
         /// <summary>
@@ -130,18 +129,28 @@ namespace SpaceInvaders
             }
         }
 
+        /// <summary>
+        /// Return true if this object is out of screen
+        /// </summary>
+        /// <param name="marge"> A marge </param>
+        private bool OutOfScreen(int marge = 0)
+        {
+            return Position.X < -marge || Position.X > Game.game.gameSize.Width + marge || Position.Y < -marge || Position.Y > Game.game.gameSize.Height;
+        }
 
         private bool alive = true;
         /// <summary>
-        /// Kills this instance.
+        /// Kills this instance with particle.
         /// </summary>
         public virtual void Kill()
         {
             alive = false;
-            if (!(this is DeathParticle))
-            for (int i = 0; i < GetNumberOfParticles(); i++)
+            if (!(this is DeathParticle || OutOfScreen()))
             {
-                new DeathParticle(Position);
+                for (int i = 0; i < GetNumberOfParticles(); i++)
+                {
+                    new DeathParticle(Position);
+                }
             }
             Game.game.AddScore(GetScore());
         }

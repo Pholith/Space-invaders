@@ -1,18 +1,20 @@
-﻿using SpaceInvaders.GameObjects.Invaders;
-using SpaceInvaders.Properties;
+﻿using SpaceInvaders.Properties;
 using SpaceInvaders.Utils;
 using System;
 using System.Drawing;
 
-namespace SpaceInvaders.GameObjects
+namespace SpaceInvaders.GameObjects.Invaders.Boss
 {
-    class InvaderBigBoss : AutoInvader
+    public class BigShip4Boss : AutoInvader
     {
-        public InvaderBigBoss(Vecteur2D v1, Vecteur2D speed = null) : base(v1, 0, 80, speed)
+        public BigShip4Boss(Vecteur2D v1, Vecteur2D speed = null) : base(v1, 0, 90, speed)
         {
 
         }
-
+        public override int GetNumberOfParticles()
+        {
+            return base.GetNumberOfParticles() * 2;
+        }
         public override Bitmap GetImage()
         {
             Image img = Resources.ship4;

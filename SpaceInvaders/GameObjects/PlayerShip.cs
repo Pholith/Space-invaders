@@ -46,6 +46,25 @@ namespace SpaceInvaders.GameObjects
                 UseMegaShoot();
                 //gm.ReleaseKey(Keys.Space);
             }
+#if DEBUG
+            if (gm.keyPressed.Contains(Keys.B))
+            {
+                Ship p = Game.game.Mode.Player;
+                p.AddBullet();
+                p.AddBullet();
+                p.AddBullet();
+                p.AddBullet();
+                p.ApplyAttackSpeedBonus();
+                p.ApplyAttackSpeedBonus();
+                p.ApplyAttackSpeedBonus();
+                p.ApplyHealBonus();
+            }
+            if (gm.keyPressed.Contains(Keys.I))
+            {
+                 Game.game.Mode.Player.ToggleInvicibility();
+            }
+
+#endif
 
             base.Update(gm, deltaT);
         }

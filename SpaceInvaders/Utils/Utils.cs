@@ -19,7 +19,18 @@ namespace SpaceInvaders.Utils
             b.Append("]");
             return b.ToString();
         }
-
+        public static void Shuffle<T>(this List<T> list)
+        {
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = Game.game.random.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
         public static T GetRandom<T>(this List<T> lst)
         {
             Random r = new Random();

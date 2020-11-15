@@ -5,7 +5,7 @@ namespace SpaceInvaders.GameModes
 {
 
     /// <summary>
-    /// A Gamemode represent the style of game that was choiced.
+    /// A Gamemode represent the style of game that was choiced in the menu.
     /// </summary>
     public abstract class GameMode
     {

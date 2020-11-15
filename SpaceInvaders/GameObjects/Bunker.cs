@@ -4,7 +4,10 @@ using System.Drawing;
 
 namespace SpaceInvaders.GameObjects
 {
-    class Bunker : LivingEntity, IImage
+    /// <summary>
+    /// A bunker is a object with life used to protect the player from lasers.
+    /// </summary>
+    public class Bunker : LivingEntity, IImage
     {
         public Bunker(Vecteur2D v1) : base(v1, -1)
         {
@@ -21,6 +24,10 @@ namespace SpaceInvaders.GameObjects
             return Resources.bunker;
         }
 
+        protected override int DestroyPixelSize()
+        {
+            return base.DestroyPixelSize() / 2;
+        }
 
     }
 }

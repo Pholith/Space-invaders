@@ -11,10 +11,16 @@ namespace SpaceInvaders.GameObjects.Invaders
     /// </summary>
     /// <seealso cref="LivingEntity" />
     /// <seealso cref="AutoInvader" />
-    class Invader : LivingEntity, IImage, IHitable
+    public class Invader : LivingEntity, IImage, IHitable
     {
 
-        public Invader(Vecteur2D v1, int invaderType = 0, int hp = 1) : base(v1, hp)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Invader"/> class.
+        /// </summary>
+        /// <param name="position">The position.</param>
+        /// <param name="invaderType">The skin of the invader.</param>
+        /// <param name="hp">The hp.</param>
+        public Invader(Vecteur2D position, int invaderType = 0, int hp = 1) : base(position, hp)
         {
             this.invaderType = invaderType;
             Speed = new Vecteur2D(baseSpeed, 0);

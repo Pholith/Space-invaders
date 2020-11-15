@@ -20,7 +20,15 @@ namespace SpaceInvaders.Utils
         /// Set a limit of calling this action, -1 is unlimited 
         /// </summary>
         private int limitOfCall;
-        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TimedAction"/> class.
+        /// </summary>
+        /// <param name="couldown">The couldown.</param>
+        /// <param name="action">The action. <seealso cref="DoIfPossible"/></param>
+        /// <param name="isAuto">if set to <c>true</c>, automaticly do the action.</param>
+        /// <param name="readyOnStart">if set to <c>true</c> the action can be used after initialisation.</param>
+        /// <param name="limitOfCall">The limit of call. Destroy the action when raised </param>
         public TimedAction(double couldown, Action action, bool isAuto = false, bool readyOnStart = false, int limitOfCall = -1)
         {
             ready = readyOnStart;
@@ -56,6 +64,10 @@ namespace SpaceInvaders.Utils
             DoIfPossible();
         }
 
+        /// <summary>
+        /// Update the action timers
+        /// </summary>
+        /// <param name="deltaT">The delta t.</param>
         public void LoadTimer(double deltaT)
         {
             timer += deltaT;

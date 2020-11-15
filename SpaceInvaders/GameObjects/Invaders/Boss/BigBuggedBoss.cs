@@ -1,17 +1,21 @@
-﻿using SpaceInvaders.GameObjects.Invaders;
-using SpaceInvaders.Properties;
+﻿using SpaceInvaders.Properties;
 using SpaceInvaders.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace SpaceInvaders.GameObjects
+namespace SpaceInvaders.GameObjects.Invaders.Boss
 {
-    class BigBuggedBoss : AutoInvader
+    public class BigBuggedBoss : AutoInvader
     {
-        public BigBuggedBoss(Vecteur2D v1) : base(v1, 0, 200, new Vecteur2D(baseSpeed / 2, 5))
+        public BigBuggedBoss(Vecteur2D v1) : base(v1, 0, 300, new Vecteur2D(baseSpeed / 2, 5))
         {
 
+        }
+
+        public override int GetNumberOfParticles()
+        {
+            return base.GetNumberOfParticles() * 3;
         }
 
         public override Bitmap GetImage()
@@ -23,7 +27,7 @@ namespace SpaceInvaders.GameObjects
                 Resources.ship7,
                 Resources.ship8,
                 Resources.ship9 }.GetRandom().InvertColor();
-            return Utils.Utils.ResizeImage(img, (int) Size.X, (int) Size.Y);
+            return Utils.Utils.ResizeImage(img, (int)Size.X, (int)Size.Y);
         }
 
         public override void Init(Game gameInstance)
@@ -33,7 +37,7 @@ namespace SpaceInvaders.GameObjects
             {
                 AddNewAction(new TimedAction(0.2, () =>
                 {
-                    
+
                     new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(20, 100),
                         null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(-Math.Cos(inc % Math.PI), 0));
 
@@ -41,20 +45,18 @@ namespace SpaceInvaders.GameObjects
                         null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(Math.Cos(inc % Math.PI), 0));
 
 
-                    new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(-120, baseBulletSpeed), 
+                    new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(-120, baseBulletSpeed),
                         null, (obj, deltaT, inc) => new Vecteur2D(Math.Cos(inc), 0) + obj.Position);
 
                     new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), new Vecteur2D(120, baseBulletSpeed),
                         null, (obj, deltaT, inc) => new Vecteur2D(Math.Cos(inc), 0) + obj.Position);
 
-                // Target the player
-                Vecteur2D newBulletPosition = Position + new Vecteur2D(- Size.X /2, Size.Y / 2);
-                Vecteur2D newBulletSpeed = (Game.game.Mode.Player.Position - newBulletPosition).SetNewMagnitude(baseBulletSpeed);
-                new LaserBall(newBulletPosition, newBulletSpeed);
+                    // Target the player
+                    Vecteur2D newBulletPosition = Position + new Vecteur2D(-Size.X / 2, Size.Y / 2);
+                    new LaserBall(newBulletPosition, Vecteur2D.FromTargetObject(newBulletPosition, Game.game.Mode.Player.Position, baseBulletSpeed));
 
-                Vecteur2D newBulletPosition2 = Position + new Vecteur2D(Size.X / 2, Size.Y / 2);
-                Vecteur2D newBulletSpeed2 = (Game.game.Mode.Player.Position - newBulletPosition2).SetNewMagnitude(baseBulletSpeed);
-                new LaserBall(newBulletPosition2, newBulletSpeed2);
+                    Vecteur2D newBulletPosition2 = Position + new Vecteur2D(Size.X / 2, Size.Y / 2);
+                    new LaserBall(newBulletPosition, Vecteur2D.FromTargetObject(newBulletPosition, Game.game.Mode.Player.Position, baseBulletSpeed));
 
 
                 }, true, false, 13));

@@ -37,7 +37,8 @@ namespace SpaceInvaders.GameObjects
             }, false, true));
         }
 
-        int speedMax = 150;
+        private int speedMax = 150;
+        private bool invicible = false;
 
         private TimedAction megaShoot { get; set; }
 
@@ -54,6 +55,12 @@ namespace SpaceInvaders.GameObjects
             if (megaShoot.DoIfPossible()) Power--;
         }
 
+#if DEBUG
+        public void ToggleInvicibility()
+        {
+            invicible = !invicible;
+        }
+#endif
         public bool ApplyHealBonus()
         {
             if (HP == 3) return false;
@@ -61,10 +68,15 @@ namespace SpaceInvaders.GameObjects
             LoadSprite();
             return true;
         }
-
+        public bool ApplyAttackSpeedBonus()
+        {
+            if (Attack.Couldown / 2 == 0.1) return false;
+            Attack.Couldown = Math.Max(0.1, Attack.Couldown / 2);
+            return true;
+        }
 
         int bullet = 1;
-        public TimedAction Attack { get; set; }
+        private TimedAction Attack { get; set; }
 
         /// <summary>
         /// Adds a bullet from a bonus.
@@ -103,7 +115,18 @@ namespace SpaceInvaders.GameObjects
             if (!(Game.game.Mode is NormalMode)) Speed = new Vecteur2D(Speed.X, speedMax);
         }
 
-
+        public override void OnHit(Laser laser)
+        {
+            if (invicible) return;
+            base.OnHit(laser);
+            invicible = true;
+            AddNewAction(new TimedAction(1, () => { invicible = false; }, true, false, 1));
+        }
+        public override void DestroyPixel(Vecteur2D position)
+        {
+            if (invicible) return;
+            base.DestroyPixel(position);
+        }
         protected void Shoot()
         {
             Attack.DoIfPossible();

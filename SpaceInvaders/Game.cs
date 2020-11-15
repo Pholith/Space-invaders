@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace SpaceInvaders
 {
-    class Game
+    public class Game
     {
 
         #region GameObjects management
@@ -154,7 +154,6 @@ namespace SpaceInvaders
         }
 
         private bool paused = false;
-
         /// <summary>
         /// Update game
         /// </summary>
@@ -168,6 +167,7 @@ namespace SpaceInvaders
             }
             if (paused) return;
 
+            #region Objects managment
             // add new game objects
             foreach (var obj in pendingNewGameObjects)
             {
@@ -184,6 +184,7 @@ namespace SpaceInvaders
 
             // remove dead objects
             gameObjects.RemoveWhere(gameObject => !gameObject.IsAlive());
+            #endregion
 
             Mode.Update(deltaT);
             if (Mode.Ended)
@@ -198,10 +199,5 @@ namespace SpaceInvaders
         }
         #endregion
 
-
-        #region Managers
-
-
-        #endregion
     }
 }

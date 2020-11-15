@@ -10,7 +10,7 @@ namespace SpaceInvaders.GameObjects
     /// </summary>
     /// <seealso cref="Ship" />
     /// <seealso cref="AutoInvader" />
-    class Laser : GameObject, IImage
+    public class Laser : GameObject, IImage
     {
 
         public int Damage { get; private set; }
@@ -19,7 +19,7 @@ namespace SpaceInvaders.GameObjects
 
 
         public static readonly int baseSpeed = 250;
-        public Laser(Vecteur2D v1, Vecteur2D speed, Tag tag = Tag.Invader, double ttl = 20) : base(v1)
+        public Laser(Vecteur2D v1, Vecteur2D speed, Tag tag = Tag.Invader, double ttl = 15) : base(v1)
         {
             Speed = speed;
             Damage = 1;
@@ -47,7 +47,7 @@ namespace SpaceInvaders.GameObjects
             return go.GetTag() != Tag && go.GetTag() != Tag.Invincible;
         }
 
-        private double ttl; // tiem to live
+        private double ttl; // time to live
         private double ttlCount = 0;
         public override void Update(Game gameInstance, double deltaT)
         {
@@ -58,17 +58,12 @@ namespace SpaceInvaders.GameObjects
 
             foreach (var obj in gameInstance.gameObjects)
             {
-                if (obj == this) continue;
-                if (!CanHit(obj)) continue;
+                if (obj == this || !CanHit(obj)) continue;
                 if (Game.game.Mode is ManicShooter && obj is Laser) continue;
 
                 // If the squares intersect
-                if (!(obj.GetAnchorX() > GetAnchorX() + Size.X ||
-                    obj.GetAnchorY() > GetAnchorY() + Size.Y ||
-                    GetAnchorX() > obj.GetAnchorX() + obj.Size.X ||
-                    GetAnchorY() > obj.GetAnchorY() + obj.Size.Y))
+                if (AreSquareSuperposing(obj))
                 {
-
                     if (obj is Laser)
                     {
                         obj.OnHit(this);

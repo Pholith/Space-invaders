@@ -4,7 +4,7 @@
     /// A living Entity is a gameobject with HPs.
     /// </summary>
     /// <seealso cref="GameObject" />
-    class LivingEntity : GameObject
+    public class LivingEntity : GameObject
     {
 
         /// <summary>

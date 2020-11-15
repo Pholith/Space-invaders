@@ -73,14 +73,15 @@
     <Compile Include="GameObjects\Bonus\HealBonus.cs" />
     <Compile Include="GameObjects\Bonus\MegaShoot.cs" />
     <Compile Include="GameObjects\DeathParticle.cs" />
-    <Compile Include="GameObjects\Invaders\BigBuggedBoss.cs" />
+    <Compile Include="GameObjects\Invaders\Boss\BigBuggedBoss.cs" />
     <Compile Include="GameObjects\Bunker.cs" />
-    <Compile Include="GameObjects\Invaders\BulletSpammerBoss.cs" />
+    <Compile Include="GameObjects\Invaders\Boss\BulletSpammerBoss.cs" />
+    <Compile Include="GameObjects\Invaders\Boss\SmartBoss.cs" />
     <Compile Include="GameObjects\Invaders\InvaderBlock.cs" />
     <Compile Include="GameObjects\Invaders\Invader.cs" />
-    <Compile Include="GameObjects\Invaders\UltimateBoss.cs" />
+    <Compile Include="GameObjects\Invaders\Boss\UltimateBoss.cs" />
     <Compile Include="GameObjects\Projectiles\LaserBall.cs" />
-    <Compile Include="GameObjects\Invaders\InvaderBigBoss.cs" />
+    <Compile Include="GameObjects\Invaders\Boss\BigShip4Boss.cs" />
     <Compile Include="GameObjects\LivingEntity.cs" />
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
@@ -196,15 +197,14 @@
     <Resource Include="Resources\shootball.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\smartBoss.png" />
     <Resource Include="Resources\bonusMegaShoot.png" />
     <Resource Include="Resources\bonusHealth.png" />
     <Resource Include="Resources\bulletSpammer.png" />
     <Content Include="Resources\playership.png" />
     <Resource Include="Resources\shipTest.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Components\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

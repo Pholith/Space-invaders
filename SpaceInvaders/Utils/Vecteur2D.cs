@@ -134,11 +134,17 @@ namespace SpaceInvaders
         {
             return new Vecteur2D(Math.Round(X), Math.Round(Y));
         }
+
+        
+        public static Vecteur2D FromTargetObject(Vecteur2D srcPosition, Vecteur2D targetPosition, double speed)
+        {
+            return (targetPosition - srcPosition).SetNewMagnitude(speed);
+        }
+
         public override int GetHashCode()
         {
             return (int)(X + Y);
         }
-
 
     }
 }

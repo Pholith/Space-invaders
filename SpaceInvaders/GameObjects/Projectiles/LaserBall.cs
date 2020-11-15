@@ -5,7 +5,7 @@ namespace SpaceInvaders.GameObjects
 {
     class LaserBall : Laser
     {
-        public LaserBall(Vecteur2D position, Vecteur2D speed, Vecteur2D acceleration = null, DelegateMovement del = null, Tag tag = Tag.Invader, bool overrideMovement = false) : base(position, speed, tag)
+        public LaserBall(Vecteur2D position, Vecteur2D speed, Vecteur2D acceleration = null, DelegateMovement del = null, Tag tag = Tag.Invader, bool overrideMovement = false, int ttl = 15) : base(position, speed, tag, ttl:ttl)
         {
             if (acceleration is null) acceleration = Vecteur2D.zero;
             Acceleration = acceleration;
@@ -14,7 +14,7 @@ namespace SpaceInvaders.GameObjects
         }
 
         /// <summary>
-        /// Describe a function to manage the movements of the balls without need to create a class for a new pattern
+        /// Describe a function to manage the movements of the balls without need to create a class for a new pattern.
         /// </summary>
         /// <param name="ball">The laser object</param>
         /// <param name="deltaT">The deltaT of the Update</param>
