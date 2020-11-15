@@ -12,7 +12,7 @@ Les fonctionnalités de bases sont toutes développés et de nombreux ajouts ont
 - Système d'invisincibilité du vaisseau après un dégat
 - Système de score
 - Particules d'explosion
-- Menu de sélection de mode de jeu![](Images/screenMenu.png "")
+- Menu de sélection de mode de jeu
 - Mode de jeu "manic shooter"
 
 Le mode Manic Shooter est un nouveau mode de jeu qui change complètement l'aspect du jeu.
@@ -23,8 +23,8 @@ Dans le projet, le mode apporte:
  - Possibilités de se déplacer en haut et en bas
  - Mode de jeu sans fin avec un système de vagues d'ennemis
  - Les invaders sont autonomes
- - Le système de projectiles ainsi que les calculs sur les vecteurs sont beaucoup plus complexes pour permettre des patterns projectiles très originaux ![](Images/screenBullets.png "")
- - De nombreux boss avec des comportements différents, et des attaques uniques ![](Images/screenSmartBoss.png "")![](Images/screenSpammer.png "")
+ - Le système de projectiles ainsi que les calculs sur les vecteurs sont beaucoup plus complexes pour permettre des patterns projectiles très originaux ![](/Images/screenBullets.png "")
+ - De nombreux boss avec des comportements différents, et des attaques uniques ![](/Images/screenSmartBoss.png "")![](/Images/screenSpammer.png "")
 
 ## Structure du programme
 ![](model.jpg "Schéma UML")
