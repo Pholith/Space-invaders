@@ -24,9 +24,9 @@ Dans le projet, le mode apporte:
  - Mode de jeu sans fin avec un système de vagues d'ennemis
  - Les invaders sont autonomes
  - Le système de projectiles ainsi que les calculs sur les vecteurs sont beaucoup plus complexes pour permettre des patterns projectiles très originaux !
- [](Images/screenBullets.gif)     
+ ![](Images/screenBullets.gif)     
  - De nombreux boss avec des comportements différents, et des attaques uniques ! 
- [](Images/screenSmartBoss.gif)  ![](Images/screenSpammer.gif)
+ ![](Images/screenSmartBoss.gif)  ![](Images/screenSpammer.gif)
 
 ## Structure du programme
 ![Schéma UML](model.jpg)
