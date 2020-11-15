@@ -23,11 +23,11 @@ Dans le projet, le mode apporte:
  - Possibilités de se déplacer en haut et en bas
  - Mode de jeu sans fin avec un système de vagues d'ennemis
  - Les invaders sont autonomes
- - Le système de projectiles ainsi que les calculs sur les vecteurs sont beaucoup plus complexes pour permettre des patterns projectiles très originaux ![](/Images/screenBullets.png "")
- - De nombreux boss avec des comportements différents, et des attaques uniques ![](/Images/screenSmartBoss.png "")![](/Images/screenSpammer.png "")
+ - Le système de projectiles ainsi que les calculs sur les vecteurs sont beaucoup plus complexes pour permettre des patterns projectiles très originaux ![](Images/screenBullets.gif)
+ - De nombreux boss avec des comportements différents, et des attaques uniques ![](Images/screenSmartBoss.gif)![](Images/screenSpammer.gif)
 
 ## Structure du programme
-![](model.jpg "Schéma UML")
+![Schéma UML](model.jpg)
 Voici un diagramme UML non exaustif du projet, il présente les aspects principaux et la hierarchie des classes.
 
 Le programme est lancé par **Program**, qui lance le **Menu** de sélection de mode pour lancer la partie.
