@@ -49,7 +49,7 @@ namespace SpaceInvaders.GameModes
         {
             // This predefined list is usefull to have one and only one time every boss, I add before some easy waves to get bonus
             List<int> easyWaves = new List<int>() { 0, 1, 2 };
-            List<int> hardWaves = new List<int>() { 3, 3, 4, 5, 6, 7 };
+            List<int> hardWaves = new List<int>() { 3, 3, 3, 4, 5, 6, 7 };
             easyWaves.Shuffle();
             hardWaves.Shuffle();
             predefinedWaves = new List<int>();
@@ -77,6 +77,8 @@ namespace SpaceInvaders.GameModes
                 int waveToSpawn;
                 if (predefinedWaves.Count <= waveCreated) waveToSpawn = Game.game.random.Next(3, 8);
                 else waveToSpawn = predefinedWaves[waveCreated];
+
+                //waveToSpawn = 3;
 
                 AddNewAction((TimedAction) map[waveToSpawn].Clone());
                 waveCreated++;
@@ -135,36 +137,40 @@ namespace SpaceInvaders.GameModes
                 {
                     new AutoInvader(new Vecteur2D(0, 20), 0, speed: new Vecteur2D(Invader.baseSpeed * 2, 20));
                     new AutoInvader(new Vecteur2D(Invader.baseSize, 20), 0, speed: new Vecteur2D(Invader.baseSpeed * 2, 20));
-                    AddNewAction(new TimedAction(3, () => new BigBuggedBoss(new Vecteur2D(0, 50)), true, false, 1));
+                    AddNewAction(new TimedAction(3, () => {
+                        spawnLocked = true;
+                        new BigBuggedBoss(new Vecteur2D(0, 50));
+                    }, true, false, 1));
+                    
                 }
                 else
                 {
                     for (int i = 0; i < (Game.game.gameSize.Width - Invader.baseSize) / Invader.baseSize; i++)
                     {
-                        new AutoInvader(new Vecteur2D(Invader.baseSize + i * Invader.baseSize, 0), 0, hp: 2, speed: new Vecteur2D(0, Invader.baseSpeed));
+                        new AutoInvader(new Vecteur2D(Invader.baseSize + i * Invader.baseSize, 0), 0, hp: 3, speed: new Vecteur2D(0, Invader.baseSpeed));
                     }
                 }
             }, true, true, 1));
 
-            map.Add(4, new TimedAction(8, () =>
+            map.Add(4, new TimedAction(2, () =>
             {
                 spawnLocked = true;
                 new BigShip4Boss(new Vecteur2D(0, 50));
-            }, true, false, 2));
+            }, true, false, 1));
 
-            map.Add(5, new TimedAction(3, () =>
+            map.Add(5, new TimedAction(2, () =>
             {
                 spawnLocked = true;
                 new UltimateBoss(new Vecteur2D(Invader.baseSize, Invader.baseSize * 2));
             }, true, false, 1));
 
-            map.Add(6, new TimedAction(3, () =>
+            map.Add(6, new TimedAction(2, () =>
             {
                 spawnLocked = true;
                 new BulletSpammerBoss(new Vecteur2D(Game.game.gameSize.Width / 2, Game.game.gameSize.Height / 4));
             }, true, false, 1));
 
-            map.Add(7, new TimedAction(3, () =>
+            map.Add(7, new TimedAction(2, () =>
             {
                 spawnLocked = true;
                 new SmartBoss(new Vecteur2D(Game.game.gameSize.Width / 2, Invader.baseSize * 2));

@@ -1,4 +1,5 @@
 ﻿using SpaceInvaders.GameModes;
+using SpaceInvaders.GameObjects;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -74,7 +75,7 @@ namespace SpaceInvaders
         /// <summary>
         /// A shared simple font
         /// </summary>
-        public static Font defaultFont = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Regular);
+        public static Font defaultFont = new Font(FontFamily.GenericSansSerif, 16, FontStyle.Regular);
         #endregion
 
 
@@ -125,7 +126,7 @@ namespace SpaceInvaders
                 gameObject.Draw(this, g);
 
             if (paused) DrawTextSquare(g, "paused", 20, 10);
-            if (Mode.Ended) DrawTextSquare(g, Mode.Win ? "win" : "lose", 38, 15);
+            if (Mode.Ended) DrawTextSquare(g, Mode.Win ? "Win !" : "Game Over", 38, 15);
             Mode.Draw(g);
         }
 
@@ -166,6 +167,11 @@ namespace SpaceInvaders
                 ReleaseKey(Keys.P);
             }
             if (paused) return;
+
+            if (game.random.NextDouble() < 0.01)
+            {
+                new StarParticle(new Vecteur2D(game.random.Next(0, game.gameSize.Width), 0));
+            }
 
             #region Objects managment
             // add new game objects

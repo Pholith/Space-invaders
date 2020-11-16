@@ -33,7 +33,7 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
         public override void Init(Game gameInstance)
         {
             Size = new Vecteur2D(80, 80);
-            AddNewAction(new TimedAction(6, () =>
+            AddNewAction(new TimedAction(5, () =>
             {
                 AddNewAction(new TimedAction(0.2, () =>
                 {
@@ -45,12 +45,6 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
                         null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(Math.Cos(inc % Math.PI), 0));
 
 
-                    new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(-120, baseBulletSpeed),
-                        null, (obj, deltaT, inc) => new Vecteur2D(Math.Cos(inc), 0) + obj.Position);
-
-                    new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), new Vecteur2D(120, baseBulletSpeed),
-                        null, (obj, deltaT, inc) => new Vecteur2D(Math.Cos(inc), 0) + obj.Position);
-
                     // Target the player
                     Vecteur2D newBulletPosition = Position + new Vecteur2D(-Size.X / 2, Size.Y / 2);
                     new LaserBall(newBulletPosition, Vecteur2D.FromTargetObject(newBulletPosition, Game.game.Mode.Player.Position, baseBulletSpeed));
@@ -59,8 +53,22 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
                     new LaserBall(newBulletPosition, Vecteur2D.FromTargetObject(newBulletPosition, Game.game.Mode.Player.Position, baseBulletSpeed));
 
 
-                }, true, false, 13));
+                }, true, false, 10));
             }, true));
+            AddNewAction(new TimedAction(1.5, () =>
+            {
+                int offSet = 10;
+                for (int i = -offSet; i <= offSet; i+= offSet * 2)
+                {
+                    Vecteur2D initPosition = new Vecteur2D(i, 0);
+                    new LaserBall(initPosition, Vecteur2D.FromTargetObject(initPosition, Game.game.Mode.Player.Position, baseBulletSpeed));
+                }
+                for (int i = -offSet; i <= offSet; i += offSet * 2)
+                {
+                    Vecteur2D initPosition = new Vecteur2D(Game.game.gameSize.Width - i, 0);
+                    new LaserBall(initPosition, Vecteur2D.FromTargetObject(initPosition, Game.game.Mode.Player.Position, baseBulletSpeed));
+                }
+            }, true, false));
         }
 
         public override void Draw(Game gameInstance, Graphics graphics)

@@ -55,12 +55,13 @@ namespace SpaceInvaders.GameObjects
             if (megaShoot.DoIfPossible()) Power--;
         }
 
-#if DEBUG
         public void ToggleInvicibility()
         {
             invicible = !invicible;
+            if (invicible) SetCustomColor(Color.DeepSkyBlue);
+            else SetCustomColor(Game.foregroundColor);
+            LoadSprite();
         }
-#endif
         public bool ApplyHealBonus()
         {
             if (HP == 3) return false;
@@ -119,8 +120,8 @@ namespace SpaceInvaders.GameObjects
         {
             if (invicible) return;
             base.OnHit(laser);
-            invicible = true;
-            AddNewAction(new TimedAction(1, () => { invicible = false; }, true, false, 1));
+            if (!invicible) ToggleInvicibility();            
+            AddNewAction(new TimedAction(1, () => { ToggleInvicibility(); }, true, false, 1));
         }
         public override void DestroyPixel(Vecteur2D position)
         {
@@ -136,7 +137,6 @@ namespace SpaceInvaders.GameObjects
         {
             return Resources.playership;
         }
-
 
         public override void Update(Game gameInstance, double deltaT)
         {

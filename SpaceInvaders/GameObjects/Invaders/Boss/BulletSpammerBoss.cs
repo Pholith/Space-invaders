@@ -8,7 +8,7 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
 {
     public class BulletSpammerBoss : Invader
     {
-        public BulletSpammerBoss(Vecteur2D position) : base(position, 0, 800)
+        public BulletSpammerBoss(Vecteur2D position) : base(position, 0, 1000)
         {
 
         }

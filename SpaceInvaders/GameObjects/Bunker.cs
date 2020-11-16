@@ -26,7 +26,7 @@ namespace SpaceInvaders.GameObjects
 
         protected override int DestroyPixelSize()
         {
-            return base.DestroyPixelSize() / 2;
+            return 1;
         }
 
     }

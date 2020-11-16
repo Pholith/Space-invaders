@@ -8,7 +8,7 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
 {
     public class SmartBoss : Invader
     {
-        public SmartBoss(Vecteur2D position) : base(position, 0, 100)
+        public SmartBoss(Vecteur2D position) : base(position, 0, 200)
         {
 
         }
@@ -163,9 +163,9 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
             AddNewAction(new TimedAction(0.8, () =>
             {
                 new LaserBall(Position, Vecteur2D.zero, del: (LaserBall ball, double deltaT, double increment)
-                    => ball.Position + Vecteur2D.FromTargetObject(ball.Position, Game.game.Mode.Player.Position, baseBulletSpeed * 0.8) * deltaT, ttl: 6
+                    => ball.Position + Vecteur2D.FromTargetObject(ball.Position, Game.game.Mode.Player.Position, baseBulletSpeed) * deltaT, ttl: 6
                 ).SetCustomColor(Color.DarkOrange);
-            }, true, false, 5));
+            }, true, false, 6));
         }
         #endregion
     }

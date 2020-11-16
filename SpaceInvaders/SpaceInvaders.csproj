@@ -13,6 +13,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,7 +26,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -49,6 +49,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>playership.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -83,6 +86,7 @@
     <Compile Include="GameObjects\Projectiles\LaserBall.cs" />
     <Compile Include="GameObjects\Invaders\Boss\BigShip4Boss.cs" />
     <Compile Include="GameObjects\LivingEntity.cs" />
+    <Compile Include="GameObjects\StarParticle.cs" />
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +205,7 @@
     <Resource Include="Resources\bonusMegaShoot.png" />
     <Resource Include="Resources\bonusHealth.png" />
     <Resource Include="Resources\bulletSpammer.png" />
+    <Content Include="playership.ico" />
     <Content Include="Resources\playership.png" />
     <Resource Include="Resources\shipTest.png" />
   </ItemGroup>

@@ -7,18 +7,18 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
 {
     public class BigShip4Boss : AutoInvader
     {
-        public BigShip4Boss(Vecteur2D v1, Vecteur2D speed = null) : base(v1, 0, 90, speed)
+        public BigShip4Boss(Vecteur2D v1, Vecteur2D speed = null) : base(v1, 0, 300, speed)
         {
 
         }
         public override int GetNumberOfParticles()
         {
-            return base.GetNumberOfParticles() * 2;
+            return base.GetNumberOfParticles() * 3;
         }
         public override Bitmap GetImage()
         {
             Image img = Resources.ship4;
-            return Utils.Utils.ResizeImage(img, img.Width * 2, img.Height * 2);
+            return Utils.Utils.ResizeImage(img, img.Width * 3, img.Height * 3);
         }
 
         public override void Init(Game gameInstance)
@@ -38,14 +38,13 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
                     new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y), new Vecteur2D(-20, 100),
                         null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(-Math.Cos(inc % Math.PI), 0));
 
-
-                }, true, false, 10));
+                }, true, false, 5));
             }, true));
         }
 
         protected override int DestroyPixelSize()
         {
-            return base.DestroyPixelSize() / 2;
+            return base.DestroyPixelSize() / 3;
         }
     }
 }

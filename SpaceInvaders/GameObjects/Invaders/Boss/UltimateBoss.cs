@@ -12,7 +12,7 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
     /// <seealso cref="AutoInvader" />
     public class UltimateBoss : AutoInvader
     {
-        public UltimateBoss(Vecteur2D v1) : base(v1, 0, 600, new Vecteur2D(baseSpeed / 2, 0))
+        public UltimateBoss(Vecteur2D v1) : base(v1, 0, 700, new Vecteur2D(baseSpeed / 2, 0))
         {
 
         }
