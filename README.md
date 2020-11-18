@@ -76,3 +76,10 @@ Un système de verrouillage a aussi été mis en place pour empêcher une vague 
 ### Test et Debug
 Il a été difficile de tester tous les boss et debugger sans perdre trop de temps. J'ai principalement modifier le code de génération au fur et à mesure des tests. Il m'a aussi fallu ajouter des actions de debug sont listées [Ici](#contrôles). Une idée d'amélioration serait un fichier json de configuration pour gérer les vagues et autres paramètres.
 J'ai aussi créer des units tests pour tester de façon sûr les fonctions de **Vecteur2D**.
+
+
+## Quelques captures du jeu
+![](Images/screenGameplay1.gif)
+![](Images/screenGameplay2.gif)
+![](Images/screenGameplay3.gif)
+![](Images/screenGameplay4.gif)
