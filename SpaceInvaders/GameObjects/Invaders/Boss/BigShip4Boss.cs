@@ -23,7 +23,7 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
 
         public override void Init(Game gameInstance)
         {
-            AddNewAction(new TimedAction(14, () => new AutoInvader(Position, 4, 2, new Vecteur2D(baseSpeed * 5, 10)), true, false));
+            AddNewAction(new TimedAction(8, () => new AutoInvader(Position, 4, 2, new Vecteur2D(baseSpeed * 5, 10)), true, false));
 
             AddNewAction(new TimedAction(5, () =>
             {
@@ -38,7 +38,7 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
                     new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y), new Vecteur2D(-20, 100),
                         null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(-Math.Cos(inc % Math.PI), 0));
 
-                }, true, false, 5));
+                }, true, false, 8));
             }, true));
         }
 

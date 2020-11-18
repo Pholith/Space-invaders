@@ -83,3 +83,4 @@ J'ai aussi créer des units tests pour tester de façon sûr les fonctions de **
 ![](Images/screenGameplay2.gif)
 ![](Images/screenGameplay3.gif)
 ![](Images/screenGameplay4.gif)
+![](Images/screenDebug.gif)
