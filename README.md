@@ -1,5 +1,17 @@
 ﻿# Space-Invaders
 
+## Contrôles
+| Touche | Action                                          |
+|--------|-------------------------------------------------|
+| q      | Gauche                                          |
+| d      | Droite                                          |
+| z      | Haut (manic shooter seulement)                  |
+| s      | Bas (manic shooter seulement)                   |
+| p      | Pause                                           |
+| espace | Tirer des super tirs et relancer le jeu         |
+| i      | Rendre invincible le vaisseau (debug seulement) |
+| b      | Ajouter tous les bonus (debug seulement)        |
+
 ## Description du projet 
 Ce projet est la réalisation du jeu *Space-Invaders* avec plusieurs ajouts.
 La piste suivi est la piste bleu, autonomie de création du jeu.
@@ -45,21 +57,22 @@ L'interface **IImage** est aussi sous-représenté sur ce schéma pour la lisibi
 
 ## Problèmes rencontrés
 ### Gestion des trajectoires des balles
-TODO
+Pour rendre le jeu intéressant, il fallait que je puisse faire de nombreuses et différentes trajectoires de balles.
+Pour cela, 3 principaux ajouts ont été faits
+##### 1 - Physique et accélération
+Pour modifier la vitesse d'une balle après sa création, j'ai rajouté un vecteur d'accélération à **GameObject**, celui-ci s'ajoute à la vitesse à chaque appel, de la même manière que la vitesse s'ajoute à l'accélération.
+![](Images/screenAcceleration.gif)
+##### 2 - Mouvement délégués
+Pour ajouter de nouvelles possibilités comme notamment faire des mouvement de vagues aux balles, j'ai ajouté en paramètre d'une **LaserBall**, la possibilité de passer une fonction delegate, qui modifiera la position de la balle.
+![](Images/screenBound.gif)
+##### 3 - Fonctions utilitaires
+Toujours dans une optique de rajouter des possibilités de mouvement, j'ai rajouté des fonctions à **Vecteur2D** tel que **Rotate()**, qui permet de modifier la direction d'un vecteur, **FromTargetObject()** qui créer un vecteur ciblant automatiquement un objet, ou **FromAngle()** qui créer un vecteur depuis un angle et une vitesse. Cela facilite énormément la création d'attaques.
+![](Images/screenSlowWaves.gif)
+
 ### Gestion des vagues
-TODO
+La gestion des vagues a du être beaucoup revisiter pendant le projet, pour avoir un jeu différent à chaque partie mais équilibré. Elle utilise **TimedAction**, qui lui permet de lancer une vague toutes les x secondes. Il y a actuellement 7 vagues prédéfinies dans le jeu, qui sont rangés dans une collection. La solution choisie est de faire 2 listes (une de vagues faciles, une difficile), qui sont mélangés et ensuite concaténer pour obtenir les vagues du jeu.
+Un système de verrouillage a aussi été mis en place pour empêcher une vague d'apparaître lorsqu'un boss est en jeu.
+
 ### Test et Debug
-TODO 
-
-> Le barême ci-dessous est donné à titre indicatif et peut évoluer.
-> Le rapport est noté sur 20 : les éléments de notations sont:
-    > la qualité de la rédaction (y compris présententation, orthographe et grammaire)
-    > la présentation du sujet
-    > l’explication de la solution et
-    > l’analyse des problèmes rencontrés.
-
-> Le rapport fera au maximum 5 pages. Il devra contenir :
-> une description succincte du problème,
-> une description de la structure de votre programme permettant de comprendre son fonctionnement,
-
-> une présentation des problèmes soulevés par les tests : analyse de l’origine du problème, de la solution trouvée ou des > > > idées de solutions (si le problème n’a pas été résolu).
+Il a été difficile de tester tous les boss et debugger sans perdre trop de temps. J'ai principalement modifier le code de génération au fur et à mesure des tests. Il m'a aussi fallu ajouter des actions de debug sont listées [Ici](#contrôles). Une idée d'amélioration serait un fichier json de configuration pour gérer les vagues et autres paramètres.
+J'ai aussi créer des units tests pour tester de façon sûr les fonctions de **Vecteur2D**.

@@ -207,7 +207,6 @@
     <Resource Include="Resources\bulletSpammer.png" />
     <Content Include="playership.ico" />
     <Content Include="Resources\playership.png" />
-    <Resource Include="Resources\shipTest.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

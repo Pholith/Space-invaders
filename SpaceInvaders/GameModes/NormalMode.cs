@@ -1,4 +1,6 @@
-﻿using SpaceInvaders.GameObjects.Invaders;
+﻿using SpaceInvaders.GameObjects;
+using SpaceInvaders.GameObjects.Invaders;
+using System;
 using System.Linq;
 
 namespace SpaceInvaders.GameModes
@@ -12,7 +14,6 @@ namespace SpaceInvaders.GameModes
         {
             base.Init();
             new InvaderBlock();
-
         }
 
         public override void Update(double deltaT)
@@ -25,7 +26,5 @@ namespace SpaceInvaders.GameModes
             }
 
         }
-
-
     }
 }
