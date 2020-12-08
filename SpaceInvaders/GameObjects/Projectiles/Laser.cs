@@ -19,14 +19,14 @@ namespace SpaceInvaders.GameObjects
 
 
         public static readonly int baseSpeed = 300;
-        public Laser(Vecteur2D v1, Vecteur2D speed, Tag tag = Tag.Invader, double ttl = 15) : base(v1)
+        public Laser(Vector2 v1, Vector2 speed, Tag tag = Tag.Invader, double ttl = 15) : base(v1)
         {
             Speed = speed;
             Damage = 1;
             Tag = tag;
             this.ttl = ttl;
         }
-        public Laser(Vecteur2D v1, Tag tag = Tag.Invader) : this(v1, new Vecteur2D(0, -baseSpeed), tag)
+        public Laser(Vector2 v1, Tag tag = Tag.Invader) : this(v1, new Vector2(0, -baseSpeed), tag)
         {
 
         }
@@ -77,9 +77,9 @@ namespace SpaceInvaders.GameObjects
                     for (int i = (int)GetAnchorX(); i < GetAnchorX() + Size.X; i++)
                         for (int j = (int)GetAnchorY(); j < GetAnchorY() + Size.Y; j++)
                             // Destroy the pixel, apply hit and destroy the laser
-                            if (obj.IsPointOnPixel(new Vecteur2D(i, j)))
+                            if (obj.IsPointOnPixel(new Vector2(i, j)))
                             {
-                                obj.DestroyPixel(new Vecteur2D(i, j));
+                                obj.DestroyPixel(new Vector2(i, j));
                                 if (!hited)
                                 {
                                     Kill();

@@ -4,11 +4,11 @@ namespace SpaceInvaders.GameObjects
 {
     class StarParticle : GameObject
     {
-        public StarParticle(Vecteur2D position) : base(position)
+        public StarParticle(Vector2 position) : base(position)
         {
-            Speed = new Vecteur2D(0, 30);
+            Speed = new Vector2(0, 30);
             int randSize = Game.game.random.Next(2, 4);
-            Size = new Vecteur2D(randSize, randSize);
+            Size = new Vector2(randSize, randSize);
         }
 
         private readonly Brush color = new SolidBrush(Color.DarkGray);

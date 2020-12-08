@@ -8,7 +8,7 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
 {
     public class BigBuggedBoss : AutoInvader
     {
-        public BigBuggedBoss(Vecteur2D v1) : base(v1, 0, 300, new Vecteur2D(baseSpeed / 2, 5))
+        public BigBuggedBoss(Vector2 v1) : base(v1, 0, 300, new Vector2(baseSpeed / 2, 5))
         {
 
         }
@@ -32,25 +32,25 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
 
         public override void Init(Game gameInstance)
         {
-            Size = new Vecteur2D(80, 80);
+            Size = new Vector2(80, 80);
             AddNewAction(new TimedAction(5, () =>
             {
                 AddNewAction(new TimedAction(0.2, () =>
                 {
 
-                    new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y / 2), new Vecteur2D(20, 100),
-                        null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(-Math.Cos(inc % Math.PI), 0));
+                    new LaserBall(Position + new Vector2(-Size.X / 2, Size.Y / 2), new Vector2(20, 100),
+                        null, (obj, deltaT, inc) => obj.Position + new Vector2(-Math.Cos(inc % Math.PI), 0));
 
-                    new LaserBall(Position + new Vecteur2D(Size.X / 2, Size.Y / 2), new Vecteur2D(-20, 100),
-                        null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(Math.Cos(inc % Math.PI), 0));
+                    new LaserBall(Position + new Vector2(Size.X / 2, Size.Y / 2), new Vector2(-20, 100),
+                        null, (obj, deltaT, inc) => obj.Position + new Vector2(Math.Cos(inc % Math.PI), 0));
 
 
                     // Target the player
-                    Vecteur2D newBulletPosition = Position + new Vecteur2D(-Size.X / 2, Size.Y / 2);
-                    new LaserBall(newBulletPosition, Vecteur2D.FromTargetObject(newBulletPosition, Game.game.Mode.Player.Position, baseBulletSpeed));
+                    Vector2 newBulletPosition = Position + new Vector2(-Size.X / 2, Size.Y / 2);
+                    new LaserBall(newBulletPosition, Vector2.FromTargetObject(newBulletPosition, Game.game.Mode.Player.Position, baseBulletSpeed));
 
-                    Vecteur2D newBulletPosition2 = Position + new Vecteur2D(Size.X / 2, Size.Y / 2);
-                    new LaserBall(newBulletPosition, Vecteur2D.FromTargetObject(newBulletPosition, Game.game.Mode.Player.Position, baseBulletSpeed));
+                    Vector2 newBulletPosition2 = Position + new Vector2(Size.X / 2, Size.Y / 2);
+                    new LaserBall(newBulletPosition, Vector2.FromTargetObject(newBulletPosition, Game.game.Mode.Player.Position, baseBulletSpeed));
 
 
                 }, true, false, 10));
@@ -60,13 +60,13 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
                 int offSet = 10;
                 for (int i = -offSet; i <= offSet; i+= offSet * 2)
                 {
-                    Vecteur2D initPosition = new Vecteur2D(i, 0);
-                    new LaserBall(initPosition, Vecteur2D.FromTargetObject(initPosition, Game.game.Mode.Player.Position, baseBulletSpeed));
+                    Vector2 initPosition = new Vector2(i, 0);
+                    new LaserBall(initPosition, Vector2.FromTargetObject(initPosition, Game.game.Mode.Player.Position, baseBulletSpeed));
                 }
                 for (int i = -offSet; i <= offSet; i += offSet * 2)
                 {
-                    Vecteur2D initPosition = new Vecteur2D(Game.game.gameSize.Width - i, 0);
-                    new LaserBall(initPosition, Vecteur2D.FromTargetObject(initPosition, Game.game.Mode.Player.Position, baseBulletSpeed));
+                    Vector2 initPosition = new Vector2(Game.game.gameSize.Width - i, 0);
+                    new LaserBall(initPosition, Vector2.FromTargetObject(initPosition, Game.game.Mode.Player.Position, baseBulletSpeed));
                 }
             }, true, false));
         }
@@ -75,16 +75,16 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
         {
 
             Image sprite = GetImage();
-            Size = new Vecteur2D(sprite.Width, sprite.Height);
+            Size = new Vector2(sprite.Width, sprite.Height);
             graphics.DrawImage(sprite, GetAnchorX(), GetAnchorY(), sprite.Width, sprite.Height);
         }
 
-        public override bool IsPointOnPixel(Vecteur2D position)
+        public override bool IsPointOnPixel(Vector2 position)
         {
             return IsPointSuperposingSquare(position);
         }
 
-        public override void DestroyPixel(Vecteur2D position)
+        public override void DestroyPixel(Vector2 position)
         {
             return;
         }

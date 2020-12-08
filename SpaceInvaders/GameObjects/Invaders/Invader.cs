@@ -20,10 +20,10 @@ namespace SpaceInvaders.GameObjects.Invaders
         /// <param name="position">The position.</param>
         /// <param name="invaderType">The skin of the invader.</param>
         /// <param name="hp">The hp.</param>
-        public Invader(Vecteur2D position, int invaderType = 0, int hp = 1) : base(position, hp)
+        public Invader(Vector2 position, int invaderType = 0, int hp = 1) : base(position, hp)
         {
             this.invaderType = invaderType;
-            Speed = new Vecteur2D(baseSpeed, 0);
+            Speed = new Vector2(baseSpeed, 0);
 
         }
 
@@ -32,7 +32,7 @@ namespace SpaceInvaders.GameObjects.Invaders
             base.Init(gameInstance);
             AddNewAction(new TimedAction(6 + gameInstance.random.NextDouble() * 10, () =>
             {
-                if (shoot == null || !shoot.IsAlive()) shoot = new Laser(Position + new Vecteur2D(0, Size.Y), new Vecteur2D(0, baseBulletSpeed));
+                if (shoot == null || !shoot.IsAlive()) shoot = new Laser(Position + new Vector2(0, Size.Y), new Vector2(0, baseBulletSpeed));
             }, true));
 
         }
@@ -80,11 +80,11 @@ namespace SpaceInvaders.GameObjects.Invaders
         /// </summary>
         public void SwitchDirection()
         {
-            Position = new Vecteur2D(Position.X, GetAnchorY() + Size.Y + 20);
-            Speed = new Vecteur2D(-Speed.X, Speed.Y);
+            Position = new Vector2(Position.X, GetAnchorY() + Size.Y + 20);
+            Speed = new Vector2(-Speed.X, Speed.Y);
             // Increase the speed 
             int amount = 10;
-            Speed = new Vecteur2D(Speed.X + ((Speed.X > 0) ? amount : -amount), Speed.Y);
+            Speed = new Vector2(Speed.X + ((Speed.X > 0) ? amount : -amount), Speed.Y);
 
         }
 

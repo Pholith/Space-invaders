@@ -10,7 +10,7 @@ namespace SpaceInvaders.GameObjects
     /// <seealso cref="InvaderBlock" />
     public class AutoInvader : Invader
     {
-        public AutoInvader(Vecteur2D position, int invaderType = 0, int hp = 1, Vecteur2D speed = null) : base(position, invaderType, hp)
+        public AutoInvader(Vector2 position, int invaderType = 0, int hp = 1, Vector2 speed = null) : base(position, invaderType, hp)
         {
             if (!(speed is null)) Speed = speed;
         }

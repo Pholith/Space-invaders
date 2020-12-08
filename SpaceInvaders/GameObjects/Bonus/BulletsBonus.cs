@@ -5,7 +5,7 @@ namespace SpaceInvaders.GameObjects.Bonus
 {
     class BulletsBonus : Bonus
     {
-        public BulletsBonus(Vecteur2D position) : base(position)
+        public BulletsBonus(Vector2 position) : base(position)
         {
 
         }

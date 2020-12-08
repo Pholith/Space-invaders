@@ -8,7 +8,7 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
 {
     public class SmartBoss : Invader
     {
-        public SmartBoss(Vecteur2D position) : base(position, 0, 200)
+        public SmartBoss(Vector2 position) : base(position, 0, 200)
         {
 
         }
@@ -42,7 +42,7 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
             if (IsEnemyLaserInFrontOfMe())
             {
                 double newSpeedX = 0;
-                if (Speed == Vecteur2D.zero)
+                if (Speed == Vector2.zero)
                 {
                     if (IsLeftFromPlayer()) newSpeedX = -speed;
                     else newSpeedX = speed;
@@ -51,9 +51,9 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
                 if (IsTooMuchOnRight()) newSpeedX = -speed * 1.5;
 
                 // Only change direction if boss is on the limits or if the boss was immobile
-                if (newSpeedX != 0) Speed = new Vecteur2D(newSpeedX, 0);
+                if (newSpeedX != 0) Speed = new Vector2(newSpeedX, 0);
             }
-            else Speed = Vecteur2D.zero;
+            else Speed = Vector2.zero;
 
         }
         public override void Draw(Game gameInstance, Graphics graphics)
@@ -65,7 +65,7 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
         }
         public override void Init(Game gameInstance)
         {
-            Speed = Vecteur2D.zero; // This boss don't move like a normal invader
+            Speed = Vector2.zero; // This boss don't move like a normal invader
 
             AddNewAction(new TimedAction(10, () =>
             {
@@ -125,11 +125,11 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
         {
             AddNewAction(new TimedAction(0.2, () =>
             {
-                new LaserBall(Position, new Vecteur2D(0, Laser.baseSpeed), del: (LaserBall ball, double deltaT, double increment)
-                   => new Vecteur2D(Math.Cos(increment), 0) + ball.Position
+                new LaserBall(Position, new Vector2(0, Laser.baseSpeed), del: (LaserBall ball, double deltaT, double increment)
+                   => new Vector2(Math.Cos(increment), 0) + ball.Position
                 );
-                new LaserBall(Position, new Vecteur2D(0, Laser.baseSpeed), del: (LaserBall ball, double deltaT, double increment)
-                   => new Vecteur2D(-Math.Cos(increment), 0) + ball.Position
+                new LaserBall(Position, new Vector2(0, Laser.baseSpeed), del: (LaserBall ball, double deltaT, double increment)
+                   => new Vector2(-Math.Cos(increment), 0) + ball.Position
                 );
             }, true, false, 20));
 
@@ -151,7 +151,7 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
                 for (int i = startAngle; i <= endAngle; i+= 5)
                 {
                     if (i > degreeSafeZone - safeZoneLarge && i < degreeSafeZone + safeZoneLarge) continue;
-                    new LaserBall(Position, Vecteur2D.FromAngle(i, baseBulletSpeed));
+                    new LaserBall(Position, Vector2.FromAngle(i, baseBulletSpeed));
                 }
             }, true, false, 10));
 
@@ -162,8 +162,8 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
         {
             AddNewAction(new TimedAction(0.8, () =>
             {
-                new LaserBall(Position, Vecteur2D.zero, del: (LaserBall ball, double deltaT, double increment)
-                    => ball.Position + Vecteur2D.FromTargetObject(ball.Position, Game.game.Mode.Player.Position, baseBulletSpeed) * deltaT, ttl: 6
+                new LaserBall(Position, Vector2.zero, del: (LaserBall ball, double deltaT, double increment)
+                    => ball.Position + Vector2.FromTargetObject(ball.Position, Game.game.Mode.Player.Position, baseBulletSpeed) * deltaT, ttl: 6
                 ).SetCustomColor(Color.DarkOrange);
             }, true, false, 6));
         }

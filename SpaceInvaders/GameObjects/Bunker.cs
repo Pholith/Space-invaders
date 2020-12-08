@@ -9,7 +9,7 @@ namespace SpaceInvaders.GameObjects
     /// </summary>
     public class Bunker : LivingEntity, IImage
     {
-        public Bunker(Vecteur2D v1) : base(v1, -1)
+        public Bunker(Vector2 v1) : base(v1, -1)
         {
 
         }

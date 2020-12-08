@@ -9,9 +9,9 @@ namespace SpaceInvaders.GameObjects.Bonus
     /// <seealso cref="GameObject" />
     abstract class Bonus : GameObject, IImage
     {
-        public Bonus(Vecteur2D position, Vecteur2D speed = null) : base(position)
+        public Bonus(Vector2 position, Vector2 speed = null) : base(position)
         {
-            if (speed is null) Speed = new Vecteur2D(0, 100);
+            if (speed is null) Speed = new Vector2(0, 100);
             else Speed = speed;
         }
 

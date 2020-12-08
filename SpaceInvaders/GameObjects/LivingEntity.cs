@@ -12,7 +12,7 @@
         /// </summary>
         /// <param name="v1"> Position of the bunker </param>
         /// <param name="hP"> Amount of HP (-1 for infinite) .</param>
-        public LivingEntity(Vecteur2D v1, int hP) : base(v1)
+        public LivingEntity(Vector2 v1, int hP) : base(v1)
         {
             HP = hP;
             BaseHP = hP;

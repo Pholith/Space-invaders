@@ -5,9 +5,9 @@ namespace SpaceInvaders.GameObjects
 {
     class LaserBall : Laser
     {
-        public LaserBall(Vecteur2D position, Vecteur2D speed, Vecteur2D acceleration = null, DelegateMovement del = null, Tag tag = Tag.Invader, bool overrideMovement = false, int ttl = 15) : base(position, speed, tag, ttl:ttl)
+        public LaserBall(Vector2 position, Vector2 speed, Vector2 acceleration = null, DelegateMovement del = null, Tag tag = Tag.Invader, bool overrideMovement = false, int ttl = 15) : base(position, speed, tag, ttl:ttl)
         {
-            if (acceleration is null) acceleration = Vecteur2D.zero;
+            if (acceleration is null) acceleration = Vector2.zero;
             Acceleration = acceleration;
             this.del = del;
             this.overrideMovement = overrideMovement;
@@ -20,7 +20,7 @@ namespace SpaceInvaders.GameObjects
         /// <param name="deltaT">The deltaT of the Update</param>
         /// <param name="increment">A var auto-incremented that can be usefull for computing (incremented by 0.02) </param>
         /// <returns> return the new Position </returns>
-        public delegate Vecteur2D DelegateMovement(LaserBall ball, double deltaT, double increment);
+        public delegate Vector2 DelegateMovement(LaserBall ball, double deltaT, double increment);
         private DelegateMovement del = null;
 
 

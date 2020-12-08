@@ -5,7 +5,7 @@ namespace SpaceInvaders.GameObjects.Bonus
 {
     class HealBonus : Bonus
     {
-        public HealBonus(Vecteur2D position) : base(position)
+        public HealBonus(Vector2 position) : base(position)
         {
         }
 

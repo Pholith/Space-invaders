@@ -12,10 +12,10 @@ namespace SpaceInvaders
     public abstract class GameObject : IHitable, ITag
     {
 
-        public Vecteur2D Position { get; protected set; }
-        public Vecteur2D Speed { get; protected set; }
-        public Vecteur2D Acceleration { get; protected set; } = Vecteur2D.zero;
-        public Vecteur2D Size { get; protected set; } = Vecteur2D.zero;
+        public Vector2 Position { get; protected set; }
+        public Vector2 Speed { get; protected set; }
+        public Vector2 Acceleration { get; protected set; } = Vector2.zero;
+        public Vector2 Size { get; protected set; } = Vector2.zero;
 
         /// <summary>
         /// Allow to center images and hitbox test on the positionX
@@ -31,12 +31,12 @@ namespace SpaceInvaders
         }
 
 
-        public GameObject(Vecteur2D v1 = null)
+        public GameObject(Vector2 v1 = null)
         {
-            if (v1 is null) v1 = Vecteur2D.zero;
+            if (v1 is null) v1 = Vector2.zero;
 
             Position = v1;
-            Speed = Vecteur2D.zero;
+            Speed = Vector2.zero;
             Game.game.AddNewGameObject(this);
 
         }
@@ -91,7 +91,7 @@ namespace SpaceInvaders
             IImage go = this as IImage;
             sprite = go.GetImage().InvertColor();
             if (customColor != Color.Empty) sprite = Utils.Utils.RecolorImage(sprite, customColor);
-            Size = new Vecteur2D(sprite.Width, sprite.Height);
+            Size = new Vector2(sprite.Width, sprite.Height);
         }
 
         private Color customColor;
@@ -181,7 +181,7 @@ namespace SpaceInvaders
         /// <returns>
         ///   <c>true</c> if the point is superposing the square; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsPointSuperposingSquare(Vecteur2D position)
+        public bool IsPointSuperposingSquare(Vector2 position)
         {
             return !(position.X - GetAnchorX() >= Size.X ||
                 position.X - GetAnchorX() < 0 ||
@@ -210,7 +210,7 @@ namespace SpaceInvaders
         /// <returns>
         /// True if there is a superposition
         /// </returns>
-        public virtual bool IsPointOnPixel(Vecteur2D position)
+        public virtual bool IsPointOnPixel(Vector2 position)
         {
             if (!IsPointSuperposingSquare(position)) return false;
             return sprite.GetPixel((int)(position.X - GetAnchorX()), (int)(position.Y - GetAnchorY())).A == 255;
@@ -220,16 +220,16 @@ namespace SpaceInvaders
         /// Destroys the pixel at the given postion and pixels arround.
         /// </summary>
         /// <param name="position">The position of the pixel </param>
-        public virtual void DestroyPixel(Vecteur2D position)
+        public virtual void DestroyPixel(Vector2 position)
         {
             int size = DestroyPixelSize();
             for (int i = -size; i < size; i++)
             {
                 for (int j = -size; j < size; j++)
                 {
-                    Vecteur2D pixel = new Vecteur2D(position.X + i, position.Y + j);
+                    Vector2 pixel = new Vector2(position.X + i, position.Y + j);
                     if (IsPointSuperposingSquare(pixel) &&
-                        Vecteur2D.Distance(position, pixel) < size)
+                        Vector2.Distance(position, pixel) < size)
                         sprite.SetPixel((int)(position.X - GetAnchorX()) + i, (int)(position.Y - GetAnchorY()) + j, Color.Transparent);
                 }
             }

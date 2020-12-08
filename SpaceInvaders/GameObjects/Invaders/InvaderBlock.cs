@@ -19,7 +19,7 @@ namespace SpaceInvaders.GameObjects.Invaders
                 unitType = Game.game.random.Next(2, 9);
                 for (int j = 0; j < 9; j++)
                 {
-                    units.Add(new Invader(new Vecteur2D(j * size, i * size), unitType));
+                    units.Add(new Invader(new Vector2(j * size, i * size), unitType));
                 }
             }
         }

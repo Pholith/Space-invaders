@@ -10,7 +10,7 @@ namespace SpaceInvaders.GameObjects
     /// <seealso cref="Ship" />
     class PlayerShip : Ship
     {
-        public PlayerShip(Vecteur2D v) : base(v)
+        public PlayerShip(Vector2 v) : base(v)
         {
 
         }

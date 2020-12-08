@@ -14,25 +14,25 @@ namespace SpaceInvaders.GameObjects
     class Ship : LivingEntity, IImage
     {
 
-        public Ship(Vecteur2D v1) : base(v1, 3)
+        public Ship(Vector2 v1) : base(v1, 3)
         {
             Attack = AddNewAction(new TimedAction(1, () =>
             {
-                lastLaserFired = new Laser(Position + new Vecteur2D(0, -(Size.Y / 2)), Tag.Player);
+                lastLaserFired = new Laser(Position + new Vector2(0, -(Size.Y / 2)), Tag.Player);
             }));
 
             megaShoot = AddNewAction(new TimedAction(1.5, () =>
             {
-                new Laser(Position + new Vecteur2D(-10, 2), Tag.Player);
-                new Laser(Position + new Vecteur2D(-10, 2), Tag.Player);
-                new Laser(Position + new Vecteur2D(0, 0), Tag.Player);
-                new Laser(Position + new Vecteur2D(10, 2), Tag.Player);
-                new Laser(Position + new Vecteur2D(10, 2), Tag.Player);
+                new Laser(Position + new Vector2(-10, 2), Tag.Player);
+                new Laser(Position + new Vector2(-10, 2), Tag.Player);
+                new Laser(Position + new Vector2(0, 0), Tag.Player);
+                new Laser(Position + new Vector2(10, 2), Tag.Player);
+                new Laser(Position + new Vector2(10, 2), Tag.Player);
                 
                 int angleMegaShoot = 40;
                 for (int i = -angleMegaShoot; i <= angleMegaShoot; i += 3)
                 {
-                    new LaserBall(Position, Vecteur2D.FromAngle(-90 + i, Laser.baseSpeed), tag: Tag.Player);
+                    new LaserBall(Position, Vector2.FromAngle(-90 + i, Laser.baseSpeed), tag: Tag.Player);
                 }
             }, false, true));
         }
@@ -92,29 +92,29 @@ namespace SpaceInvaders.GameObjects
 
             else if (bullet > 3) Attack.Action += () =>
             {
-                new LaserBall(Position, new Vecteur2D(0, - Laser.baseSpeed / 2), tag: Tag.Player, del: (ball, deltaT, inc)
-                    => new Vecteur2D(Math.Cos(inc), 0) + ball.Position
+                new LaserBall(Position, new Vector2(0, - Laser.baseSpeed / 2), tag: Tag.Player, del: (ball, deltaT, inc)
+                    => new Vector2(Math.Cos(inc), 0) + ball.Position
                 ); ;
             };
-            else Attack.Action += () => { new LaserBall(Position, new Vecteur2D(-40 + bulletFixed * 20, - Laser.baseSpeed * 0.8), tag: Tag.Player); };
+            else Attack.Action += () => { new LaserBall(Position, new Vector2(-40 + bulletFixed * 20, - Laser.baseSpeed * 0.8), tag: Tag.Player); };
             bullet++;
             return true;
         }
         protected void MoveLeft()
         {
-            Speed = new Vecteur2D(-speedMax, Speed.Y);
+            Speed = new Vector2(-speedMax, Speed.Y);
         }
         protected void MoveRight()
         {
-            Speed = new Vecteur2D(speedMax, Speed.Y);
+            Speed = new Vector2(speedMax, Speed.Y);
         }
         protected void MoveUp()
         {
-            if (!(Game.game.Mode is NormalMode)) Speed = new Vecteur2D(Speed.X, -speedMax);
+            if (!(Game.game.Mode is NormalMode)) Speed = new Vector2(Speed.X, -speedMax);
         }
         protected void MoveDown()
         {
-            if (!(Game.game.Mode is NormalMode)) Speed = new Vecteur2D(Speed.X, speedMax);
+            if (!(Game.game.Mode is NormalMode)) Speed = new Vector2(Speed.X, speedMax);
         }
 
         public override void OnHit(Laser laser)
@@ -124,7 +124,7 @@ namespace SpaceInvaders.GameObjects
             if (!invicible) ToggleInvicibility();            
             AddNewAction(new TimedAction(1, () => { ToggleInvicibility(); }, true, false, 1));
         }
-        public override void DestroyPixel(Vecteur2D position)
+        public override void DestroyPixel(Vector2 position)
         {
             if (invicible) return;
             base.DestroyPixel(position);
@@ -148,16 +148,16 @@ namespace SpaceInvaders.GameObjects
             base.Update(gameInstance, deltaT);
 
             if (GetAnchorX() < 0)
-                Position = new Vecteur2D(Size.X / 2, Position.Y);
+                Position = new Vector2(Size.X / 2, Position.Y);
 
             if (GetAnchorX() + Size.X > Game.game.gameSize.Width)
-                Position = new Vecteur2D(Game.game.gameSize.Width - Size.X / 2, Position.Y);
+                Position = new Vector2(Game.game.gameSize.Width - Size.X / 2, Position.Y);
 
             if (GetAnchorY() < 0)
-                Position = new Vecteur2D(Position.X, Size.Y / 2);
+                Position = new Vector2(Position.X, Size.Y / 2);
 
             if (GetAnchorY() + Size.Y > Game.game.gameSize.Height)
-                Position = new Vecteur2D(Position.X, Game.game.gameSize.Height - Size.Y / 2);
+                Position = new Vector2(Position.X, Game.game.gameSize.Height - Size.Y / 2);
 
         }
 

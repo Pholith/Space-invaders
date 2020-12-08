@@ -6,7 +6,7 @@ namespace SpaceInvaders.GameObjects.Bonus
 {
     class AttackSpeedBonus : Bonus
     {
-        public AttackSpeedBonus(Vecteur2D position) : base(position)
+        public AttackSpeedBonus(Vector2 position) : base(position)
         {
 
         }

@@ -134,7 +134,7 @@ namespace SpaceInvaders
         {
             Font f = new Font(FontFamily.GenericSansSerif, fontSize, FontStyle.Regular);
             SizeF textSize = g.MeasureString(text, f);
-            Vecteur2D pausePosition = new Vecteur2D(gameSize.Width / 2 - textSize.Width / 2, gameSize.Height / 2 - textSize.Height / 2);
+            Vector2 pausePosition = new Vector2(gameSize.Width / 2 - textSize.Width / 2, gameSize.Height / 2 - textSize.Height / 2);
             Rectangle rect = new Rectangle((int)pausePosition.X - padding, (int)pausePosition.Y - padding, (int)textSize.Width + padding * 2, (int)textSize.Height + padding * 2);
 
             g.FillRectangle(whitePen.Brush, rect);
@@ -170,7 +170,7 @@ namespace SpaceInvaders
 
             if (game.random.NextDouble() < 0.01)
             {
-                new StarParticle(new Vecteur2D(game.random.Next(0, game.gameSize.Width), 0));
+                new StarParticle(new Vector2(game.random.Next(0, game.gameSize.Width), 0));
             }
 
             #region Objects managment

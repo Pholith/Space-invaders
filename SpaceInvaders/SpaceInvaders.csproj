@@ -103,7 +103,7 @@
     <Compile Include="Utils\TimedAction.cs" />
     <Compile Include="Utils\IImage.cs" />
     <Compile Include="Utils\Utils.cs" />
-    <Compile Include="Utils\Vecteur2D.cs" />
+    <Compile Include="Utils\Vector2.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -22,10 +22,10 @@ namespace SpaceInvaders.GameModes
 
         public virtual void Init()
         {
-            Player = new PlayerShip(new Vecteur2D(Game.game.gameSize.Width / 2, Game.game.gameSize.Height - 50));
+            Player = new PlayerShip(new Vector2(Game.game.gameSize.Width / 2, Game.game.gameSize.Height - 50));
 
-            new Bunker(new Vecteur2D(Game.game.gameSize.Width / 3, Game.game.gameSize.Height - 100));
-            new Bunker(new Vecteur2D(Game.game.gameSize.Width / 1.5, Game.game.gameSize.Height - 100));
+            new Bunker(new Vector2(Game.game.gameSize.Width / 3, Game.game.gameSize.Height - 100));
+            new Bunker(new Vector2(Game.game.gameSize.Width / 1.5, Game.game.gameSize.Height - 100));
 
             Win = false;
             Ended = false;

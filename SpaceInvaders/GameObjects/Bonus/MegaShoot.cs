@@ -5,7 +5,7 @@ namespace SpaceInvaders.GameObjects.Bonus
 {
     class MegaShoot : Bonus
     {
-        public MegaShoot(Vecteur2D position) : base(position, new Vecteur2D(0, 80))
+        public MegaShoot(Vector2 position) : base(position, new Vector2(0, 80))
         {
         }
 

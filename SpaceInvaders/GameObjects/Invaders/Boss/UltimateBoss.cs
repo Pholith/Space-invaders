@@ -12,7 +12,7 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
     /// <seealso cref="AutoInvader" />
     public class UltimateBoss : AutoInvader
     {
-        public UltimateBoss(Vecteur2D v1) : base(v1, 0, 700, new Vecteur2D(baseSpeed / 2, 0))
+        public UltimateBoss(Vector2 v1) : base(v1, 0, 700, new Vector2(baseSpeed / 2, 0))
         {
 
         }
@@ -57,28 +57,28 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
             // The bullets do a shape of A
             AddNewAction(new TimedAction(0.8, () =>
             {
-                new LaserBall(Position, new Vecteur2D(70, baseBulletSpeed));
-                new LaserBall(Position, new Vecteur2D(60, baseBulletSpeed));
-                new LaserBall(Position, new Vecteur2D(50, baseBulletSpeed));
-                new LaserBall(Position, new Vecteur2D(40, baseBulletSpeed));
-                new LaserBall(Position, new Vecteur2D(30, baseBulletSpeed));
+                new LaserBall(Position, new Vector2(70, baseBulletSpeed));
+                new LaserBall(Position, new Vector2(60, baseBulletSpeed));
+                new LaserBall(Position, new Vector2(50, baseBulletSpeed));
+                new LaserBall(Position, new Vector2(40, baseBulletSpeed));
+                new LaserBall(Position, new Vector2(30, baseBulletSpeed));
 
-                new LaserBall(Position, new Vecteur2D(-70, baseBulletSpeed));
-                new LaserBall(Position, new Vecteur2D(-60, baseBulletSpeed));
-                new LaserBall(Position, new Vecteur2D(-50, baseBulletSpeed));
-                new LaserBall(Position, new Vecteur2D(-40, baseBulletSpeed));
-                new LaserBall(Position, new Vecteur2D(-30, baseBulletSpeed));
+                new LaserBall(Position, new Vector2(-70, baseBulletSpeed));
+                new LaserBall(Position, new Vector2(-60, baseBulletSpeed));
+                new LaserBall(Position, new Vector2(-50, baseBulletSpeed));
+                new LaserBall(Position, new Vector2(-40, baseBulletSpeed));
+                new LaserBall(Position, new Vector2(-30, baseBulletSpeed));
 
-                new LaserBall(Position, new Vecteur2D(50, baseBulletSpeed), new Vecteur2D(-20, -30));
-                new LaserBall(Position, new Vecteur2D(-50, baseBulletSpeed), new Vecteur2D(-20, -30));
-                new LaserBall(Position, new Vecteur2D(50, baseBulletSpeed), new Vecteur2D(20, -30));
-                new LaserBall(Position, new Vecteur2D(-50, baseBulletSpeed), new Vecteur2D(20, -30));
+                new LaserBall(Position, new Vector2(50, baseBulletSpeed), new Vector2(-20, -30));
+                new LaserBall(Position, new Vector2(-50, baseBulletSpeed), new Vector2(-20, -30));
+                new LaserBall(Position, new Vector2(50, baseBulletSpeed), new Vector2(20, -30));
+                new LaserBall(Position, new Vector2(-50, baseBulletSpeed), new Vector2(20, -30));
 
-                new LaserBall(Position, new Vecteur2D(70, baseBulletSpeed),
-                    del: (obj, deltaT, inc) => obj.Position + new Vecteur2D(Math.Cos(inc % Math.PI) * 2, 0));
+                new LaserBall(Position, new Vector2(70, baseBulletSpeed),
+                    del: (obj, deltaT, inc) => obj.Position + new Vector2(Math.Cos(inc % Math.PI) * 2, 0));
 
-                new LaserBall(Position, new Vecteur2D(-70, baseBulletSpeed),
-                    del: (obj, deltaT, inc) => obj.Position + new Vecteur2D(-Math.Cos(inc % Math.PI) * 2, 0));
+                new LaserBall(Position, new Vector2(-70, baseBulletSpeed),
+                    del: (obj, deltaT, inc) => obj.Position + new Vector2(-Math.Cos(inc % Math.PI) * 2, 0));
 
             }, true, false, 6));
         }
@@ -92,7 +92,7 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
 
                 for (int i = 0; i < 3; i++)
                 {
-                    new LaserBall(Position, Vecteur2D.FromAngle(randAngle + (-10 + i * 2), baseBulletSpeed));
+                    new LaserBall(Position, Vector2.FromAngle(randAngle + (-10 + i * 2), baseBulletSpeed));
                 }
                 // Create another wave far from the first
                 int angle2 = randAngle + hitLarger;
@@ -100,7 +100,7 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
 
                 for (int i = 0; i < 3; i++)
                 {
-                    new LaserBall(Position, Vecteur2D.FromAngle((angle2) + (-10 + i * 2), baseBulletSpeed));
+                    new LaserBall(Position, Vector2.FromAngle((angle2) + (-10 + i * 2), baseBulletSpeed));
                 }
 
 
