@@ -9,9 +9,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SpaceInvaders")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Pholith")]
 [assembly: AssemblyProduct("SpaceInvaders")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCopyright("Pholith")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

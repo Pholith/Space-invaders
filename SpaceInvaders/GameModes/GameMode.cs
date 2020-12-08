@@ -42,6 +42,10 @@ namespace SpaceInvaders.GameModes
 
         }
 
+        public bool IsNormalMode()
+        {
+            return this is NormalMode;
+        }
 
         public void Lose()
         {

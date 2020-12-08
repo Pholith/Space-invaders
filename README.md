@@ -3,10 +3,10 @@
 ## Contrôles
 | Touche | Action                                          |
 |--------|-------------------------------------------------|
-| q      | Gauche                                          |
-| d      | Droite                                          |
-| z      | Haut (manic shooter seulement)                  |
-| s      | Bas (manic shooter seulement)                   |
+| q ou ← | Gauche                                          |
+| d ou → | Droite                                          |
+| z ou ↑ | Haut (manic shooter seulement)                  |
+| s ou ↓ | Bas (manic shooter seulement)                   |
 | p      | Pause                                           |
 | espace | Tirer des super tirs et relancer le jeu         |
 | i      | Rendre invincible le vaisseau (debug seulement) |
@@ -15,11 +15,11 @@
 ## Description du projet 
 Ce projet est la réalisation du jeu *Space-Invaders* avec plusieurs ajouts.
 La piste suivi est la piste bleu, autonomie de création du jeu.
-Les fonctionnalités de bases sont toutes développés et de nombreux ajouts ont été 
+Les fonctionnalités de bases sont toutes développés (Principalement dans le mode de jeu Space-Invaders) et de nombreux ajouts ont été réalisés:
 - Bonus
   * Bonus de vitesse d'attaque
   * Bonus de puissance d'attaque
-  * Bonus de heal
+  * Bonus de soin
   * Bonus consommable de tir puissant
 - Système d'invisincibilité du vaisseau après un dégat
 - Système de score
@@ -30,6 +30,7 @@ Les fonctionnalités de bases sont toutes développés et de nombreux ajouts ont
 Le mode Manic Shooter est un nouveau mode de jeu qui change complètement l'aspect du jeu.
 Pour plus de détails, voici une vidéo qui explique l'origine et les aspects de ce type de jeu: https://www.youtube.com/watch?v=q02XCVp6Ww8
 Les principes suivis pour ce mode sont le fait qu'il y a peu d'ennemis et énormément de projectiles qui sont difficiles à esquiver.
+Les projectiles ne se détruisent plus entre eux, le joueur tire automatiquement et les tirs ne sont plus limité à 1.
 
 Dans le projet, le mode apporte:
  - Possibilités de se déplacer en haut et en bas

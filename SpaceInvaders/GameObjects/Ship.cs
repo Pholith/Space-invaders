@@ -16,10 +16,10 @@ namespace SpaceInvaders.GameObjects
 
         public Ship(Vecteur2D v1) : base(v1, 3)
         {
-            Attack = AddNewAction(new TimedAction(0.8, () =>
+            Attack = AddNewAction(new TimedAction(1, () =>
             {
-                new Laser(Position + new Vecteur2D(0, -(Size.Y / 2)), Tag.Player);
-            }, true));
+                lastLaserFired = new Laser(Position + new Vecteur2D(0, -(Size.Y / 2)), Tag.Player);
+            }));
 
             megaShoot = AddNewAction(new TimedAction(1.5, () =>
             {
@@ -37,6 +37,7 @@ namespace SpaceInvaders.GameObjects
             }, false, true));
         }
 
+        private Laser lastLaserFired = null;// Used only in space-invaders mode
         private int speedMax = 150;
         private bool invicible = false;
 
@@ -128,8 +129,12 @@ namespace SpaceInvaders.GameObjects
             if (invicible) return;
             base.DestroyPixel(position);
         }
+        /// <summary>
+        /// The ship shoot a laser
+        /// </summary>
         protected void Shoot()
         {
+            if (Game.game.Mode.IsNormalMode() && lastLaserFired != null && lastLaserFired.IsAlive()) return; // Don't Shoot in normal mode if missile is still here
             Attack.DoIfPossible();
         }
 

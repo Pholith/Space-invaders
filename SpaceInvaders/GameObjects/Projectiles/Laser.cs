@@ -18,7 +18,7 @@ namespace SpaceInvaders.GameObjects
         public Tag Tag { get; private set; }
 
 
-        public static readonly int baseSpeed = 250;
+        public static readonly int baseSpeed = 300;
         public Laser(Vecteur2D v1, Vecteur2D speed, Tag tag = Tag.Invader, double ttl = 15) : base(v1)
         {
             Speed = speed;
@@ -59,7 +59,7 @@ namespace SpaceInvaders.GameObjects
             foreach (var obj in gameInstance.gameObjects)
             {
                 if (obj == this || !CanHit(obj)) continue;
-                if (Game.game.Mode is ManicShooter && obj is Laser) continue;
+                if (!Game.game.Mode.IsNormalMode() && obj is Laser) continue;
 
                 // If the squares intersect
                 if (AreSquareSuperposing(obj))

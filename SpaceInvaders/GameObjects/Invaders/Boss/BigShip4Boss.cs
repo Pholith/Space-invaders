@@ -38,7 +38,7 @@ namespace SpaceInvaders.GameObjects.Invaders.Boss
                     new LaserBall(Position + new Vecteur2D(-Size.X / 2, Size.Y), new Vecteur2D(-20, 100),
                         null, (obj, deltaT, inc) => obj.Position + new Vecteur2D(-Math.Cos(inc % Math.PI), 0));
 
-                }, true, false, 8));
+                }, true, false, 12));
             }, true));
         }
 

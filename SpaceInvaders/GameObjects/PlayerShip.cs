@@ -18,23 +18,23 @@ namespace SpaceInvaders.GameObjects
         public override void Update(Game gm, double deltaT)
         {
 
-            if (gm.keyPressed.Contains(Keys.Q))
+            if (gm.keyPressed.Contains(Keys.Q) || gm.keyPressed.Contains(Keys.Left))
             {
                 MoveLeft();
                 //gm.ReleaseKey(Keys.Q);
             }
 
-            if (gm.keyPressed.Contains(Keys.D))
+            if (gm.keyPressed.Contains(Keys.D) || gm.keyPressed.Contains(Keys.Right))
             {
                 MoveRight();
                 //gm.ReleaseKey(Keys.D);
             } 
-            if (gm.keyPressed.Contains(Keys.Z))
+            if (gm.keyPressed.Contains(Keys.Z) || gm.keyPressed.Contains(Keys.Up))
             {
                 MoveUp();
                 //gm.ReleaseKey(Keys.Z);
             }
-            if (gm.keyPressed.Contains(Keys.S))
+            if (gm.keyPressed.Contains(Keys.S) || gm.keyPressed.Contains(Keys.Down))
             {
                 MoveDown();
                 //gm.ReleaseKey(Keys.S);
@@ -44,6 +44,7 @@ namespace SpaceInvaders.GameObjects
             if (gm.keyPressed.Contains(Keys.Space))
             {
                 UseMegaShoot();
+                if (Game.game.Mode.IsNormalMode()) Shoot();
                 //gm.ReleaseKey(Keys.Space);
             }
 #if DEBUG
@@ -63,9 +64,8 @@ namespace SpaceInvaders.GameObjects
             {
                  Game.game.Mode.Player.ToggleInvicibility();
             }
-
 #endif
-
+            if (!Game.game.Mode.IsNormalMode()) Shoot(); // Automaticly shoot in others modes
             base.Update(gm, deltaT);
         }
     }
